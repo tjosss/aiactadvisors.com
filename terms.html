@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AI Act Advisors terms of use.">
+<title>Terms of Use | AI Act Advisors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static/css/style.css">
+<link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<div class="urgency-bar">
+  <strong>165 days</strong> until EU AI Act high-risk deadline (August 2026) — Find your compliance consultant now
+</div>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="site-logo">AI Act <span>Advisors</span></a>
+    <button class="mobile-toggle" onclick="document.querySelector('.main-nav').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+    <nav class="main-nav">
+      <a href="consultants.html">All Consultants</a>
+      <a href="countries.html">By Country</a>
+      <a href="sectors.html">By Sector</a>
+      <a href="blog.html">Resources</a>
+      <a href="list-your-practice.html" class="nav-cta">List Your Practice</a>
+    </nav>
+  </div>
+</header>
+<div class="static-page">
+  <h1>Terms of Use</h1>
+  <p><em>Last updated: February 2026</em></p>
+  <h2>Acceptance</h2>
+  <p>By using aiactadvisors.com, you agree to these terms.</p>
+  <h2>Directory Purpose</h2>
+  <p>AI Act Advisors is an informational directory. We aggregate publicly available information about EU AI Act compliance consultants to help businesses find appropriate expertise.</p>
+  <h2>No Legal Advice</h2>
+  <p>Nothing on this site constitutes legal advice. The directory is for informational purposes only. For legal guidance on AI Act compliance, consult a qualified professional.</p>
+  <h2>No Endorsement</h2>
+  <p>Listing a consultant on our directory does not constitute endorsement of their services, qualifications, or competence. Users are responsible for independently verifying consultant credentials before engagement.</p>
+  <h2>Accuracy</h2>
+  <p>We make reasonable efforts to ensure listing accuracy but cannot guarantee all information is current or complete. Listings are based on publicly available information and self-reported data.</p>
+  <h2>Limitation of Liability</h2>
+  <p>AI Act Advisors shall not be liable for any damages arising from the use of this directory, reliance on listing information, or engagement with listed consultants.</p>
+  <h2>Contact</h2>
+  <p>Questions about these terms: <strong>info@aiactadvisors.com</strong></p>
+</div>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>AI Act Advisors</h4>
+        <p class="footer-about">Europe's directory for EU AI Act compliance consultants, ethics advisors, and governance experts. Find, compare, and contact the right expert for your organisation.</p>
+      </div>
+      <div>
+        <h4>Directory</h4>
+        <a href="consultants.html">All Consultants</a>
+        <a href="countries.html">Browse by Country</a>
+        <a href="sectors.html">Browse by Sector</a>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <a href="blog.html">Blog</a>
+        <a href="about.html">About Us</a>
+        <a href="list-your-practice.html">List Your Practice</a>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 AI Act Advisors. All rights reserved.</p>
+      <p class="footer-disclaimer">AI Act Advisors is an independent directory service. Listings are informational only and do not constitute endorsement. Verify consultant qualifications independently. This site does not provide legal advice. For legal guidance, consult a qualified professional.</p>
+    </div>
+  </div>
+</footer>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1f2937;color:#e5e7eb;padding:1rem 1.5rem;z-index:999;font-size:0.85rem;box-shadow:0 -2px 10px rgba(0,0,0,0.15)">
+  <div style="max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+    <p style="margin:0;flex:1">We use cookies for analytics only (Google Analytics 4 with anonymised IPs). No marketing cookies. <a href="privacy.html" style="color:#D79922">Privacy Policy</a></p>
+    <div style="display:flex;gap:0.5rem">
+      <button onclick="acceptCookies()" style="background:#4056A1;color:#fff;border:none;padding:0.4rem 1rem;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem">Accept</button>
+      <button onclick="declineCookies()" style="background:transparent;color:#9ca3af;border:1px solid #4b5563;padding:0.4rem 1rem;border-radius:8px;cursor:pointer;font-size:0.85rem">Decline</button>
+    </div>
+  </div>
+</div>
+<script>
+if(!localStorage.getItem('cookie-consent')){document.getElementById('cookie-banner').style.display='block'}
+function acceptCookies(){localStorage.setItem('cookie-consent','accepted');document.getElementById('cookie-banner').style.display='none'}
+function declineCookies(){localStorage.setItem('cookie-consent','declined');document.getElementById('cookie-banner').style.display='none'}
+</script>
+<script src="static/js/main.js"></script>
+</body>
+</html>
