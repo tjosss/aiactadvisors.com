@@ -118,5 +118,34 @@ function acceptCookies(){localStorage.setItem('cookie-consent','accepted');docum
 function declineCookies(){localStorage.setItem('cookie-consent','declined');document.getElementById('cookie-banner').style.display='none'}
 </script>
 <script src="../static/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.listing-card a, a[href*="consultant/"]').forEach(function(a){
+    a.addEventListener('click',function(){
+      var name=this.textContent.trim();
+      var href=this.getAttribute('href')||'';
+      var id=href.split('/').pop().replace('.html','');
+      if(typeof gtag==='function'){
+        gtag('event','consultant_click',{consultant_name:name,consultant_id:id,page_location:window.location.pathname});
+      }
+    });
+  });
+  document.querySelectorAll('.country-card').forEach(function(a){
+    a.addEventListener('click',function(){
+      var name=this.querySelector('.name');
+      if(name&&typeof gtag==='function'){
+        gtag('event','country_click',{country_name:name.textContent.trim(),page_location:window.location.pathname});
+      }
+    });
+  });
+  document.querySelectorAll('a[href*="list-your-practice"]').forEach(function(a){
+    a.addEventListener('click',function(){
+      if(typeof gtag==='function'){
+        gtag('event','cta_click',{cta_type:'list_practice',page_location:window.location.pathname});
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>

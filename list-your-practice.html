@@ -43,7 +43,7 @@
   <h2>Why List With Us</h2>
   <p>Businesses across Europe are searching for AI Act compliance help. Our directory connects them directly with qualified consultants like you. Listings are free and include your company profile, services, sectors, and contact information.</p>
   <h2>Submit Your Listing</h2>
-  <form class="contact-form" name="listing-submission" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" style="max-width:600px">
+  <form class="contact-form" name="listing-submission" method="POST" action="/list-your-practice.html" data-netlify="true" netlify-honeypot="bot-field" style="max-width:600px">
     <input type="hidden" name="form-name" value="listing-submission">
     <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
     <label>Company Name *</label><input type="text" name="company" required>
@@ -113,5 +113,34 @@ function acceptCookies(){localStorage.setItem('cookie-consent','accepted');docum
 function declineCookies(){localStorage.setItem('cookie-consent','declined');document.getElementById('cookie-banner').style.display='none'}
 </script>
 <script src="static/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.listing-card a, a[href*="consultant/"]').forEach(function(a){
+    a.addEventListener('click',function(){
+      var name=this.textContent.trim();
+      var href=this.getAttribute('href')||'';
+      var id=href.split('/').pop().replace('.html','');
+      if(typeof gtag==='function'){
+        gtag('event','consultant_click',{consultant_name:name,consultant_id:id,page_location:window.location.pathname});
+      }
+    });
+  });
+  document.querySelectorAll('.country-card').forEach(function(a){
+    a.addEventListener('click',function(){
+      var name=this.querySelector('.name');
+      if(name&&typeof gtag==='function'){
+        gtag('event','country_click',{country_name:name.textContent.trim(),page_location:window.location.pathname});
+      }
+    });
+  });
+  document.querySelectorAll('a[href*="list-your-practice"]').forEach(function(a){
+    a.addEventListener('click',function(){
+      if(typeof gtag==='function'){
+        gtag('event','cta_click',{cta_type:'list_practice',page_location:window.location.pathname});
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>
