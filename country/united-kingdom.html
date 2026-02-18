@@ -22,8 +22,9 @@
 </head>
 <body>
 <div class="urgency-bar">
-  <strong>165 days</strong> until EU AI Act high-risk deadline (August 2026) — Find your compliance consultant now
+  <strong><span id="countdown"></span> days</strong> until EU AI Act high-risk deadline (August 2026) — Find your compliance consultant now
 </div>
+<script>document.getElementById('countdown').textContent=Math.max(0,Math.ceil((new Date('2026-08-02T00:00:00')-new Date())/(1000*60*60*24)));</script>
 <header class="site-header">
   <div class="header-inner">
     <a href="../index.html" class="site-logo">AI Act <span>Advisors</span></a>
