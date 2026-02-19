@@ -2,97 +2,98 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Act: Choose Your Compliance Path | AI Act Advisors</title>
+<meta name="description" content="10 real-world scenarios testing your AI Act knowledge. Every choice teaches a real concept. Earn badges and get graded A through F.">
+<link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RRHZE8N0GW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){{dataLayer.push(arguments);}}
   gtag('js', new Date());
   gtag('config', 'G-RRHZE8N0GW');
 </script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="lz-CmQYG7LZE-G7RL7IPztnLW2yL4FKL-g5lXHoplgA" />
-<meta name="description" content="10 real-world scenarios testing your AI Act knowledge. Every choice teaches a real concept. Earn badges and get graded A through F.">
-<title>AI Act: Choose Your Compliance Path — Interactive Game | AI Act Advisors</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="static/css/style.css">
-<link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
+
+<style>
+*{{margin:0;padding:0;box-sizing:border-box}}
+body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1729;color:#e2e8f0;min-height:100vh}}
+.container{{max-width:720px;margin:0 auto;padding:2rem 1.5rem}}
+h1{{text-align:center;font-size:1.8rem;margin-bottom:0.25rem;color:#fff}}
+.subtitle{{text-align:center;color:#C9A84C;margin-bottom:2rem;font-size:0.95rem}}
+
+/* Progress */
+.progress-bar{{background:rgba(255,255,255,0.08);border-radius:99px;height:8px;margin-bottom:0.5rem;overflow:hidden}}
+.progress-fill{{background:linear-gradient(90deg,#C9A84C,#27ae60);height:100%;border-radius:99px;transition:width 0.5s ease}}
+.progress-text{{text-align:right;font-size:0.75rem;color:#6b7280;margin-bottom:1.5rem}}
+
+/* Score */
+.score-bar{{display:flex;justify-content:center;gap:1.5rem;margin-bottom:2rem}}
+.score-item{{text-align:center}}
+.score-item .val{{font-size:1.5rem;font-weight:800}}
+.score-item .lbl{{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.6}}
+.score-good .val{{color:#27ae60}}
+.score-bad .val{{color:#e74c3c}}
+.score-badges .val{{color:#C9A84C}}
+
+/* Scenario Card */
+.scenario{{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:2rem;margin-bottom:1.5rem;animation:fadeIn 0.4s ease}}
+@keyframes fadeIn{{from{{opacity:0;transform:translateY(12px)}}to{{opacity:1;transform:translateY(0)}}}}
+.scenario-context{{font-size:0.8rem;color:#C9A84C;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem}}
+.scenario h2{{font-size:1.2rem;color:#fff;margin-bottom:1rem;line-height:1.4}}
+.scenario p{{font-size:0.95rem;line-height:1.6;opacity:0.85;margin-bottom:1.25rem}}
+
+/* Choices */
+.choices{{display:flex;flex-direction:column;gap:0.6rem}}
+.choice{{background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.12);border-radius:12px;padding:1rem 1.15rem;cursor:pointer;transition:all 0.2s;display:flex;gap:0.75rem;align-items:flex-start}}
+.choice:hover{{border-color:#C9A84C;background:rgba(201,168,76,0.08)}}
+.choice .letter{{background:rgba(255,255,255,0.08);width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0;color:#C9A84C}}
+.choice .text{{font-size:0.92rem;line-height:1.4}}
+
+/* Feedback */
+.feedback{{border-radius:14px;padding:1.5rem;margin-bottom:1.5rem;animation:fadeIn 0.3s ease}}
+.feedback.correct{{background:rgba(39,174,96,0.12);border:1px solid rgba(39,174,96,0.3)}}
+.feedback.wrong{{background:rgba(231,76,60,0.12);border:1px solid rgba(231,76,60,0.3)}}
+.feedback.partial{{background:rgba(243,156,18,0.12);border:1px solid rgba(243,156,18,0.3)}}
+.feedback h3{{font-size:1rem;margin-bottom:0.5rem}}
+.feedback.correct h3{{color:#27ae60}}
+.feedback.wrong h3{{color:#e74c3c}}
+.feedback.partial h3{{color:#f39c12}}
+.feedback p{{font-size:0.88rem;line-height:1.5;opacity:0.9}}
+.feedback .article-ref{{display:inline-block;background:rgba(255,255,255,0.08);padding:0.15rem 0.5rem;border-radius:4px;font-size:0.75rem;font-weight:600;margin-top:0.5rem}}
+
+.btn-next{{display:block;width:100%;background:#C9A84C;color:#0f1729;padding:0.75rem;border-radius:10px;font-weight:700;font-size:1rem;border:none;cursor:pointer;font-family:inherit;margin-top:1rem}}
+.btn-next:hover{{background:#e6c45a}}
+
+/* Badges */
+.badge-unlock{{display:inline-flex;align-items:center;gap:0.35rem;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);padding:0.3rem 0.7rem;border-radius:8px;font-size:0.8rem;font-weight:600;color:#C9A84C;margin-top:0.75rem}}
+
+/* Final Results */
+.final-results{{text-align:center;animation:fadeIn 0.5s ease}}
+.final-grade{{font-size:4rem;font-weight:900;margin:1rem 0 0.5rem}}
+.grade-a{{color:#27ae60}}
+.grade-b{{color:#C9A84C}}
+.grade-c{{color:#f39c12}}
+.grade-d{{color:#e67e22}}
+.grade-f{{color:#e74c3c}}
+.final-title{{font-size:1.3rem;color:#fff;margin-bottom:0.5rem}}
+.final-desc{{font-size:0.95rem;opacity:0.8;max-width:500px;margin:0 auto 2rem;line-height:1.6}}
+.badges-earned{{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-bottom:2rem}}
+.badge-display{{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:10px;padding:0.5rem 0.75rem;font-size:0.8rem;color:#C9A84C}}
+.btn-row{{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}}
+.btn-primary{{display:inline-block;background:#C9A84C;color:#0f1729;padding:0.65rem 1.5rem;border-radius:10px;font-weight:700;font-size:0.9rem;text-decoration:none;border:none;cursor:pointer;font-family:inherit}}
+.btn-outline{{display:inline-block;background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.2);padding:0.65rem 1.5rem;border-radius:10px;font-weight:600;font-size:0.9rem;text-decoration:none;cursor:pointer;font-family:inherit}}
+</style>
 </head>
 <body>
-<div class="urgency-bar">
-  <strong><span id="countdown"></span> days</strong> until EU AI Act high-risk deadline (August 2026) — Find your compliance consultant now
-</div>
-<script>document.getElementById('countdown').textContent=Math.max(0,Math.ceil((new Date('2026-08-02T00:00:00')-new Date())/(1000*60*60*24)));</script>
-<header class="site-header">
-  <div class="header-inner">
-    <a href="index.html" class="site-logo">AI Act <span>Advisors</span></a>
-    <button class="mobile-toggle" onclick="document.querySelector('.main-nav').classList.toggle('open')" aria-label="Menu">&#9776;</button>
-    <nav class="main-nav">
-      <a href="consultants.html">All Consultants</a>
-      <a href="countries.html">By Country</a>
-      <a href="sectors.html">By Sector</a>
-      <a href="blog.html">Resources</a>
-      <a href="products.html">Free Tools</a>
-      <a href="list-your-practice.html" class="nav-cta">List Your Practice</a>
-    </nav>
+<div style="background:rgba(15,23,41,0.95);border-bottom:1px solid rgba(255,255,255,0.08);padding:0.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem">
+  <a href="index.html" style="color:#fff;text-decoration:none;font-weight:700;font-size:1rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">AI Act <span style="color:#C9A84C">Advisors</span></a>
+  <div style="display:flex;gap:1rem;align-items:center">
+    <a href="products.html" style="color:#9ca3af;text-decoration:none;font-size:0.85rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Free Tools</a>
+    <a href="consultants.html" style="color:#9ca3af;text-decoration:none;font-size:0.85rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Find a Consultant</a>
+    <a href="blog.html" style="color:#9ca3af;text-decoration:none;font-size:0.85rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Resources</a>
   </div>
-</header>
-<div style="background:#0f1729;margin:-2rem -1.5rem;padding:0">
-<style>
-.adv-wrap .container{{max-width:720px;margin:0 auto;padding:2rem 1.5rem}}
-.adv-wrap h1{{text-align:center;font-size:1.8rem;margin-bottom:0.25rem;color:#fff}}
-.adv-wrap .subtitle{{text-align:center;color:#C9A84C;margin-bottom:2rem;font-size:0.95rem}}
-.adv-wrap .progress-bar{{background:rgba(255,255,255,0.08);border-radius:99px;height:8px;margin-bottom:0.5rem;overflow:hidden}}
-.adv-wrap .progress-fill{{background:linear-gradient(90deg,#C9A84C,#27ae60);height:100%;border-radius:99px;transition:width 0.5s ease}}
-.adv-wrap .progress-text{{text-align:right;font-size:0.75rem;color:#6b7280;margin-bottom:1.5rem}}
-.adv-wrap .score-bar{{display:flex;justify-content:center;gap:1.5rem;margin-bottom:2rem}}
-.adv-wrap .score-item{{text-align:center}}
-.adv-wrap .score-item .val{{font-size:1.5rem;font-weight:800}}
-.adv-wrap .score-item .lbl{{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.6}}
-.adv-wrap .score-good .val{{color:#27ae60}}
-.adv-wrap .score-bad .val{{color:#e74c3c}}
-.adv-wrap .score-badges .val{{color:#C9A84C}}
-.adv-wrap .scenario{{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:2rem;margin-bottom:1.5rem;animation:fadeIn 0.4s ease}}
-@keyframes fadeIn{{from{{opacity:0;transform:translateY(12px)}}to{{opacity:1;transform:translateY(0)}}}}
-.adv-wrap .scenario-context{{font-size:0.8rem;color:#C9A84C;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem}}
-.adv-wrap .scenario h2{{font-size:1.2rem;color:#fff;margin-bottom:1rem;line-height:1.4}}
-.adv-wrap .scenario p{{font-size:0.95rem;line-height:1.6;opacity:0.85;margin-bottom:1.25rem}}
-.adv-wrap .choices{{display:flex;flex-direction:column;gap:0.6rem}}
-.adv-wrap .choice{{background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.12);border-radius:12px;padding:1rem 1.15rem;cursor:pointer;transition:all 0.2s;display:flex;gap:0.75rem;align-items:flex-start}}
-.adv-wrap .choice:hover{{border-color:#C9A84C;background:rgba(201,168,76,0.08)}}
-.adv-wrap .choice .letter{{background:rgba(255,255,255,0.08);width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0;color:#C9A84C}}
-.adv-wrap .choice .text{{font-size:0.92rem;line-height:1.4}}
-.adv-wrap .feedback{{border-radius:14px;padding:1.5rem;margin-bottom:1.5rem;animation:fadeIn 0.3s ease}}
-.adv-wrap .feedback.correct{{background:rgba(39,174,96,0.12);border:1px solid rgba(39,174,96,0.3)}}
-.adv-wrap .feedback.wrong{{background:rgba(231,76,60,0.12);border:1px solid rgba(231,76,60,0.3)}}
-.adv-wrap .feedback.partial{{background:rgba(243,156,18,0.12);border:1px solid rgba(243,156,18,0.3)}}
-.adv-wrap .feedback h3{{font-size:1rem;margin-bottom:0.5rem}}
-.adv-wrap .feedback.correct h3{{color:#27ae60}}
-.adv-wrap .feedback.wrong h3{{color:#e74c3c}}
-.adv-wrap .feedback.partial h3{{color:#f39c12}}
-.adv-wrap .feedback p{{font-size:0.88rem;line-height:1.5;opacity:0.9}}
-.adv-wrap .feedback .article-ref{{display:inline-block;background:rgba(255,255,255,0.08);padding:0.15rem 0.5rem;border-radius:4px;font-size:0.75rem;font-weight:600;margin-top:0.5rem}}
-.adv-wrap .btn-next{{display:block;width:100%;background:#C9A84C;color:#0f1729;padding:0.75rem;border-radius:10px;font-weight:700;font-size:1rem;border:none;cursor:pointer;font-family:inherit;margin-top:1rem}}
-.adv-wrap .btn-next:hover{{background:#e6c45a}}
-.adv-wrap .badge-unlock{{display:inline-flex;align-items:center;gap:0.35rem;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);padding:0.3rem 0.7rem;border-radius:8px;font-size:0.8rem;font-weight:600;color:#C9A84C;margin-top:0.75rem}}
-.adv-wrap .final-results{{text-align:center;animation:fadeIn 0.5s ease}}
-.adv-wrap .final-grade{{font-size:4rem;font-weight:900;margin:1rem 0 0.5rem}}
-.adv-wrap .grade-a{{color:#27ae60}}
-.adv-wrap .grade-b{{color:#C9A84C}}
-.adv-wrap .grade-c{{color:#f39c12}}
-.adv-wrap .grade-d{{color:#e67e22}}
-.adv-wrap .grade-f{{color:#e74c3c}}
-.adv-wrap .final-title{{font-size:1.3rem;color:#fff;margin-bottom:0.5rem}}
-.adv-wrap .final-desc{{font-size:0.95rem;opacity:0.8;max-width:500px;margin:0 auto 2rem;line-height:1.6}}
-.adv-wrap .badges-earned{{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-bottom:2rem}}
-.adv-wrap .badge-display{{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:10px;padding:0.5rem 0.75rem;font-size:0.8rem;color:#C9A84C}}
-.adv-wrap .btn-row{{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}}
-.adv-wrap .btn-primary{{display:inline-block;background:#C9A84C;color:#0f1729;padding:0.65rem 1.5rem;border-radius:10px;font-weight:700;font-size:0.9rem;text-decoration:none;border:none;cursor:pointer;font-family:inherit}}
-.adv-wrap .btn-outline{{display:inline-block;background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.2);padding:0.65rem 1.5rem;border-radius:10px;font-weight:600;font-size:0.9rem;text-decoration:none;cursor:pointer;font-family:inherit}}
-</style>
-<div class="adv-wrap">
+</div>
 <div class="container">
   <h1>AI Act: Choose Your Compliance Path</h1>
   <p class="subtitle">You're the new compliance lead. 10 scenarios. Every choice teaches a real AI Act concept.</p>
@@ -408,83 +409,9 @@ document.addEventListener('keydown', (e) => {{
 
 renderScenario();
 </script>
+<div style="text-align:center;padding:2rem 1rem;background:#0a0f1a;font-size:0.8rem;color:#6b7280;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <a href="products.html" style="color:#C9A84C;text-decoration:none;font-weight:600">All Free Tools</a> · <a href="consultants.html" style="color:#C9A84C;text-decoration:none;font-weight:600">Find a Consultant</a> · <a href="blog.html" style="color:#C9A84C;text-decoration:none;font-weight:600">Resources</a>
+  <p style="margin-top:0.5rem">&copy; 2026 AI Act Advisors</p>
 </div>
-</div>
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <h4>AI Act Advisors</h4>
-        <p class="footer-about">Europe's directory for EU AI Act compliance consultants, ethics advisors, and governance experts. Find, compare, and contact the right expert for your organisation.</p>
-      </div>
-      <div>
-        <h4>Directory</h4>
-        <a href="consultants.html">All Consultants</a>
-        <a href="countries.html">Browse by Country</a>
-        <a href="sectors.html">Browse by Sector</a>
-      </div>
-      <div>
-        <h4>Resources</h4>
-        <a href="blog.html">Blog</a>
-        <a href="about.html">About Us</a>
-        <a href="list-your-practice.html">List Your Practice</a>
-      </div>
-      <div>
-        <h4>Legal</h4>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="disclaimer.html">Disclaimer</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 AI Act Advisors. All rights reserved.</p>
-      <p class="footer-disclaimer">AI Act Advisors is an independent directory service. Listings are informational only and do not constitute endorsement. Verify consultant qualifications independently. This site does not provide legal advice. For legal guidance, consult a qualified professional.</p>
-    </div>
-  </div>
-</footer>
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1f2937;color:#e5e7eb;padding:1rem 1.5rem;z-index:999;font-size:0.85rem;box-shadow:0 -2px 10px rgba(0,0,0,0.15)">
-  <div style="max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
-    <p style="margin:0;flex:1">We use cookies for analytics only (Google Analytics 4 with anonymised IPs). No marketing cookies. <a href="privacy.html" style="color:#D79922">Privacy Policy</a></p>
-    <div style="display:flex;gap:0.5rem">
-      <button onclick="acceptCookies()" style="background:#4056A1;color:#fff;border:none;padding:0.4rem 1rem;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem">Accept</button>
-      <button onclick="declineCookies()" style="background:transparent;color:#9ca3af;border:1px solid #4b5563;padding:0.4rem 1rem;border-radius:8px;cursor:pointer;font-size:0.85rem">Decline</button>
-    </div>
-  </div>
-</div>
-<script>
-if(!localStorage.getItem('cookie-consent')){document.getElementById('cookie-banner').style.display='block'}
-function acceptCookies(){localStorage.setItem('cookie-consent','accepted');document.getElementById('cookie-banner').style.display='none'}
-function declineCookies(){localStorage.setItem('cookie-consent','declined');document.getElementById('cookie-banner').style.display='none'}
-</script>
-<script src="static/js/main.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  document.querySelectorAll('.listing-card a, a[href*="consultant/"]').forEach(function(a){
-    a.addEventListener('click',function(){
-      var name=this.textContent.trim();
-      var href=this.getAttribute('href')||'';
-      var id=href.split('/').pop().replace('.html','');
-      if(typeof gtag==='function'){
-        gtag('event','consultant_click',{consultant_name:name,consultant_id:id,page_location:window.location.pathname});
-      }
-    });
-  });
-  document.querySelectorAll('.country-card').forEach(function(a){
-    a.addEventListener('click',function(){
-      var name=this.querySelector('.name');
-      if(name&&typeof gtag==='function'){
-        gtag('event','country_click',{country_name:name.textContent.trim(),page_location:window.location.pathname});
-      }
-    });
-  });
-  document.querySelectorAll('a[href*="list-your-practice"]').forEach(function(a){
-    a.addEventListener('click',function(){
-      if(typeof gtag==='function'){
-        gtag('event','cta_click',{cta_type:'list_practice',page_location:window.location.pathname});
-      }
-    });
-  });
-});
-</script>
 </body>
 </html>

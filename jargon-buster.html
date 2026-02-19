@@ -2,85 +2,91 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Periodic Table of AI Act Terms | AI Act Advisors</title>
+<meta name="description" content="43 essential EU AI Act terms in an interactive periodic table. Hover to see plain-English definitions. Colour-coded by category.">
+<link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RRHZE8N0GW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){{dataLayer.push(arguments);}}
   gtag('js', new Date());
   gtag('config', 'G-RRHZE8N0GW');
 </script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="lz-CmQYG7LZE-G7RL7IPztnLW2yL4FKL-g5lXHoplgA" />
-<meta name="description" content="43 essential EU AI Act terms in an interactive periodic table. Hover to see plain-English definitions. Colour-coded by category.">
-<title>The Periodic Table of AI Act Terms — 43 Key Definitions | AI Act Advisors</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="static/css/style.css">
-<link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
+
+<style>
+*{{margin:0;padding:0;box-sizing:border-box}}
+body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1729;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1.5rem}}
+
+h1{{font-size:1.6rem;color:#fff;margin-bottom:0.15rem;text-align:center}}
+.subtitle{{color:#C9A84C;font-size:0.85rem;text-align:center;margin-bottom:1.25rem}}
+
+/* Legend */
+.legend{{display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.25rem}}
+.legend-item{{display:flex;align-items:center;gap:0.3rem;font-size:0.7rem;font-weight:600;opacity:0.8}}
+.legend-dot{{width:12px;height:12px;border-radius:3px}}
+
+/* Grid */
+.ptable{{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;max-width:820px;width:100%}}
+
+/* Cell */
+.cell{{position:relative;border-radius:6px;padding:6px;cursor:pointer;transition:all 0.15s;aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;min-height:0}}
+.cell:hover{{transform:scale(1.08);z-index:10;box-shadow:0 4px 20px rgba(0,0,0,0.4)}}
+.cell .abbr{{font-size:1.1rem;font-weight:800;line-height:1}}
+.cell .name{{font-size:0.5rem;font-weight:600;line-height:1.15;opacity:0.85;overflow:hidden}}
+.cell .num{{font-size:0.5rem;opacity:0.5;text-align:right}}
+
+/* Colours */
+.c-prohibited{{background:rgba(196,30,58,0.7);color:#fff}}
+.c-risk{{background:rgba(231,76,60,0.6);color:#fff}}
+.c-core{{background:rgba(27,42,74,0.9);color:#fff;border:1px solid rgba(201,168,76,0.3)}}
+.c-regulation{{background:rgba(99,102,241,0.5);color:#fff}}
+.c-compliance{{background:rgba(14,165,233,0.45);color:#fff}}
+.c-other{{background:rgba(139,92,246,0.45);color:#fff}}
+.c-empty{{background:transparent;pointer-events:none}}
+.c-title{{background:transparent;pointer-events:none;display:flex;align-items:center;justify-content:center}}
+.c-title span{{font-size:0.65rem;color:#C9A84C;font-weight:600;text-align:center;line-height:1.3}}
+
+/* Tooltip */
+.tooltip{{display:none;position:fixed;z-index:100;background:#1a2540;border:1px solid rgba(201,168,76,0.4);border-radius:12px;padding:1.25rem;max-width:340px;width:90vw;box-shadow:0 8px 30px rgba(0,0,0,0.5);pointer-events:none}}
+.tooltip.show{{display:block}}
+.tooltip .tt-cat{{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem}}
+.tooltip .tt-name{{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:0.15rem}}
+.tooltip .tt-short{{font-size:0.8rem;color:#C9A84C;margin-bottom:0.5rem}}
+.tooltip .tt-def{{font-size:0.82rem;line-height:1.5;opacity:0.85}}
+.tt-prohibited{{color:#e74c3c}}
+.tt-risk{{color:#e74c3c}}
+.tt-core{{color:#C9A84C}}
+.tt-regulation{{color:#818cf8}}
+.tt-compliance{{color:#38bdf8}}
+.tt-other{{color:#a78bfa}}
+
+/* Footer */
+.footer{{margin-top:1.25rem;text-align:center;font-size:0.7rem;opacity:0.4}}
+.footer a{{color:#C9A84C;text-decoration:none}}
+
+/* Mobile */
+@media(max-width:700px){{
+  .ptable{{grid-template-columns:repeat(6,1fr);max-width:400px}}
+  .cell .abbr{{font-size:0.85rem}}
+  .cell .name{{font-size:0.42rem}}
+}}
+@media(max-width:420px){{
+  .ptable{{grid-template-columns:repeat(5,1fr);max-width:330px}}
+}}
+</style>
 </head>
 <body>
-<div class="urgency-bar">
-  <strong><span id="countdown"></span> days</strong> until EU AI Act high-risk deadline (August 2026) — Find your compliance consultant now
-</div>
-<script>document.getElementById('countdown').textContent=Math.max(0,Math.ceil((new Date('2026-08-02T00:00:00')-new Date())/(1000*60*60*24)));</script>
-<header class="site-header">
-  <div class="header-inner">
-    <a href="index.html" class="site-logo">AI Act <span>Advisors</span></a>
-    <button class="mobile-toggle" onclick="document.querySelector('.main-nav').classList.toggle('open')" aria-label="Menu">&#9776;</button>
-    <nav class="main-nav">
-      <a href="consultants.html">All Consultants</a>
-      <a href="countries.html">By Country</a>
-      <a href="sectors.html">By Sector</a>
-      <a href="blog.html">Resources</a>
-      <a href="products.html">Free Tools</a>
-      <a href="list-your-practice.html" class="nav-cta">List Your Practice</a>
-    </nav>
+<div style="background:rgba(15,23,41,0.95);border-bottom:1px solid rgba(255,255,255,0.08);padding:0.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem">
+  <a href="index.html" style="color:#fff;text-decoration:none;font-weight:700;font-size:1rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">AI Act <span style="color:#C9A84C">Advisors</span></a>
+  <div style="display:flex;gap:1rem;align-items:center">
+    <a href="products.html" style="color:#9ca3af;text-decoration:none;font-size:0.85rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Free Tools</a>
+    <a href="consultants.html" style="color:#9ca3af;text-decoration:none;font-size:0.85rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Find a Consultant</a>
+    <a href="blog.html" style="color:#9ca3af;text-decoration:none;font-size:0.85rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Resources</a>
   </div>
-</header>
-<div style="background:#0f1729;margin:-2rem -1.5rem;padding:1.5rem;display:flex;flex-direction:column;align-items:center">
-<style>
-.pt-wrap h1{{font-size:1.6rem;color:#fff;margin-bottom:0.15rem;text-align:center}}
-.pt-wrap .subtitle{{color:#C9A84C;font-size:0.85rem;text-align:center;margin-bottom:1.25rem}}
-.pt-wrap .legend{{display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.25rem}}
-.pt-wrap .legend-item{{display:flex;align-items:center;gap:0.3rem;font-size:0.7rem;font-weight:600;opacity:0.8}}
-.pt-wrap .legend-dot{{width:12px;height:12px;border-radius:3px}}
-.pt-wrap .ptable{{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;max-width:820px;width:100%}}
-.pt-wrap .cell{{position:relative;border-radius:6px;padding:6px;cursor:pointer;transition:all 0.15s;aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;min-height:0}}
-.pt-wrap .cell:hover{{transform:scale(1.08);z-index:10;box-shadow:0 4px 20px rgba(0,0,0,0.4)}}
-.pt-wrap .cell .abbr{{font-size:1.1rem;font-weight:800;line-height:1}}
-.pt-wrap .cell .name{{font-size:0.5rem;font-weight:600;line-height:1.15;opacity:0.85;overflow:hidden}}
-.pt-wrap .cell .num{{font-size:0.5rem;opacity:0.5;text-align:right}}
-.pt-wrap .c-prohibited{{background:rgba(196,30,58,0.7);color:#fff}}
-.pt-wrap .c-risk{{background:rgba(231,76,60,0.6);color:#fff}}
-.pt-wrap .c-core{{background:rgba(27,42,74,0.9);color:#fff;border:1px solid rgba(201,168,76,0.3)}}
-.pt-wrap .c-regulation{{background:rgba(99,102,241,0.5);color:#fff}}
-.pt-wrap .c-compliance{{background:rgba(14,165,233,0.45);color:#fff}}
-.pt-wrap .c-other{{background:rgba(139,92,246,0.45);color:#fff}}
-.pt-wrap .c-empty{{background:transparent;pointer-events:none}}
-.pt-wrap .c-title{{background:transparent;pointer-events:none;display:flex;align-items:center;justify-content:center}}
-.pt-wrap .c-title span{{font-size:0.65rem;color:#C9A84C;font-weight:600;text-align:center;line-height:1.3}}
-.pt-wrap .tooltip{{display:none;position:fixed;z-index:100;background:#1a2540;border:1px solid rgba(201,168,76,0.4);border-radius:12px;padding:1.25rem;max-width:340px;width:90vw;box-shadow:0 8px 30px rgba(0,0,0,0.5);pointer-events:none}}
-.pt-wrap .tooltip.show{{display:block}}
-.pt-wrap .tooltip .tt-cat{{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem}}
-.pt-wrap .tooltip .tt-name{{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:0.15rem}}
-.pt-wrap .tooltip .tt-short{{font-size:0.8rem;color:#C9A84C;margin-bottom:0.5rem}}
-.pt-wrap .tooltip .tt-def{{font-size:0.82rem;line-height:1.5;opacity:0.85}}
-.pt-wrap .tt-prohibited{{color:#e74c3c}}
-.pt-wrap .tt-risk{{color:#e74c3c}}
-.pt-wrap .tt-core{{color:#C9A84C}}
-.pt-wrap .tt-regulation{{color:#818cf8}}
-.pt-wrap .tt-compliance{{color:#38bdf8}}
-.pt-wrap .tt-other{{color:#a78bfa}}
-.pt-wrap .footer{{margin-top:1.25rem;text-align:center;font-size:0.7rem;opacity:0.4}}
-.pt-wrap .footer a{{color:#C9A84C;text-decoration:none}}
-@media(max-width:700px){{  .pt-wrap .ptable{{grid-template-columns:repeat(6,1fr);max-width:400px}}
-  .pt-wrap .cell .abbr{{font-size:0.85rem}}
-  .pt-wrap .cell .name{{font-size:0.42rem}}}}
-@media(max-width:420px){{  .pt-wrap .ptable{{grid-template-columns:repeat(5,1fr);max-width:330px}}}}
-</style>
-<div class="pt-wrap">
+</div>
+
 <h1>The Periodic Table of AI Act Terms</h1>
 <p class="subtitle">Hover over any element to see the definition. 43 terms every business needs to know.</p>
 
@@ -246,83 +252,9 @@ function hideTooltip() {{
 
 buildTable();
 </script>
+<div style="text-align:center;padding:2rem 1rem;background:#0a0f1a;font-size:0.8rem;color:#6b7280;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <a href="products.html" style="color:#C9A84C;text-decoration:none;font-weight:600">All Free Tools</a> · <a href="consultants.html" style="color:#C9A84C;text-decoration:none;font-weight:600">Find a Consultant</a> · <a href="blog.html" style="color:#C9A84C;text-decoration:none;font-weight:600">Resources</a>
+  <p style="margin-top:0.5rem">&copy; 2026 AI Act Advisors</p>
 </div>
-</div>
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <h4>AI Act Advisors</h4>
-        <p class="footer-about">Europe's directory for EU AI Act compliance consultants, ethics advisors, and governance experts. Find, compare, and contact the right expert for your organisation.</p>
-      </div>
-      <div>
-        <h4>Directory</h4>
-        <a href="consultants.html">All Consultants</a>
-        <a href="countries.html">Browse by Country</a>
-        <a href="sectors.html">Browse by Sector</a>
-      </div>
-      <div>
-        <h4>Resources</h4>
-        <a href="blog.html">Blog</a>
-        <a href="about.html">About Us</a>
-        <a href="list-your-practice.html">List Your Practice</a>
-      </div>
-      <div>
-        <h4>Legal</h4>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="disclaimer.html">Disclaimer</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 AI Act Advisors. All rights reserved.</p>
-      <p class="footer-disclaimer">AI Act Advisors is an independent directory service. Listings are informational only and do not constitute endorsement. Verify consultant qualifications independently. This site does not provide legal advice. For legal guidance, consult a qualified professional.</p>
-    </div>
-  </div>
-</footer>
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1f2937;color:#e5e7eb;padding:1rem 1.5rem;z-index:999;font-size:0.85rem;box-shadow:0 -2px 10px rgba(0,0,0,0.15)">
-  <div style="max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
-    <p style="margin:0;flex:1">We use cookies for analytics only (Google Analytics 4 with anonymised IPs). No marketing cookies. <a href="privacy.html" style="color:#D79922">Privacy Policy</a></p>
-    <div style="display:flex;gap:0.5rem">
-      <button onclick="acceptCookies()" style="background:#4056A1;color:#fff;border:none;padding:0.4rem 1rem;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem">Accept</button>
-      <button onclick="declineCookies()" style="background:transparent;color:#9ca3af;border:1px solid #4b5563;padding:0.4rem 1rem;border-radius:8px;cursor:pointer;font-size:0.85rem">Decline</button>
-    </div>
-  </div>
-</div>
-<script>
-if(!localStorage.getItem('cookie-consent')){document.getElementById('cookie-banner').style.display='block'}
-function acceptCookies(){localStorage.setItem('cookie-consent','accepted');document.getElementById('cookie-banner').style.display='none'}
-function declineCookies(){localStorage.setItem('cookie-consent','declined');document.getElementById('cookie-banner').style.display='none'}
-</script>
-<script src="static/js/main.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  document.querySelectorAll('.listing-card a, a[href*="consultant/"]').forEach(function(a){
-    a.addEventListener('click',function(){
-      var name=this.textContent.trim();
-      var href=this.getAttribute('href')||'';
-      var id=href.split('/').pop().replace('.html','');
-      if(typeof gtag==='function'){
-        gtag('event','consultant_click',{consultant_name:name,consultant_id:id,page_location:window.location.pathname});
-      }
-    });
-  });
-  document.querySelectorAll('.country-card').forEach(function(a){
-    a.addEventListener('click',function(){
-      var name=this.querySelector('.name');
-      if(name&&typeof gtag==='function'){
-        gtag('event','country_click',{country_name:name.textContent.trim(),page_location:window.location.pathname});
-      }
-    });
-  });
-  document.querySelectorAll('a[href*="list-your-practice"]').forEach(function(a){
-    a.addEventListener('click',function(){
-      if(typeof gtag==='function'){
-        gtag('event','cta_click',{cta_type:'list_practice',page_location:window.location.pathname});
-      }
-    });
-  });
-});
-</script>
 </body>
 </html>
