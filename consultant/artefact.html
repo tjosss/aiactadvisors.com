@@ -24,7 +24,7 @@
 <div class="urgency-bar">
   <strong><span id="countdown"></span> days</strong> until EU AI Act high-risk deadline (August 2026) — Find your compliance consultant now
 </div>
-<script>document.getElementById('countdown').textContent=Math.max(0,Math.ceil((new Date('2026-08-02T00:00:00')-new Date())/(1000*60*60*24)));</script>
+<script>!function(){var d=Math.max(0,Math.ceil((new Date('2026-08-02T00:00:00')-new Date())/(1000*60*60*24)));document.getElementById('countdown').textContent=d;document.addEventListener('DOMContentLoaded',function(){var h=document.getElementById('hero-countdown');if(h)h.textContent=d;});}()</script>
 <header class="site-header">
   <div class="header-inner">
     <a href="../index.html" class="site-logo">AI Act <span>Advisors</span></a>
