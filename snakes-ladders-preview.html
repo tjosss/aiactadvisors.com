@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Act Snakes & Ladders</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#1B2A4A;color:#fff;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:1.5rem}
+h1{text-align:center;font-size:1.8rem;margin-bottom:0.25rem}
+.subtitle{text-align:center;color:#C9A84C;margin-bottom:1.5rem;font-size:0.95rem}
+
+.game-wrapper{display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+
+/* Board */
+.board{display:grid;grid-template-columns:repeat(6,1fr);width:540px;border:3px solid #C9A84C;border-radius:12px;overflow:hidden;flex-shrink:0}
+.cell{width:90px;height:80px;padding:6px;position:relative;border:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:all 0.15s}
+.cell:hover{filter:brightness(1.2)}
+.cell .num{font-size:0.65rem;font-weight:700;opacity:0.5}
+.cell .label{font-size:0.68rem;font-weight:600;line-height:1.2;text-align:center;flex:1;display:flex;align-items:center;justify-content:center}
+.cell .icon{font-size:1.4rem;text-align:center}
+
+/* Cell colors by type */
+.cell-start{background:#2a3d6b}
+.cell-minimal{background:#1a6b3a}
+.cell-limited{background:#7d6608}
+.cell-high{background:#8b2c2c}
+.cell-prohibited{background:#5c1010}
+.cell-ladder{background:#1a5c1a;border:2px solid #27ae60}
+.cell-snake{background:#5c1a1a;border:2px solid #c0392b}
+.cell-finish{background:linear-gradient(135deg,#C9A84C,#e6c45a)}
+.cell-finish .label{color:#1B2A4A}
+.cell-finish .num{color:#1B2A4A}
+.cell-neutral{background:#2a3d6b}
+.cell-info{background:#1a4a6b}
+
+/* Player token */
+.token{position:absolute;bottom:4px;right:4px;width:22px;height:22px;background:#C9A84C;border-radius:50%;border:2px solid #fff;z-index:10;transition:all 0.5s ease;box-shadow:0 2px 6px rgba(0,0,0,0.4)}
+
+/* Dice */
+.side-panel{width:280px}
+.dice-area{background:rgba(255,255,255,0.05);border-radius:14px;padding:1.25rem;text-align:center;margin-bottom:1rem}
+.dice{width:70px;height:70px;background:#fff;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;font-size:2.2rem;color:#1B2A4A;font-weight:800;margin:0.75rem 0;cursor:pointer;transition:transform 0.15s;user-select:none}
+.dice:hover{transform:scale(1.05)}
+.dice.rolling{animation:shake 0.3s ease infinite}
+@keyframes shake{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.roll-btn{background:#C9A84C;color:#1B2A4A;border:none;padding:0.6rem 1.5rem;border-radius:10px;font-weight:700;font-size:0.95rem;cursor:pointer;font-family:inherit;width:100%}
+.roll-btn:hover{background:#e6c45a}
+.roll-btn:disabled{opacity:0.5;cursor:not-allowed}
+
+/* Info card */
+.info-card{background:rgba(255,255,255,0.05);border-radius:14px;padding:1.25rem;min-height:160px}
+.info-card h3{font-size:0.95rem;margin-bottom:0.5rem}
+.info-card p{font-size:0.85rem;line-height:1.5;opacity:0.85}
+.info-card .tag{display:inline-block;font-size:0.7rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:4px;margin-bottom:0.5rem}
+.tag-prohibited{background:#c0392b;color:#fff}
+.tag-high{background:#e74c3c;color:#fff}
+.tag-limited{background:#f39c12;color:#fff}
+.tag-minimal{background:#27ae60;color:#fff}
+.tag-ladder{background:#27ae60;color:#fff}
+.tag-snake{background:#c0392b;color:#fff}
+
+/* Legend */
+.legend{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.5rem}
+.legend span{font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:4px;font-weight:600}
+
+/* Responsive */
+@media(max-width:860px){
+  .board{width:360px}
+  .cell{width:60px;height:60px}
+  .cell .label{font-size:0.55rem}
+  .cell .icon{font-size:1rem}
+  .side-panel{width:100%}
+}
+
+/* Win overlay */
+.win-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:100;align-items:center;justify-content:center}
+.win-overlay.show{display:flex}
+.win-card{background:#1B2A4A;border:3px solid #C9A84C;border-radius:20px;padding:2.5rem;text-align:center;max-width:400px}
+.win-card h2{font-size:1.6rem;color:#C9A84C;margin-bottom:0.5rem}
+.win-card p{font-size:0.95rem;opacity:0.85;margin-bottom:1.5rem;line-height:1.5}
+.win-card a,.win-card button{display:inline-block;margin:0.25rem;padding:0.6rem 1.25rem;border-radius:10px;font-weight:600;text-decoration:none;font-size:0.9rem;font-family:inherit;cursor:pointer;border:none}
+.win-card .btn-gold{background:#C9A84C;color:#1B2A4A}
+.win-card .btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.3)}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🎲 AI Act: Snakes &amp; Ladders</h1>
+  <p class="subtitle">Roll the dice. Learn the EU AI Act. Reach compliance before August 2026.</p>
+  <div class="legend">
+    <span style="background:#27ae60;color:#fff">🪜 Ladder = Compliance win</span>
+    <span style="background:#c0392b;color:#fff">🐍 Snake = Compliance fail</span>
+    <span style="background:#1a6b3a;color:#fff">Minimal</span>
+    <span style="background:#7d6608;color:#fff">Limited</span>
+    <span style="background:#8b2c2c;color:#fff">High-Risk</span>
+    <span style="background:#5c1010;color:#fff">Prohibited</span>
+  </div>
+
+  <div class="game-wrapper">
+    <div class="board" id="board"></div>
+    <div class="side-panel">
+      <div class="dice-area">
+        <div style="font-size:0.85rem;opacity:0.7;margin-bottom:0.25rem">Roll to move</div>
+        <div class="dice" id="dice" onclick="rollDice()">?</div>
+        <div style="font-size:0.8rem;margin:0.5rem 0" id="move-text">Click the dice or press Space</div>
+        <button class="roll-btn" id="roll-btn" onclick="rollDice()">Roll Dice</button>
+      </div>
+      <div class="info-card" id="info-card">
+        <h3>Welcome!</h3>
+        <p>You're starting your AI Act compliance journey. Roll the dice to move through the board. Land on ladders (compliance wins) to jump ahead. Land on snakes (compliance failures) to slide back. Reach square 30 to achieve compliance!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="win-overlay" id="win-overlay">
+  <div class="win-card">
+    <h2>🎉 You're Compliant!</h2>
+    <p>You navigated the EU AI Act and reached compliance. In real life, the journey takes 8–14 months — but now you know the key concepts, risks, and requirements.</p>
+    <a href="consultants.html" class="btn-gold">Find a Consultant →</a>
+    <button class="btn-outline" onclick="resetGame()">Play Again</button>
+  </div>
+</div>
+
+<script>
+const CELLS = [
+  {n:1, type:"start", icon:"🚀", label:"Start", info:"Your AI Act compliance journey begins. February 2025: AI literacy and prohibited practices are already in force."},
+  {n:2, type:"info", icon:"📋", label:"AI Inventory", info:"First step: document every AI system in your organisation. What does it do? What data does it process? Who uses it?"},
+  {n:3, type:"ladder", icon:"🪜", label:"AI Literacy Training Done", info:"You trained your team on AI literacy (Article 4). Jump ahead! This has been mandatory since February 2025.", goTo:8},
+  {n:4, type:"minimal", icon:"📅", label:"AI Scheduling", info:"AI scheduling and calendar tools are MINIMAL risk. No specific obligations — you're fine here."},
+  {n:5, type:"limited", icon:"🤖", label:"Chatbot Deployed", info:"Chatbots must disclose they're AI before the conversation starts. LIMITED risk — transparency obligation."},
+  {n:6, type:"snake", icon:"🐍", label:"No AI Disclosure", info:"You forgot to tell users they're talking to a chatbot. Slide back! Transparency has been required since February 2025.", goTo:2},
+  {n:7, type:"minimal", icon:"📧", label:"Email AI", info:"AI email personalisation and send-time optimisation is MINIMAL risk. No specific obligations."},
+  {n:8, type:"info", icon:"📊", label:"Risk Classification", info:"Time to classify your AI systems: Prohibited → High-Risk → Limited → Minimal. Annex III lists the high-risk categories."},
+  {n:9, type:"high", icon:"⚠️", label:"CV Screening AI", info:"AI that screens, scores, or ranks job candidates is HIGH-RISK (Annex III, Category 4). Full deployer obligations apply."},
+  {n:10, type:"ladder", icon:"🪜", label:"Human Oversight Set Up", info:"You established meaningful human review for all AI decisions. Jump ahead! This is a core requirement of Article 26.", goTo:15},
+  {n:11, type:"high", icon:"🏥", label:"Medical AI Triage", info:"AI triage and diagnostic tools are HIGH-RISK. They may also require medical device certification under the MDR."},
+  {n:12, type:"snake", icon:"🐍", label:"No DPIA Done", info:"You deployed high-risk AI without a Data Protection Impact Assessment. GDPR Article 35 requires this. Slide back!", goTo:8},
+  {n:13, type:"limited", icon:"🖼️", label:"AI Images in Ads", info:"AI-generated images in advertising need disclosure under Article 50. LIMITED risk — label your synthetic content."},
+  {n:14, type:"prohibited", icon:"🚫", label:"Emotion Recognition at Work", info:"PROHIBITED since February 2025. AI that infers emotions from biometric data in workplaces and schools is banned (Article 5)."},
+  {n:15, type:"info", icon:"📝", label:"DPIA Completed", info:"You've completed Data Protection Impact Assessments for your high-risk AI systems. GDPR compliance ✓"},
+  {n:16, type:"high", icon:"🎓", label:"AI Proctoring", info:"AI exam monitoring is HIGH-RISK (Annex III, Category 3d). Eye-tracking, behaviour analysis — all caught."},
+  {n:17, type:"ladder", icon:"🪜", label:"Provider Compliance Confirmed", info:"You wrote to your AI vendors and confirmed their conformity assessment timelines. Jump ahead!", goTo:22},
+  {n:18, type:"snake", icon:"🐍", label:"Biased AI Pricing", info:"Your insurance AI is producing discriminatory pricing across demographics. Slide back to fix bias monitoring!", goTo:13},
+  {n:19, type:"high", icon:"🛡️", label:"Insurance Underwriting AI", info:"AI for risk assessment and pricing in life/health insurance is HIGH-RISK (Annex III, Category 5c)."},
+  {n:20, type:"limited", icon:"📹", label:"Deepfake in Campaign", info:"Synthetic video in marketing must be disclosed. The artistic exemption does NOT apply to commercial advertising."},
+  {n:21, type:"prohibited", icon:"🚫", label:"Subliminal AI Ads", info:"PROHIBITED. AI using imperceptible cues to influence behaviour is banned under Article 5. Fines up to €35M or 7% of turnover."},
+  {n:22, type:"info", icon:"✅", label:"Transparency Notices Live", info:"You've informed all affected individuals that AI is used in decisions about them. Article 26 deployer obligation ✓"},
+  {n:23, type:"high", icon:"💳", label:"BNPL Credit Scoring", info:"Buy Now Pay Later AI credit scoring is HIGH-RISK (Annex III, Category 5b). Klarna, Afterpay — all caught."},
+  {n:24, type:"snake", icon:"🐍", label:"No Decision Logs", info:"You failed to maintain AI decision logs. You can't explain how the system reached its decisions. Slide back!", goTo:19},
+  {n:25, type:"ladder", icon:"🪜", label:"FRIA Completed", info:"You conducted a Fundamental Rights Impact Assessment for your financial AI. Jump ahead to near-compliance!", goTo:28},
+  {n:26, type:"high", icon:"🏫", label:"Admissions Algorithm", info:"AI determining access to education is HIGH-RISK (Annex III, Category 3a). Human review of all admissions decisions required."},
+  {n:27, type:"snake", icon:"🐍", label:"Targeting Vulnerable Groups", info:"PROHIBITED. Your ad AI was targeting elderly users with manipulative health product ads. Article 5 violation. Slide back!", goTo:20},
+  {n:28, type:"info", icon:"📑", label:"Documentation Ready", info:"All deployer documentation is prepared. AI inventories, risk classifications, DPIAs, training records — all on file."},
+  {n:29, type:"neutral", icon:"⏰", label:"Aug 2, 2026", info:"The deadline for high-risk AI system compliance. You're almost there. One more step to full compliance."},
+  {n:30, type:"finish", icon:"🏆", label:"COMPLIANT!", info:"Congratulations! You've achieved EU AI Act compliance. Your AI systems are documented, transparent, and properly governed."}
+];
+
+let playerPos = 1;
+let isRolling = false;
+
+function buildBoard() {
+  const board = document.getElementById('board');
+  // Board layout: snake-like path. Row 1 (bottom): left to right. Row 2: right to left. Etc.
+  // 5 rows of 6 cells
+  const rows = [];
+  for (let r = 0; r < 5; r++) {
+    const row = [];
+    for (let c = 0; c < 6; c++) {
+      const cellNum = (4 - r) * 6 + (r % 2 === 0 ? c + 1 : 6 - c);
+      // Wait — we want bottom row = cells 1-6 left to right, next row = 7-12 right to left, etc.
+      // Actually for snakes & ladders the board goes:
+      // Row 5 (top):    30 29 28 27 26 25
+      // Row 4:          19 20 21 22 23 24
+      // Row 3:          18 17 16 15 14 13
+      // Row 2:          7  8  9  10 11 12
+      // Row 1 (bottom): 6  5  4  3  2  1
+      // Hmm, let me recalculate.
+      row.push(null); // placeholder
+    }
+    rows.push(row);
+  }
+
+  // Actually, let me just generate the grid directly
+  const grid = [];
+  // Row 0 (top of display) = cells 25-30
+  // Row 1 = cells 24-19
+  // Row 2 = cells 13-18
+  // Row 3 = cells 12-7
+  // Row 4 (bottom of display) = cells 1-6
+  const layout = [
+    [30,29,28,27,26,25],
+    [19,20,21,22,23,24],
+    [18,17,16,15,14,13],
+    [7,8,9,10,11,12],
+    [6,5,4,3,2,1]
+  ];
+
+  layout.forEach(row => {
+    row.forEach(cellNum => {
+      const cell = CELLS[cellNum - 1];
+      const div = document.createElement('div');
+      div.className = 'cell cell-' + cell.type;
+      div.id = 'cell-' + cellNum;
+      div.onclick = () => showInfo(cellNum);
+
+      let extra = '';
+      if (cell.goTo && cell.type === 'ladder') extra = ' → '+cell.goTo;
+      if (cell.goTo && cell.type === 'snake') extra = ' → '+cell.goTo;
+
+      div.innerHTML = '<div class="num">' + cellNum + extra + '</div><div class="icon">' + cell.icon + '</div><div class="label">' + cell.label + '</div>';
+      board.appendChild(div);
+    });
+  });
+
+  // Place token
+  updateToken();
+}
+
+function updateToken() {
+  // Remove old token
+  const old = document.querySelector('.token');
+  if (old) old.remove();
+  // Place on current cell
+  const cell = document.getElementById('cell-' + playerPos);
+  if (cell) {
+    const token = document.createElement('div');
+    token.className = 'token';
+    cell.appendChild(token);
+  }
+}
+
+function showInfo(cellNum) {
+  const cell = CELLS[cellNum - 1];
+  const card = document.getElementById('info-card');
+  let tagClass = '';
+  let tagText = '';
+  if (cell.type === 'high') { tagClass = 'tag-high'; tagText = 'HIGH-RISK'; }
+  else if (cell.type === 'prohibited') { tagClass = 'tag-prohibited'; tagText = 'PROHIBITED'; }
+  else if (cell.type === 'limited') { tagClass = 'tag-limited'; tagText = 'LIMITED RISK'; }
+  else if (cell.type === 'minimal') { tagClass = 'tag-minimal'; tagText = 'MINIMAL RISK'; }
+  else if (cell.type === 'ladder') { tagClass = 'tag-ladder'; tagText = '🪜 LADDER'; }
+  else if (cell.type === 'snake') { tagClass = 'tag-snake'; tagText = '🐍 SNAKE'; }
+
+  card.innerHTML = (tagText ? '<span class="tag '+tagClass+'">'+tagText+'</span>' : '') +
+    '<h3>Square '+cellNum+': '+cell.label+'</h3><p>'+cell.info+'</p>';
+}
+
+function rollDice() {
+  if (isRolling) return;
+  if (playerPos >= 30) return;
+  isRolling = true;
+
+  const dice = document.getElementById('dice');
+  const btn = document.getElementById('roll-btn');
+  btn.disabled = true;
+  dice.classList.add('rolling');
+
+  // Animate dice
+  let count = 0;
+  const anim = setInterval(() => {
+    dice.textContent = Math.floor(Math.random() * 6) + 1;
+    count++;
+    if (count > 10) {
+      clearInterval(anim);
+      const roll = Math.floor(Math.random() * 6) + 1;
+      dice.textContent = roll;
+      dice.classList.remove('rolling');
+      movePlayer(roll);
+    }
+  }, 80);
+}
+
+function movePlayer(roll) {
+  let newPos = playerPos + roll;
+  if (newPos > 30) newPos = 30; // exact or overshoot lands on 30
+
+  document.getElementById('move-text').textContent = 'Rolled ' + roll + '! Moving to square ' + newPos + '...';
+
+  // Animate movement step by step
+  let current = playerPos;
+  const moveStep = () => {
+    if (current < newPos) {
+      current++;
+      playerPos = current;
+      updateToken();
+      setTimeout(moveStep, 200);
+    } else {
+      // Check for snake or ladder
+      const cell = CELLS[newPos - 1];
+      if (cell.goTo) {
+        setTimeout(() => {
+          const isLadder = cell.type === 'ladder';
+          document.getElementById('move-text').textContent = (isLadder ? '🪜 Ladder!' : '🐍 Snake!') + ' Moving to ' + cell.goTo + '...';
+          showInfo(newPos);
+
+          setTimeout(() => {
+            playerPos = cell.goTo;
+            updateToken();
+            showInfo(cell.goTo);
+
+            if (playerPos >= 30) {
+              setTimeout(showWin, 600);
+            }
+            isRolling = false;
+            document.getElementById('roll-btn').disabled = false;
+          }, 800);
+        }, 400);
+      } else {
+        showInfo(newPos);
+        if (playerPos >= 30) {
+          setTimeout(showWin, 600);
+        }
+        isRolling = false;
+        document.getElementById('roll-btn').disabled = false;
+      }
+    }
+  };
+  moveStep();
+}
+
+function showWin() {
+  document.getElementById('win-overlay').classList.add('show');
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'game_complete', {game: 'snakes_ladders'});
+  }
+}
+
+function resetGame() {
+  playerPos = 1;
+  updateToken();
+  showInfo(1);
+  document.getElementById('win-overlay').classList.remove('show');
+  document.getElementById('dice').textContent = '?';
+  document.getElementById('move-text').textContent = 'Click the dice or press Space';
+}
+
+// Keyboard support
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') { e.preventDefault(); rollDice(); }
+});
+
+buildBoard();
+showInfo(1);
+</script>
+</body>
+</html>

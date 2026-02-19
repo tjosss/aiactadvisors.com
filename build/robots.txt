@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aiactadvisors.com/sitemap.xml

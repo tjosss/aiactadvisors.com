@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU AI Act Jargon Buster — Visual Guide</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#1a1a2e}
+.page{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
+
+/* Header */
+.header{text-align:center;margin-bottom:2rem;padding:2rem 1rem;background:linear-gradient(135deg,#1B2A4A 0%,#2a3d6b 100%);border-radius:16px;color:#fff}
+.header h1{font-size:2rem;margin-bottom:0.25rem}
+.header p{color:#C9A84C;font-size:1rem}
+
+/* Risk Legend */
+.risk-legend{display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem}
+.risk-legend .chip{display:flex;align-items:center;gap:0.35rem;font-size:0.8rem;font-weight:600;padding:0.3rem 0.75rem;border-radius:99px;background:#fff;border:1px solid #e5e7eb}
+.chip .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* Groups */
+.group{margin-bottom:2rem}
+.group-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px solid}
+.group-header .group-icon{font-size:1.8rem}
+.group-header h2{font-size:1.1rem;text-transform:uppercase;letter-spacing:0.05em}
+.group-header .count{font-size:0.75rem;background:rgba(0,0,0,0.06);padding:0.15rem 0.5rem;border-radius:99px;color:#6b7280}
+
+/* Term Cards */
+.terms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:0.6rem}
+.term{background:#fff;border-radius:10px;padding:0.85rem 1rem;display:flex;gap:0.75rem;align-items:flex-start;border-left:4px solid;transition:box-shadow 0.15s}
+.term:hover{box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.term .term-icon{font-size:1.2rem;flex-shrink:0;margin-top:2px}
+.term .term-body{}
+.term .term-name{font-weight:700;font-size:0.88rem;color:#1B2A4A}
+.term .term-short{font-size:0.75rem;color:#C9A84C;font-weight:600;margin-bottom:0.15rem}
+.term .term-def{font-size:0.78rem;color:#4b5563;line-height:1.4}
+
+/* Risk colours for borders */
+.border-prohibited{border-left-color:#C41E3A}
+.border-high{border-left-color:#e74c3c}
+.border-limited{border-left-color:#f39c12}
+.border-minimal{border-left-color:#27ae60}
+.border-core{border-left-color:#1B2A4A}
+.border-regulation{border-left-color:#6366f1}
+.border-compliance{border-left-color:#0ea5e9}
+.border-other{border-left-color:#8b5cf6}
+
+/* Group header border colours */
+.gh-risk{border-bottom-color:#e74c3c}
+.gh-core{border-bottom-color:#1B2A4A}
+.gh-regulation{border-bottom-color:#6366f1}
+.gh-compliance{border-bottom-color:#0ea5e9}
+.gh-other{border-bottom-color:#8b5cf6}
+
+/* Footer */
+.footer{text-align:center;padding:1.5rem;color:#9ca3af;font-size:0.8rem}
+.footer a{color:#C9A84C;text-decoration:none}
+
+/* Print styles */
+@media print{
+  body{background:#fff}
+  .page{padding:0.5cm}
+  .term{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <h1>🔤 EU AI Act Jargon Buster</h1>
+    <p>43 key terms explained in plain English — colour-coded and grouped for quick reference</p>
+  </div>
+
+  <div class="risk-legend">
+    <div class="chip"><div class="dot" style="background:#C41E3A"></div> Prohibited</div>
+    <div class="chip"><div class="dot" style="background:#e74c3c"></div> High-Risk</div>
+    <div class="chip"><div class="dot" style="background:#f39c12"></div> Limited Risk</div>
+    <div class="chip"><div class="dot" style="background:#27ae60"></div> Minimal Risk</div>
+    <div class="chip"><div class="dot" style="background:#1B2A4A"></div> Core Concept</div>
+    <div class="chip"><div class="dot" style="background:#6366f1"></div> Regulation</div>
+    <div class="chip"><div class="dot" style="background:#0ea5e9"></div> Compliance</div>
+    <div class="chip"><div class="dot" style="background:#8b5cf6"></div> Other</div>
+  </div>
+
+  <!-- GROUP: Risk Levels (the most important concepts) -->
+  <div class="group">
+    <div class="group-header gh-risk">
+      <span class="group-icon">⚡</span>
+      <h2>Risk Levels — Where Does Your AI Sit?</h2>
+      <span class="count">5 terms</span>
+    </div>
+    <div class="terms-grid">
+      <div class="term border-prohibited">
+        <div class="term-icon">🚫</div>
+        <div class="term-body">
+          <div class="term-name">Prohibited AI</div>
+          <div class="term-short">The banned uses (Article 5)</div>
+          <div class="term-def">AI uses too dangerous for any compliance pathway — they're simply banned. Includes real-time facial recognition, emotion recognition at work/school, and manipulation tactics.</div>
+        </div>
+      </div>
+      <div class="term border-prohibited">
+        <div class="term-icon">🚫</div>
+        <div class="term-body">
+          <div class="term-name">Unacceptable Risk</div>
+          <div class="term-short">Synonym for prohibited</div>
+          <div class="term-def">The highest risk tier. These AI uses are completely banned in the EU with no compliance pathway available.</div>
+        </div>
+      </div>
+      <div class="term border-high">
+        <div class="term-icon">⚠️</div>
+        <div class="term-body">
+          <div class="term-name">High-Risk AI System</div>
+          <div class="term-short">Annex III listed systems</div>
+          <div class="term-def">AI that significantly impacts rights — hiring tools, credit scoring, medical AI, education AI. Triggers the heaviest compliance: conformity assessment, CE marking, human oversight.</div>
+        </div>
+      </div>
+      <div class="term border-limited">
+        <div class="term-icon">💬</div>
+        <div class="term-body">
+          <div class="term-name">Limited Risk</div>
+          <div class="term-short">Transparency obligations (Article 50)</div>
+          <div class="term-def">AI with some risk but not high-risk. You must disclose that AI is being used and explain how. Chatbots, AI-generated content, deepfakes.</div>
+        </div>
+      </div>
+      <div class="term border-minimal">
+        <div class="term-icon">✅</div>
+        <div class="term-body">
+          <div class="term-name">Minimal Risk</div>
+          <div class="term-short">Most business AI, lightest obligations</div>
+          <div class="term-def">AI that doesn't significantly impact rights — recommendations, scheduling, analytics. Minimal requirements, but you still can't use banned practices.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP: Core Concepts — Who's Who -->
+  <div class="group">
+    <div class="group-header gh-core">
+      <span class="group-icon">🏗️</span>
+      <h2>Core Concepts — Who's Who</h2>
+      <span class="count">7 terms</span>
+    </div>
+    <div class="terms-grid">
+      <div class="term border-core">
+        <div class="term-icon">🤖</div>
+        <div class="term-body">
+          <div class="term-name">AI System</div>
+          <div class="term-short">What the Act considers "AI"</div>
+          <div class="term-def">Software that uses machine learning or logic-based approaches to generate predictions or decisions. Tools that "learn" from data or follow rules to make decisions.</div>
+        </div>
+      </div>
+      <div class="term border-core">
+        <div class="term-icon">🏭</div>
+        <div class="term-body">
+          <div class="term-name">Provider</div>
+          <div class="term-short">Company that builds the AI</div>
+          <div class="term-def">The organisation that creates or develops an AI system. If you're building your own AI — you have provider obligations (the heaviest).</div>
+        </div>
+      </div>
+      <div class="term border-core">
+        <div class="term-icon">🏢</div>
+        <div class="term-body">
+          <div class="term-name">Deployer</div>
+          <div class="term-short">Business that uses AI (most SMEs)</div>
+          <div class="term-def">The organisation that uses an AI system in their operations. Using ChatGPT, analytics, or hiring tools? You're a deployer. Lighter obligations than providers.</div>
+        </div>
+      </div>
+      <div class="term border-core">
+        <div class="term-icon">👥</div>
+        <div class="term-body">
+          <div class="term-name">Operator</div>
+          <div class="term-short">Umbrella: providers + deployers</div>
+          <div class="term-def">Any organisation in the AI value chain — either building it or using it. The Act imposes different obligations on each.</div>
+        </div>
+      </div>
+      <div class="term border-core">
+        <div class="term-icon">🧠</div>
+        <div class="term-body">
+          <div class="term-name">General-Purpose AI (GPAI)</div>
+          <div class="term-short">Models like ChatGPT, Claude</div>
+          <div class="term-def">Large language models trained on broad data for many uses. The Act has specific rules for GPAI providers about transparency and safety testing.</div>
+        </div>
+      </div>
+      <div class="term border-core">
+        <div class="term-icon">📖</div>
+        <div class="term-body">
+          <div class="term-name">AI Literacy</div>
+          <div class="term-short">Article 4: train your staff</div>
+          <div class="term-def">The obligation to ensure staff understand the AI systems they use — how they work and their limitations. Mandatory since February 2025.</div>
+        </div>
+      </div>
+      <div class="term border-core">
+        <div class="term-icon">🚀</div>
+        <div class="term-body">
+          <div class="term-name">Placing on the Market</div>
+          <div class="term-short">Making AI available in the EU</div>
+          <div class="term-def">When a provider first makes an AI system available for distribution or use. This triggers compliance obligations.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP: Key Articles -->
+  <div class="group">
+    <div class="group-header gh-regulation">
+      <span class="group-icon">📜</span>
+      <h2>Key Articles — The Rules That Matter</h2>
+      <span class="count">10 terms</span>
+    </div>
+    <div class="terms-grid">
+      <div class="term border-regulation">
+        <div class="term-icon">📋</div>
+        <div class="term-body">
+          <div class="term-name">Annex III</div>
+          <div class="term-short">The high-risk AI list</div>
+          <div class="term-def">Lists the specific uses classified as high-risk: hiring, credit scoring, education, healthcare, critical infrastructure. Determines which systems need the most work.</div>
+        </div>
+      </div>
+      <div class="term border-regulation">
+        <div class="term-icon">4️⃣</div>
+        <div class="term-body">
+          <div class="term-name">Article 4</div>
+          <div class="term-short">AI literacy obligation</div>
+          <div class="term-def">Staff using high-risk AI must be trained on how the system works. Document training and keep records. In force since February 2025.</div>
+        </div>
+      </div>
+      <div class="term border-regulation">
+        <div class="term-icon">5️⃣</div>
+        <div class="term-body">
+          <div class="term-name">Article 5</div>
+          <div class="term-short">Prohibited practices</div>
+          <div class="term-def">The complete ban on certain AI uses — emotion recognition at work/school, subliminal manipulation, social scoring. No exceptions. In force since February 2025.</div>
+        </div>
+      </div>
+      <div class="term border-regulation">
+        <div class="term-icon">6️⃣</div>
+        <div class="term-body">
+          <div class="term-name">Article 6</div>
+          <div class="term-short">High-risk classification rules</div>
+          <div class="term-def">Defines which systems are high-risk based on intended use and impact on people's rights. Critical for understanding your category.</div>
+        </div>
+      </div>
+      <div class="term border-regulation">
+        <div class="term-icon">👁️</div>
+        <div class="term-body">
+          <div class="term-name">Article 14</div>
+          <div class="term-short">Human oversight obligation</div>
+          <div class="term-def">Humans must stay meaningfully involved in high-risk AI decisions. Not a token button-press — real ability to understand and override.</div>
+        </div>
+      </div>
+      <div class="term border-regulation">
+        <div class="term-icon">📝</div>
+        <div class="term-body">
+          <div class="term-name">Article 26</div>
+          <div class="term-short">Deployer obligations</div>
+          <div class="term-def">The main compliance checklist for SMEs using high-risk AI: monitor performance, keep records, report incidents, ensure human oversight.</div>
+        </div>
+      </div>
+      <div class="term border-regulation">
+        <div class="term-icon">⚖️</div>
+        <div class="term-body">
+          <div class="term-name">Article 27</div>
+          <div class="term-short">Fundamental rights impact assessment</div>
+          <div class="term-def">Deployers of high-risk AI must assess how it might affect people's rights. Document potential harms and mitigation measures.</div>
+        </div>
+      </div>
+      <div class="term border-regulation">
+        <div class="term-icon">🔍</div>
+        <div class="term-body">
+          <div class="term-name">Article 50</div>
+          <div class="term-short">Transparency for limited risk</div>
+          <div class="term-def">Tell people when they're interacting with AI and disclose how it works. Applies to chatbots, AI-generated content, and deepfakes.</div>
+        </div>
+      </div>
+      <div class="term border-regulation">
+        <div class="term-icon">💰</div>
+        <div class="term-body">
+          <div class="term-name">Article 99</div>
+          <div class="term-short">Penalties</div>
+          <div class="term-def">Maximum fines: €35M/7% turnover for prohibited practices, €15M/3% for high-risk violations. SMEs get "whichever is lower" relief.</div>
+        </div>
+      </div>
+      <div class="term border-regulation">
+        <div class="term-icon">🏥</div>
+        <div class="term-body">
+          <div class="term-name">MDR</div>
+          <div class="term-short">Medical Device Regulation</div>
+          <div class="term-def">EU rules for medical devices. Overlaps with AI Act for healthcare AI — you may need to comply with both. Healthcare AI is often high-risk.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP: Compliance Terms -->
+  <div class="group">
+    <div class="group-header gh-compliance">
+      <span class="group-icon">✅</span>
+      <h2>Compliance — What You Actually Do</h2>
+      <span class="count">12 terms</span>
+    </div>
+    <div class="terms-grid">
+      <div class="term border-compliance">
+        <div class="term-icon">🏷️</div>
+        <div class="term-body">
+          <div class="term-name">CE Marking</div>
+          <div class="term-short">The compliance label</div>
+          <div class="term-def">A mark placed on high-risk AI systems to show they meet AI Act requirements. Similar to CE marks on other EU products.</div>
+        </div>
+      </div>
+      <div class="term border-compliance">
+        <div class="term-icon">🔬</div>
+        <div class="term-body">
+          <div class="term-name">Conformity Assessment</div>
+          <div class="term-short">The formal compliance check</div>
+          <div class="term-def">Independent review verifying your high-risk system meets all legal requirements. Mandatory before placing on market.</div>
+        </div>
+      </div>
+      <div class="term border-compliance">
+        <div class="term-icon">🏛️</div>
+        <div class="term-body">
+          <div class="term-name">Notified Body</div>
+          <div class="term-short">Independent assessor</div>
+          <div class="term-def">A government-accredited third party that conducts conformity assessments. You hire them to verify your system meets requirements.</div>
+        </div>
+      </div>
+      <div class="term border-compliance">
+        <div class="term-icon">👁️</div>
+        <div class="term-body">
+          <div class="term-name">Human Oversight</div>
+          <div class="term-short">Keeping humans in the loop</div>
+          <div class="term-def">Humans must remain meaningfully involved in high-risk AI decisions — understand the system, monitor it, and can override or stop it.</div>
+        </div>
+      </div>
+      <div class="term border-compliance">
+        <div class="term-icon">⚖️</div>
+        <div class="term-body">
+          <div class="term-name">Fundamental Rights Impact Assessment</div>
+          <div class="term-short">Article 27, for deployers</div>
+          <div class="term-def">A documented review of how your high-risk AI might violate people's rights. Identify and mitigate harms before deployment.</div>
+        </div>
+      </div>
+      <div class="term border-compliance">
+        <div class="term-icon">📊</div>
+        <div class="term-body">
+          <div class="term-name">Risk Management System</div>
+          <div class="term-short">Article 9, systematic risk ID</div>
+          <div class="term-def">Your documented process for identifying, assessing, and reducing AI-related risks. Required for high-risk systems.</div>
+        </div>
+      </div>
+      <div class="term border-compliance">
+        <div class="term-icon">📄</div>
+        <div class="term-body">
+          <div class="term-name">Technical Documentation</div>
+          <div class="term-short">What providers must maintain</div>
+          <div class="term-def">Detailed records of how AI was built, trained, and tested. Includes data, algorithms, testing results, and performance metrics.</div>
+        </div>
+      </div>
+      <div class="term border-compliance">
+        <div class="term-icon">💬</div>
+        <div class="term-body">
+          <div class="term-name">Transparency Obligation</div>
+          <div class="term-short">Article 50, telling people about AI</div>
+          <div class="term-def">For limited-risk AI: disclose that AI is involved and explain how it works. Builds trust and meets legal honesty requirements.</div>
+        </div>
+      </div>
+      <div class="term border-compliance">
+        <div class="term-icon">📡</div>
+        <div class="term-body">
+          <div class="term-name">Post-Market Monitoring</div>
+          <div class="term-short">Ongoing compliance</div>
+          <div class="term-def">After deploying high-risk AI, continuously monitor its performance, gather feedback, and check for problems.</div>
+        </div>
+      </div>
+      <div class="term border-compliance">
+        <div class="term-icon">🗄️</div>
+        <div class="term-body">
+          <div class="term-name">EU Database</div>
+          <div class="term-short">Public register for high-risk systems</div>
+          <div class="term-def">A transparency tool where providers register high-risk AI systems. Lets customers verify what they're using.</div>
+        </div>
+      </div>
+      <div class="term border-compliance">
+        <div class="term-icon">👮</div>
+        <div class="term-body">
+          <div class="term-name">Market Surveillance Authority</div>
+          <div class="term-short">National enforcement body</div>
+          <div class="term-def">Your national regulator for AI Act compliance. Each EU member state has one. Contact them for guidance.</div>
+        </div>
+      </div>
+      <div class="term border-compliance">
+        <div class="term-icon">🔄</div>
+        <div class="term-body">
+          <div class="term-name">Significant Modification</div>
+          <div class="term-short">When deployer becomes provider</div>
+          <div class="term-def">Substantial changes to how you use or modify an AI system may shift you from deployer to provider — triggering new obligations.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP: Other Terms -->
+  <div class="group">
+    <div class="group-header gh-other">
+      <span class="group-icon">🔮</span>
+      <h2>Other Key Terms</h2>
+      <span class="count">8 terms</span>
+    </div>
+    <div class="terms-grid">
+      <div class="term border-other">
+        <div class="term-icon">🎭</div>
+        <div class="term-body">
+          <div class="term-name">Deep Fake</div>
+          <div class="term-short">AI-generated synthetic media</div>
+          <div class="term-def">Video, audio, or images created or altered by AI to look real. The Act requires labelling of all synthetic media.</div>
+        </div>
+      </div>
+      <div class="term border-other">
+        <div class="term-icon">😤</div>
+        <div class="term-body">
+          <div class="term-name">Emotion Recognition System</div>
+          <div class="term-short">Detecting feelings via AI</div>
+          <div class="term-def">AI that claims to identify emotions from facial expressions or voice. Banned in workplaces and schools since February 2025.</div>
+        </div>
+      </div>
+      <div class="term border-other">
+        <div class="term-icon">👤</div>
+        <div class="term-body">
+          <div class="term-name">Biometric Categorisation</div>
+          <div class="term-short">Classifying people by physical traits</div>
+          <div class="term-def">AI that assigns people to categories (age, gender, ethnicity) from biometric data. Often banned or heavily restricted.</div>
+        </div>
+      </div>
+      <div class="term border-other">
+        <div class="term-icon">📹</div>
+        <div class="term-body">
+          <div class="term-name">Real-Time Remote Biometric ID</div>
+          <div class="term-short">The banned facial recognition</div>
+          <div class="term-def">Real-time facial recognition in public spaces. Banned in most EU contexts. Very narrow exceptions for law enforcement only.</div>
+        </div>
+      </div>
+      <div class="term border-other">
+        <div class="term-icon">🧪</div>
+        <div class="term-body">
+          <div class="term-name">Regulatory Sandbox</div>
+          <div class="term-short">Safe testing for SMEs</div>
+          <div class="term-def">A government-provided space where SMEs can test innovative AI with lighter requirements. Ask your national authority about local schemes.</div>
+        </div>
+      </div>
+      <div class="term border-other">
+        <div class="term-icon">📜</div>
+        <div class="term-body">
+          <div class="term-name">Codes of Practice</div>
+          <div class="term-short">Voluntary compliance frameworks</div>
+          <div class="term-def">Optional industry standards that help demonstrate good compliance. Useful for showing extra diligence beyond minimum requirements.</div>
+        </div>
+      </div>
+      <div class="term border-other">
+        <div class="term-icon">🔐</div>
+        <div class="term-body">
+          <div class="term-name">GDPR</div>
+          <div class="term-short">Data protection (overlaps with AI Act)</div>
+          <div class="term-def">The EU's data protection regulation. Overlaps significantly with the AI Act since AI systems often process personal data.</div>
+        </div>
+      </div>
+      <div class="term border-other">
+        <div class="term-icon">🔧</div>
+        <div class="term-body">
+          <div class="term-name">Putting into Service</div>
+          <div class="term-short">First use of AI for its purpose</div>
+          <div class="term-def">When an AI system is first actually used in the real world. Differs from "placing on market" — the deployer puts it into service.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Free to share with attribution · <a href="https://aiactadvisors.com">aiactadvisors.com</a> · February 2026</p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Periodic Table of AI Act Terms</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1729;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1.5rem}
+
+h1{font-size:1.6rem;color:#fff;margin-bottom:0.15rem;text-align:center}
+.subtitle{color:#C9A84C;font-size:0.85rem;text-align:center;margin-bottom:1.25rem}
+
+/* Legend */
+.legend{display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.25rem}
+.legend-item{display:flex;align-items:center;gap:0.3rem;font-size:0.7rem;font-weight:600;opacity:0.8}
+.legend-dot{width:12px;height:12px;border-radius:3px}
+
+/* Grid */
+.ptable{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;max-width:820px;width:100%}
+
+/* Cell */
+.cell{position:relative;border-radius:6px;padding:6px;cursor:pointer;transition:all 0.15s;aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;min-height:0}
+.cell:hover{transform:scale(1.08);z-index:10;box-shadow:0 4px 20px rgba(0,0,0,0.4)}
+.cell .abbr{font-size:1.1rem;font-weight:800;line-height:1}
+.cell .name{font-size:0.5rem;font-weight:600;line-height:1.15;opacity:0.85;overflow:hidden}
+.cell .num{font-size:0.5rem;opacity:0.5;text-align:right}
+
+/* Colours */
+.c-prohibited{background:rgba(196,30,58,0.7);color:#fff}
+.c-risk{background:rgba(231,76,60,0.6);color:#fff}
+.c-core{background:rgba(27,42,74,0.9);color:#fff;border:1px solid rgba(201,168,76,0.3)}
+.c-regulation{background:rgba(99,102,241,0.5);color:#fff}
+.c-compliance{background:rgba(14,165,233,0.45);color:#fff}
+.c-other{background:rgba(139,92,246,0.45);color:#fff}
+.c-empty{background:transparent;pointer-events:none}
+.c-title{background:transparent;pointer-events:none;display:flex;align-items:center;justify-content:center}
+.c-title span{font-size:0.65rem;color:#C9A84C;font-weight:600;text-align:center;line-height:1.3}
+
+/* Tooltip */
+.tooltip{display:none;position:fixed;z-index:100;background:#1a2540;border:1px solid rgba(201,168,76,0.4);border-radius:12px;padding:1.25rem;max-width:340px;width:90vw;box-shadow:0 8px 30px rgba(0,0,0,0.5);pointer-events:none}
+.tooltip.show{display:block}
+.tooltip .tt-cat{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem}
+.tooltip .tt-name{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:0.15rem}
+.tooltip .tt-short{font-size:0.8rem;color:#C9A84C;margin-bottom:0.5rem}
+.tooltip .tt-def{font-size:0.82rem;line-height:1.5;opacity:0.85}
+.tt-prohibited{color:#e74c3c}
+.tt-risk{color:#e74c3c}
+.tt-core{color:#C9A84C}
+.tt-regulation{color:#818cf8}
+.tt-compliance{color:#38bdf8}
+.tt-other{color:#a78bfa}
+
+/* Footer */
+.footer{margin-top:1.25rem;text-align:center;font-size:0.7rem;opacity:0.4}
+.footer a{color:#C9A84C;text-decoration:none}
+
+/* Mobile */
+@media(max-width:700px){
+  .ptable{grid-template-columns:repeat(6,1fr);max-width:400px}
+  .cell .abbr{font-size:0.85rem}
+  .cell .name{font-size:0.42rem}
+}
+@media(max-width:420px){
+  .ptable{grid-template-columns:repeat(5,1fr);max-width:330px}
+}
+</style>
+</head>
+<body>
+
+<h1>The Periodic Table of AI Act Terms</h1>
+<p class="subtitle">Hover over any element to see the definition. 43 terms every business needs to know.</p>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:rgba(196,30,58,0.8)"></div>Prohibited</div>
+  <div class="legend-item"><div class="legend-dot" style="background:rgba(231,76,60,0.7)"></div>Risk Levels</div>
+  <div class="legend-item"><div class="legend-dot" style="background:rgba(27,42,74,0.9);border:1px solid rgba(201,168,76,0.3)"></div>Core Concepts</div>
+  <div class="legend-item"><div class="legend-dot" style="background:rgba(99,102,241,0.6)"></div>Key Articles</div>
+  <div class="legend-item"><div class="legend-dot" style="background:rgba(14,165,233,0.5)"></div>Compliance</div>
+  <div class="legend-item"><div class="legend-dot" style="background:rgba(139,92,246,0.5)"></div>Other</div>
+</div>
+
+<div class="ptable" id="ptable"></div>
+
+<div class="tooltip" id="tooltip">
+  <div class="tt-cat" id="tt-cat"></div>
+  <div class="tt-name" id="tt-name"></div>
+  <div class="tt-short" id="tt-short"></div>
+  <div class="tt-def" id="tt-def"></div>
+</div>
+
+<div class="footer">Free to share with attribution &middot; <a href="https://aiactadvisors.com">aiactadvisors.com</a> &middot; February 2026</div>
+
+<script>
+const ELEMENTS = [
+  // Row 1: Risk levels + header
+  {abbr:"Pr",name:"Prohibited AI",cat:"prohibited",short:"The banned uses (Article 5)",def:"AI uses too dangerous for any compliance pathway. Includes real-time facial recognition, emotion recognition at work/school, subliminal manipulation, and social scoring. Completely banned."},
+  {abbr:"Un",name:"Unacceptable Risk",cat:"prohibited",short:"Synonym for prohibited",def:"The highest risk tier. These AI uses are completely banned in the EU with no compliance pathway. Fines up to \u20ac35M or 7% of turnover."},
+  {abbr:"Hi",name:"High-Risk AI",cat:"risk",short:"Annex III listed systems",def:"AI that significantly impacts fundamental rights \u2014 hiring tools, credit scoring, medical AI, education AI. Triggers the heaviest compliance: conformity assessment, CE marking, human oversight."},
+  {abbr:"Li",name:"Limited Risk",cat:"risk",short:"Transparency (Article 50)",def:"AI with some risk but not high-risk. Must disclose AI is being used. Covers chatbots, AI-generated content, deepfakes."},
+  {abbr:"Mi",name:"Minimal Risk",cat:"risk",short:"Most business AI",def:"AI that doesn\u2019t significantly impact rights \u2014 recommendations, scheduling, analytics. Minimal requirements, but banned practices still apply."},
+  {type:"title",text:"RISK\nLEVELS"},
+  {type:"empty"},{type:"empty"},
+
+  // Row 2: Core concepts
+  {abbr:"AS",name:"AI System",cat:"core",short:"What the Act considers \u201CAI\u201D",def:"Software using machine learning or logic-based approaches to generate predictions or decisions. Tools that learn from data or follow rules to make decisions."},
+  {abbr:"Pv",name:"Provider",cat:"core",short:"Company that builds AI",def:"The organisation that creates or develops an AI system. If you\u2019re building your own AI, you have provider obligations \u2014 the heaviest in the Act."},
+  {abbr:"Dp",name:"Deployer",cat:"core",short:"Business that uses AI",def:"The organisation that uses an AI system in operations. Using ChatGPT, analytics, or hiring tools? You\u2019re a deployer. Lighter obligations than providers."},
+  {abbr:"Op",name:"Operator",cat:"core",short:"Providers + deployers",def:"Umbrella term for any organisation in the AI value chain \u2014 either building it or using it. The Act imposes different obligations on each."},
+  {abbr:"GP",name:"General-Purpose AI",cat:"core",short:"ChatGPT, Claude, etc.",def:"Large language models trained on broad data for many uses. The Act has specific rules for GPAI providers about transparency and safety testing."},
+  {abbr:"AL",name:"AI Literacy",cat:"core",short:"Article 4: train your staff",def:"Obligation to ensure staff understand AI systems they use. Mandatory since February 2025. Documented, role-specific training required."},
+  {abbr:"PM",name:"Placing on Market",cat:"core",short:"Making AI available in EU",def:"When a provider first makes an AI system available for distribution or use. Triggers compliance obligations."},
+  {abbr:"PS",name:"Putting into Service",cat:"other",short:"First use for its purpose",def:"When an AI system is first actually used in the real world. The deployer puts it into service."},
+
+  // Row 3: Key articles (regulation)
+  {abbr:"A3",name:"Annex III",cat:"regulation",short:"The high-risk AI list",def:"Lists specific uses classified as high-risk: hiring (Cat 4), credit scoring (Cat 5), education (Cat 3), healthcare (Cat 1). Determines which systems need the most work."},
+  {abbr:"A4",name:"Article 4",cat:"regulation",short:"AI literacy obligation",def:"Staff using high-risk AI must be trained on how the system works. Document training and keep records. In force since February 2025."},
+  {abbr:"A5",name:"Article 5",cat:"regulation",short:"Prohibited practices",def:"Complete ban on certain AI uses \u2014 emotion recognition at work/school, subliminal manipulation, social scoring. No exceptions. In force since February 2025."},
+  {abbr:"A6",name:"Article 6",cat:"regulation",short:"Classification rules",def:"Defines which systems are high-risk based on intended use and impact on people\u2019s rights. Critical for understanding your category."},
+  {abbr:"A14",name:"Article 14",cat:"regulation",short:"Human oversight",def:"Humans must stay meaningfully involved in high-risk AI decisions. Not a token button-press \u2014 real ability to understand and override the system."},
+  {abbr:"A26",name:"Article 26",cat:"regulation",short:"Deployer obligations",def:"The main compliance checklist for SMEs using high-risk AI: monitor performance, keep records, report incidents, ensure human oversight."},
+  {abbr:"A27",name:"Article 27",cat:"regulation",short:"Rights impact assessment",def:"Deployers of high-risk AI must assess how it might affect people\u2019s rights. Document potential harms and mitigation measures before deployment."},
+  {abbr:"A50",name:"Article 50",cat:"regulation",short:"Transparency (limited)",def:"Tell people when they\u2019re interacting with AI and disclose how it works. Applies to chatbots, AI-generated content, deepfakes."},
+
+  // Row 4: More regulation + compliance
+  {abbr:"A99",name:"Article 99",cat:"regulation",short:"Penalties",def:"Maximum fines: \u20ac35M/7% for prohibited practices, \u20ac15M/3% for high-risk violations. SMEs get \u2018whichever is lower\u2019 relief."},
+  {abbr:"MDR",name:"Medical Device Reg",cat:"regulation",short:"Healthcare AI overlap",def:"EU rules for medical devices. Overlaps with AI Act for healthcare AI \u2014 you may need to comply with both."},
+  {abbr:"GDR",name:"GDPR",cat:"other",short:"Data protection overlap",def:"The EU\u2019s general data protection regulation. Overlaps significantly with the AI Act since AI systems often process personal data."},
+  {abbr:"CE",name:"CE Marking",cat:"compliance",short:"The compliance label",def:"A mark placed on high-risk AI systems to show they meet AI Act requirements. Similar to CE marks on other EU products."},
+  {abbr:"CA",name:"Conformity Assessment",cat:"compliance",short:"Formal compliance check",def:"Independent review verifying your high-risk system meets all legal requirements. Mandatory before placing on market."},
+  {abbr:"NB",name:"Notified Body",cat:"compliance",short:"Independent assessor",def:"A government-accredited third party that conducts conformity assessments. You hire them to verify compliance."},
+  {abbr:"HO",name:"Human Oversight",cat:"compliance",short:"Humans in the loop",def:"Humans must remain meaningfully involved in high-risk AI decisions \u2014 understand the system, monitor it, can override or stop it."},
+  {abbr:"FR",name:"Rights Impact Assess.",cat:"compliance",short:"Article 27 FRIA",def:"Documented review of how high-risk AI might violate people\u2019s rights. Identify and mitigate harms before deployment."},
+
+  // Row 5: More compliance
+  {abbr:"RM",name:"Risk Management",cat:"compliance",short:"Systematic risk ID",def:"Your documented process for identifying, assessing, and reducing AI-related risks. Required for high-risk systems."},
+  {abbr:"TD",name:"Technical Docs",cat:"compliance",short:"Provider must maintain",def:"Detailed records of how AI was built, trained, and tested. Includes data, algorithms, testing results, performance metrics."},
+  {abbr:"TO",name:"Transparency Oblig.",cat:"compliance",short:"Article 50 disclosure",def:"For limited-risk AI: disclose that AI is involved and explain how it works. Builds trust and meets legal requirements."},
+  {abbr:"PO",name:"Post-Market Monitor",cat:"compliance",short:"Ongoing compliance",def:"After deploying high-risk AI, continuously monitor performance, gather feedback, check for problems."},
+  {abbr:"DB",name:"EU Database",cat:"compliance",short:"Public register",def:"Transparency tool where providers register high-risk AI systems. Lets customers verify what they\u2019re using."},
+  {abbr:"MS",name:"Market Surveillance",cat:"compliance",short:"National enforcer",def:"Your national regulator for AI Act compliance. Each EU member state has one. Contact them for guidance."},
+  {abbr:"SM",name:"Significant Modif.",cat:"compliance",short:"Deployer \u2192 provider",def:"Substantial changes to how you use or modify AI may shift you from deployer to provider \u2014 triggering new obligations."},
+  {abbr:"CP",name:"Codes of Practice",cat:"other",short:"Voluntary frameworks",def:"Optional industry standards demonstrating good compliance. Useful for showing extra diligence beyond minimums."},
+
+  // Row 6: Other terms
+  {abbr:"DF",name:"Deep Fake",cat:"other",short:"AI synthetic media",def:"Video, audio, or images created or altered by AI to look real. The Act requires labelling of all synthetic media in commercial contexts."},
+  {abbr:"ER",name:"Emotion Recognition",cat:"other",short:"Detecting feelings via AI",def:"AI that claims to identify emotions from facial expressions or voice. Banned in workplaces and schools since February 2025."},
+  {abbr:"BC",name:"Biometric Categ.",cat:"other",short:"Classifying by traits",def:"AI assigning people to categories (age, gender, ethnicity) from biometric data. Often banned or heavily restricted."},
+  {abbr:"RB",name:"Remote Biometric ID",cat:"prohibited",short:"Banned facial recognition",def:"Real-time facial recognition in public spaces. Banned in most EU contexts. Very narrow exceptions for law enforcement only."},
+  {abbr:"RS",name:"Regulatory Sandbox",cat:"other",short:"Safe testing for SMEs",def:"Government-provided space where SMEs can test innovative AI with lighter requirements. Ask your national authority."},
+  {type:"title",text:"OTHER\nTERMS"},
+  {type:"empty"},{type:"empty"}
+];
+
+function buildTable() {
+  const table = document.getElementById('ptable');
+  ELEMENTS.forEach((el, i) => {
+    const div = document.createElement('div');
+    if (el.type === 'empty') {
+      div.className = 'cell c-empty';
+    } else if (el.type === 'title') {
+      div.className = 'cell c-title';
+      div.innerHTML = '<span>' + el.text.replace('\n','<br>') + '</span>';
+    } else {
+      div.className = 'cell c-' + el.cat;
+      div.innerHTML = '<div class="num">' + (i + 1) + '</div><div class="abbr">' + el.abbr + '</div><div class="name">' + el.name + '</div>';
+      div.addEventListener('mouseenter', (e) => showTooltip(e, el));
+      div.addEventListener('mousemove', (e) => moveTooltip(e));
+      div.addEventListener('mouseleave', hideTooltip);
+      // Touch support
+      div.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        showTooltipAt(touch.clientX, touch.clientY, el);
+      });
+    }
+    table.appendChild(div);
+  });
+
+  // Close tooltip on touch outside
+  document.addEventListener('touchstart', (e) => {
+    if (!e.target.closest('.cell')) hideTooltip();
+  });
+}
+
+function showTooltip(e, el) {
+  const tt = document.getElementById('tooltip');
+  const catLabels = {prohibited:'PROHIBITED',risk:'RISK LEVEL',core:'CORE CONCEPT',regulation:'KEY ARTICLE',compliance:'COMPLIANCE',other:'OTHER'};
+  document.getElementById('tt-cat').textContent = catLabels[el.cat] || el.cat;
+  document.getElementById('tt-cat').className = 'tt-cat tt-' + el.cat;
+  document.getElementById('tt-name').textContent = el.name;
+  document.getElementById('tt-short').textContent = el.short;
+  document.getElementById('tt-def').textContent = el.def;
+  tt.classList.add('show');
+  moveTooltip(e);
+}
+
+function showTooltipAt(x, y, el) {
+  const tt = document.getElementById('tooltip');
+  const catLabels = {prohibited:'PROHIBITED',risk:'RISK LEVEL',core:'CORE CONCEPT',regulation:'KEY ARTICLE',compliance:'COMPLIANCE',other:'OTHER'};
+  document.getElementById('tt-cat').textContent = catLabels[el.cat] || el.cat;
+  document.getElementById('tt-cat').className = 'tt-cat tt-' + el.cat;
+  document.getElementById('tt-name').textContent = el.name;
+  document.getElementById('tt-short').textContent = el.short;
+  document.getElementById('tt-def').textContent = el.def;
+  tt.classList.add('show');
+  positionTooltip(x, y);
+}
+
+function moveTooltip(e) {
+  positionTooltip(e.clientX, e.clientY);
+}
+
+function positionTooltip(x, y) {
+  const tt = document.getElementById('tooltip');
+  const rect = tt.getBoundingClientRect();
+  let left = x + 15;
+  let top = y - 10;
+  if (left + rect.width > window.innerWidth - 10) left = x - rect.width - 15;
+  if (top + rect.height > window.innerHeight - 10) top = y - rect.height - 10;
+  if (top < 10) top = 10;
+  if (left < 10) left = 10;
+  tt.style.left = left + 'px';
+  tt.style.top = top + 'px';
+}
+
+function hideTooltip() {
+  document.getElementById('tooltip').classList.remove('show');
+}
+
+buildTable();
+</script>
+</body>
+</html>

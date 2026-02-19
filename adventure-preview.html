@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Act: Choose Your Compliance Path</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1729;color:#e2e8f0;min-height:100vh}
+.container{max-width:720px;margin:0 auto;padding:2rem 1.5rem}
+h1{text-align:center;font-size:1.8rem;margin-bottom:0.25rem;color:#fff}
+.subtitle{text-align:center;color:#C9A84C;margin-bottom:2rem;font-size:0.95rem}
+
+/* Progress */
+.progress-bar{background:rgba(255,255,255,0.08);border-radius:99px;height:8px;margin-bottom:0.5rem;overflow:hidden}
+.progress-fill{background:linear-gradient(90deg,#C9A84C,#27ae60);height:100%;border-radius:99px;transition:width 0.5s ease}
+.progress-text{text-align:right;font-size:0.75rem;color:#6b7280;margin-bottom:1.5rem}
+
+/* Score */
+.score-bar{display:flex;justify-content:center;gap:1.5rem;margin-bottom:2rem}
+.score-item{text-align:center}
+.score-item .val{font-size:1.5rem;font-weight:800}
+.score-item .lbl{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.6}
+.score-good .val{color:#27ae60}
+.score-bad .val{color:#e74c3c}
+.score-badges .val{color:#C9A84C}
+
+/* Scenario Card */
+.scenario{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:2rem;margin-bottom:1.5rem;animation:fadeIn 0.4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.scenario-context{font-size:0.8rem;color:#C9A84C;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem}
+.scenario h2{font-size:1.2rem;color:#fff;margin-bottom:1rem;line-height:1.4}
+.scenario p{font-size:0.95rem;line-height:1.6;opacity:0.85;margin-bottom:1.25rem}
+
+/* Choices */
+.choices{display:flex;flex-direction:column;gap:0.6rem}
+.choice{background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.12);border-radius:12px;padding:1rem 1.15rem;cursor:pointer;transition:all 0.2s;display:flex;gap:0.75rem;align-items:flex-start}
+.choice:hover{border-color:#C9A84C;background:rgba(201,168,76,0.08)}
+.choice .letter{background:rgba(255,255,255,0.08);width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0;color:#C9A84C}
+.choice .text{font-size:0.92rem;line-height:1.4}
+
+/* Feedback */
+.feedback{border-radius:14px;padding:1.5rem;margin-bottom:1.5rem;animation:fadeIn 0.3s ease}
+.feedback.correct{background:rgba(39,174,96,0.12);border:1px solid rgba(39,174,96,0.3)}
+.feedback.wrong{background:rgba(231,76,60,0.12);border:1px solid rgba(231,76,60,0.3)}
+.feedback.partial{background:rgba(243,156,18,0.12);border:1px solid rgba(243,156,18,0.3)}
+.feedback h3{font-size:1rem;margin-bottom:0.5rem}
+.feedback.correct h3{color:#27ae60}
+.feedback.wrong h3{color:#e74c3c}
+.feedback.partial h3{color:#f39c12}
+.feedback p{font-size:0.88rem;line-height:1.5;opacity:0.9}
+.feedback .article-ref{display:inline-block;background:rgba(255,255,255,0.08);padding:0.15rem 0.5rem;border-radius:4px;font-size:0.75rem;font-weight:600;margin-top:0.5rem}
+
+.btn-next{display:block;width:100%;background:#C9A84C;color:#0f1729;padding:0.75rem;border-radius:10px;font-weight:700;font-size:1rem;border:none;cursor:pointer;font-family:inherit;margin-top:1rem}
+.btn-next:hover{background:#e6c45a}
+
+/* Badges */
+.badge-unlock{display:inline-flex;align-items:center;gap:0.35rem;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);padding:0.3rem 0.7rem;border-radius:8px;font-size:0.8rem;font-weight:600;color:#C9A84C;margin-top:0.75rem}
+
+/* Final Results */
+.final-results{text-align:center;animation:fadeIn 0.5s ease}
+.final-grade{font-size:4rem;font-weight:900;margin:1rem 0 0.5rem}
+.grade-a{color:#27ae60}
+.grade-b{color:#C9A84C}
+.grade-c{color:#f39c12}
+.grade-d{color:#e67e22}
+.grade-f{color:#e74c3c}
+.final-title{font-size:1.3rem;color:#fff;margin-bottom:0.5rem}
+.final-desc{font-size:0.95rem;opacity:0.8;max-width:500px;margin:0 auto 2rem;line-height:1.6}
+.badges-earned{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-bottom:2rem}
+.badge-display{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:10px;padding:0.5rem 0.75rem;font-size:0.8rem;color:#C9A84C}
+.btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{display:inline-block;background:#C9A84C;color:#0f1729;padding:0.65rem 1.5rem;border-radius:10px;font-weight:700;font-size:0.9rem;text-decoration:none;border:none;cursor:pointer;font-family:inherit}
+.btn-outline{display:inline-block;background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.2);padding:0.65rem 1.5rem;border-radius:10px;font-weight:600;font-size:0.9rem;text-decoration:none;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>AI Act: Choose Your Compliance Path</h1>
+  <p class="subtitle">You're the new compliance lead. 10 scenarios. Every choice teaches a real AI Act concept.</p>
+
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  <div class="progress-text" id="progress-text">Scenario 1 of 10</div>
+
+  <div class="score-bar">
+    <div class="score-item score-good"><div class="val" id="score-good">0</div><div class="lbl">Correct</div></div>
+    <div class="score-item score-bad"><div class="val" id="score-bad">0</div><div class="lbl">Wrong</div></div>
+    <div class="score-item score-badges"><div class="val" id="score-badges">0</div><div class="lbl">Badges</div></div>
+  </div>
+
+  <div id="game-area"></div>
+</div>
+
+<script>
+const SCENARIOS = [
+  {
+    context: "Week 1 \u2014 Your first day",
+    title: "The CEO asks: \u201CDo we even need to worry about the AI Act? We don\u2019t build AI, we just use it.\u201D",
+    desc: "Your company uses several AI-powered tools for HR, customer service, and marketing. The CEO thinks the AI Act only applies to companies that develop AI.",
+    choices: [
+      {text:"The CEO is right \u2014 the Act only applies to AI developers, not users",correct:false},
+      {text:"We\u2019re a \u2018deployer\u2019 \u2014 the Act applies to us too, with specific obligations",correct:true},
+      {text:"We should stop using AI entirely to avoid any risk",correct:false}
+    ],
+    feedback: {
+      correct: {type:"correct",title:"Exactly right.",text:"The AI Act distinguishes between \u2018providers\u2019 (who build AI) and \u2018deployers\u2019 (who use it). Most SMEs are deployers. You have lighter obligations than providers, but you\u2019re definitely covered \u2014 especially if you use high-risk AI.",ref:"Article 3 \u2014 Definitions, Article 26 \u2014 Deployer obligations"},
+      wrong0: {type:"wrong",title:"Not quite.",text:"The AI Act applies to both providers AND deployers. As a company that uses AI tools, you\u2019re a \u2018deployer\u2019 under Article 3, with obligations under Article 26. Ignoring this could lead to fines.",ref:"Article 3 \u2014 Definitions"},
+      wrong2: {type:"wrong",title:"Overreaction.",text:"You don\u2019t need to stop using AI. Most business AI is minimal or limited risk with light obligations. The key is understanding which of your tools might be high-risk and what you need to do for those.",ref:"Article 6 \u2014 Classification rules"}
+    },
+    badge: "\uD83C\uDFAF Deployer Detected"
+  },
+  {
+    context: "Week 1 \u2014 The AI inventory",
+    title: "You start documenting every AI tool in the company. Marketing says their chatbot \u201Cdoesn\u2019t count as AI.\u201D",
+    desc: "The marketing team deployed a customer service chatbot last year. They argue it\u2019s \u201Cjust a chatbot, not real AI\u201D and shouldn\u2019t be on your inventory.",
+    choices: [
+      {text:"They\u2019re right \u2014 simple chatbots aren\u2019t AI under the Act",correct:false},
+      {text:"Add it to the inventory \u2014 chatbots have specific transparency obligations",correct:true},
+      {text:"Remove the chatbot entirely to be safe",correct:false}
+    ],
+    feedback: {
+      correct: {type:"correct",title:"Good call.",text:"Chatbots are explicitly covered. Article 50 requires you to tell users they\u2019re interacting with AI \u2014 before or at the start of the conversation. This is a \u2018limited risk\u2019 transparency obligation and it\u2019s already in force since February 2025.",ref:"Article 50 \u2014 Transparency obligations"},
+      wrong0: {type:"wrong",title:"Wrong.",text:"Chatbots are covered by the AI Act. Article 50 specifically requires deployers to disclose when someone is interacting with AI. This is already enforceable. Add it to your inventory and check you\u2019re disclosing properly.",ref:"Article 50 \u2014 Transparency obligations"},
+      wrong2: {type:"partial",title:"Unnecessary.",text:"You don\u2019t need to remove it \u2014 chatbots are limited risk, not banned. Just make sure it clearly tells users they\u2019re talking to AI. A simple disclosure at the start of the conversation is enough.",ref:"Article 50 \u2014 Transparency obligations"}
+    },
+    badge: "\uD83D\uDCCB Inventory Master"
+  },
+  {
+    context: "Week 2 \u2014 The HR bombshell",
+    title: "HR reveals they\u2019ve been using AI to screen CVs and rank candidates for the past 18 months.",
+    desc: "The Head of HR shows you a platform that automatically scores applicants, ranks them by suitability, and generates shortlists. She says it saves 40 hours a week.",
+    choices: [
+      {text:"That\u2019s fine \u2014 it\u2019s just helping HR work faster",correct:false},
+      {text:"This is HIGH-RISK AI \u2014 it needs full compliance under Annex III",correct:true},
+      {text:"We should switch it off immediately until we\u2019ve assessed it",correct:false}
+    ],
+    feedback: {
+      correct: {type:"correct",title:"Spot on.",text:"AI that screens, scores, or ranks job candidates is explicitly HIGH-RISK under Annex III, Category 4(a). This triggers the full set of deployer obligations: human oversight, transparency to candidates, AI literacy training for HR staff, a DPIA, and provider compliance verification. The deadline is August 2, 2026.",ref:"Annex III, Category 4(a) \u2014 Employment, recruitment"},
+      wrong0: {type:"wrong",title:"This is a serious gap.",text:"CV screening AI is one of the most explicitly regulated categories in the entire Act. Annex III, Category 4(a) specifically names AI used to \u2018analyse and filter job applications and evaluate candidates.\u2019 This needs immediate attention.",ref:"Annex III, Category 4(a)"},
+      wrong2: {type:"partial",title:"Close, but not quite.",text:"You don\u2019t necessarily need to switch it off \u2014 but you DO need to act fast. Ensure human oversight of every shortlist, inform candidates AI is used, train HR staff, and conduct a DPIA. The tool can stay if you build compliance around it.",ref:"Article 26 \u2014 Deployer obligations"}
+    },
+    badge: "\u26A0\uFE0F High-Risk Spotter"
+  },
+  {
+    context: "Week 3 \u2014 The emotion scanner",
+    title: "A vendor pitches software that reads employee facial expressions during meetings to measure \u201Cengagement levels.\u201D",
+    desc: "The vendor says Fortune 500 companies use it. The Operations Director is interested. The software analyses webcam footage to detect emotions and flag disengaged employees.",
+    choices: [
+      {text:"Interesting \u2014 let\u2019s trial it with proper oversight",correct:false},
+      {text:"This is PROHIBITED \u2014 reject it immediately",correct:true},
+      {text:"It\u2019s probably fine if employees consent",correct:false}
+    ],
+    feedback: {
+      correct: {type:"correct",title:"Absolutely right.",text:"Emotion recognition in the workplace is PROHIBITED under Article 5(1)(f). This has been banned since February 2, 2025 \u2014 no trial, no consent workaround, no exceptions except for medical or safety purposes. Using this could trigger fines of up to \u20ac35 million or 7% of global turnover.",ref:"Article 5(1)(f) \u2014 Prohibited AI practices"},
+      wrong0: {type:"wrong",title:"This would be illegal.",text:"Emotion recognition AI in workplaces is completely banned under Article 5. Not high-risk with compliance obligations \u2014 outright prohibited. No amount of human oversight or good intentions makes this legal. Reject the vendor.",ref:"Article 5(1)(f) \u2014 Prohibited AI practices"},
+      wrong2: {type:"wrong",title:"Consent doesn\u2019t override the ban.",text:"Article 5 prohibitions are absolute. Employee consent does not create an exemption. Emotion recognition in workplaces is banned regardless of whether employees agree to it. The only exceptions are for medical or safety purposes.",ref:"Article 5(1)(f)"}
+    },
+    badge: "\uD83D\uDEAB Prohibition Enforcer"
+  },
+  {
+    context: "Week 4 \u2014 AI literacy deadline",
+    title: "You discover that nobody in the company has received AI literacy training. Your CTO says: \u201CThat doesn\u2019t kick in until 2026.\u201D",
+    desc: "Article 4 requires AI literacy for all staff involved in operating or affected by AI systems. You need to check when this actually takes effect.",
+    choices: [
+      {text:"The CTO is right \u2014 AI literacy is an August 2026 requirement",correct:false},
+      {text:"AI literacy has been mandatory since February 2, 2025 \u2014 we\u2019re already late",correct:true},
+      {text:"AI literacy is only recommended, not required",correct:false}
+    ],
+    feedback: {
+      correct: {type:"correct",title:"Correct \u2014 and urgent.",text:"Article 4 (AI literacy) came into force on February 2, 2025 alongside the Article 5 prohibitions. It\u2019s not a future requirement \u2014 it\u2019s already law. You need documented, role-specific training for all staff who use or are affected by AI systems. Not a certification \u2014 but documented training they understand the tools, limitations, and risks.",ref:"Article 4 \u2014 AI literacy"},
+      wrong0: {type:"wrong",title:"Your CTO is mistaken.",text:"AI literacy (Article 4) came into force on February 2, 2025 \u2014 not August 2026. This is one of the earliest enforcement dates in the entire Act. You\u2019re already behind and need to start training immediately.",ref:"Article 4 \u2014 AI literacy"},
+      wrong2: {type:"wrong",title:"It\u2019s mandatory, not optional.",text:"Article 4 is a binding obligation, not guidance. Non-compliance can result in enforcement action. Start documented training for all staff who interact with AI systems.",ref:"Article 4 \u2014 AI literacy"}
+    },
+    badge: "\uD83D\uDCDA Literacy Champion"
+  },
+  {
+    context: "Week 5 \u2014 The marketing deepfake",
+    title: "Your creative team made a promotional video using an AI-generated spokesperson who looks and sounds completely real.",
+    desc: "The video is polished and convincing. The team wants to publish it across social media and the company website. Nobody watching would know the person isn\u2019t real.",
+    choices: [
+      {text:"Publish it \u2014 it\u2019s creative content, so it qualifies for the artistic exemption",correct:false},
+      {text:"Publish it with clear disclosure that it\u2019s AI-generated",correct:true},
+      {text:"Don\u2019t publish it \u2014 deepfakes are banned",correct:false}
+    ],
+    feedback: {
+      correct: {type:"correct",title:"Perfect approach.",text:"Article 50 requires disclosure of AI-generated synthetic content, including deepfakes. The \u2018artistic, creative, or fictional\u2019 exemption does NOT apply to commercial advertising. You can absolutely publish it \u2014 but it must be clearly labelled as AI-generated. A visible disclosure in the video or description is required.",ref:"Article 50 \u2014 Transparency for AI-generated content"},
+      wrong0: {type:"wrong",title:"The artistic exemption doesn\u2019t cover ads.",text:"Commercial advertising is explicitly excluded from the creative/artistic exemption in Article 50. A synthetic spokesperson in a promotional video must be disclosed as AI-generated.",ref:"Article 50 \u2014 Transparency obligations"},
+      wrong2: {type:"partial",title:"Deepfakes aren\u2019t banned \u2014 they need disclosure.",text:"AI-generated video isn\u2019t prohibited. It\u2019s \u2018limited risk\u2019 with transparency obligations. You can use synthetic media in marketing as long as you clearly disclose it\u2019s AI-generated. Don\u2019t throw away good content \u2014 just label it.",ref:"Article 50"}
+    },
+    badge: "\uD83C\uDFAC Transparency Pro"
+  },
+  {
+    context: "Week 6 \u2014 The insurance crisis",
+    title: "Your insurance division uses AI to calculate premiums for health insurance. Compliance asks: \u201CIs this high-risk?\u201D",
+    desc: "The AI analyses customer data including age, health history, and lifestyle factors to generate personalised premium quotes for life and health insurance.",
+    choices: [
+      {text:"It\u2019s probably minimal risk \u2014 it\u2019s just calculating prices",correct:false},
+      {text:"This is explicitly HIGH-RISK under Annex III, Category 5(c)",correct:true},
+      {text:"It depends on whether we built the AI or bought it",correct:false}
+    ],
+    feedback: {
+      correct: {type:"correct",title:"Exactly.",text:"Annex III, Category 5(c) specifically names \u2018AI systems intended for risk assessment and pricing in relation to natural persons in the case of life and health insurance.\u2019 This is one of the most clearly defined high-risk categories. You need a Fundamental Rights Impact Assessment, human oversight, decision logging for 6+ months, and bias monitoring.",ref:"Annex III, Category 5(c) \u2014 Essential services"},
+      wrong0: {type:"wrong",title:"This is explicitly high-risk.",text:"Insurance pricing AI isn\u2019t \u2018just calculating prices\u2019 \u2014 it determines whether people can afford essential coverage. Annex III, Category 5(c) specifically names this as high-risk. Full deployer obligations apply.",ref:"Annex III, Category 5(c)"},
+      wrong2: {type:"wrong",title:"The classification doesn\u2019t depend on that.",text:"Whether you\u2019re the provider or deployer changes your obligations, but the risk classification is the same. Insurance pricing AI is high-risk regardless of who built it. As a deployer, you still have substantial obligations under Article 26.",ref:"Article 26 \u2014 Deployer obligations"}
+    },
+    badge: "\uD83D\uDEE1\uFE0F Insurance Inspector"
+  },
+  {
+    context: "Week 7 \u2014 The school contract",
+    title: "A university client asks your consultancy to review their AI proctoring tool. Students are flagged for \u201Csuspicious eye movement.\u201D",
+    desc: "The proctoring software records students during online exams and uses AI to detect suspicious behaviour including eye movement patterns, background noise, and browser activity.",
+    choices: [
+      {text:"Proctoring is minimal risk \u2014 it\u2019s just monitoring exams",correct:false},
+      {text:"This is HIGH-RISK under Annex III, Category 3(d) \u2014 and check it\u2019s not doing emotion recognition",correct:true},
+      {text:"The university should switch to in-person exams to avoid the Act entirely",correct:false}
+    ],
+    feedback: {
+      correct: {type:"correct",title:"Thorough thinking.",text:"AI proctoring is HIGH-RISK under Annex III, Category 3(d): \u2018AI systems intended to monitor and detect prohibited behaviour during tests.\u2019 And you\u2019re right to check for emotion recognition \u2014 if the tool analyses facial expressions to infer student emotions (stress, attention), that element is PROHIBITED under Article 5. The university needs human review of all flags, transparency to students, and DPIAs given it records minors.",ref:"Annex III, Category 3(d) + Article 5(1)(f)"},
+      wrong0: {type:"wrong",title:"Proctoring is specifically high-risk.",text:"Annex III, Category 3(d) explicitly covers AI that monitors behaviour during tests. This triggers full deployer obligations including human oversight, student transparency, and DPIAs.",ref:"Annex III, Category 3(d)"},
+      wrong2: {type:"partial",title:"Impractical and unnecessary.",text:"Online proctoring can continue \u2014 it just needs compliance. Human review of AI flags, transparency to students, and a DPIA are required. Switching to in-person exams might avoid the Act but creates other costs and accessibility issues.",ref:"Annex III, Category 3(d)"}
+    },
+    badge: "\uD83C\uDF93 Education Expert"
+  },
+  {
+    context: "Week 8 \u2014 The vendor letter",
+    title: "You write to all your AI vendors asking about their AI Act compliance roadmap. Three out of five don\u2019t respond.",
+    desc: "Your conformity letters went out two weeks ago. Two providers confirmed they\u2019re working on compliance. Three haven\u2019t replied at all.",
+    choices: [
+      {text:"Not our problem \u2014 compliance is their responsibility as providers",correct:false},
+      {text:"Follow up urgently \u2014 if they can\u2019t demonstrate compliance, we may need alternatives",correct:true},
+      {text:"Wait for the August 2026 deadline before worrying about vendor readiness",correct:false}
+    ],
+    feedback: {
+      correct: {type:"correct",title:"Smart move.",text:"While the heaviest technical obligations fall on providers, you as the deployer must use AI systems \u2018in accordance with the instructions of use\u2019 (Article 26). If your provider can\u2019t demonstrate compliance, you\u2019re taking a risk. You should: follow up in writing, set a response deadline, evaluate alternatives, and document everything. Compliance takes 8\u201314 months \u2014 providers who haven\u2019t started are a red flag.",ref:"Article 26 \u2014 Deployer obligations"},
+      wrong0: {type:"wrong",title:"Partially true, but risky.",text:"Provider obligations are heavier, yes. But you have deployer obligations too \u2014 and you can\u2019t properly fulfil them if your provider isn\u2019t compliant. If their system fails a conformity assessment, your use of it becomes non-compliant too.",ref:"Article 26 \u2014 Deployer obligations"},
+      wrong2: {type:"wrong",title:"Too late by then.",text:"Compliance takes 8\u201314 months. Waiting until August 2026 to worry about vendor readiness means you\u2019ll likely be caught with non-compliant systems. Start the vendor assessment process now.",ref:"Timeline \u2014 Implementation deadlines"}
+    },
+    badge: "\uD83D\uDCE7 Vendor Verifier"
+  },
+  {
+    context: "Week 10 \u2014 The board presentation",
+    title: "You present your compliance plan to the board. The CFO asks: \u201CWhat happens if we just ignore this?\u201D",
+    desc: "The board wants to understand the real consequences of non-compliance. Some members think the Act won\u2019t be enforced against SMEs.",
+    choices: [
+      {text:"Fines are capped at \u20ac500K for SMEs, so the risk is manageable",correct:false},
+      {text:"Fines go up to \u20ac35M or 7% of turnover for prohibited practices, with SME relief using \u2018whichever is lower\u2019",correct:true},
+      {text:"There are no fines \u2014 the Act is self-regulatory",correct:false}
+    ],
+    feedback: {
+      correct: {type:"correct",title:"Well prepared.",text:"The fine structure has three tiers: up to \u20ac35M/7% for prohibited practices, \u20ac15M/3% for high-risk violations, and \u20ac7.5M/1% for providing incorrect information. For SMEs, the calculation uses \u2018whichever is lower\u2019 instead of \u2018whichever is higher\u2019 \u2014 meaningful relief, but not immunity. Beyond fines: enforcement is complaint-driven through national market surveillance authorities, and reputational damage from non-compliance can outweigh any penalty.",ref:"Article 99 \u2014 Penalties"},
+      wrong0: {type:"wrong",title:"No such cap exists.",text:"There is no \u20ac500K SME cap. SMEs benefit from \u2018whichever is lower\u2019 rather than \u2018whichever is higher\u2019 for fine calculations, but the potential penalties are still substantial \u2014 up to millions for serious violations.",ref:"Article 99 \u2014 Penalties"},
+      wrong2: {type:"wrong",title:"The Act has teeth.",text:"The EU AI Act includes enforceable penalties administered by national market surveillance authorities. It is not self-regulatory. Enforcement is complaint-driven \u2014 a disgruntled employee, candidate, or customer can trigger an investigation.",ref:"Article 99 \u2014 Penalties"}
+    },
+    badge: "\uD83C\uDFC6 Compliance Champion"
+  }
+];
+
+let currentScenario = 0;
+let scoreGood = 0;
+let scoreBad = 0;
+let badges = [];
+let answered = false;
+
+function renderScenario() {
+  const s = SCENARIOS[currentScenario];
+  document.getElementById('progress-fill').style.width = ((currentScenario) / SCENARIOS.length * 100) + '%';
+  document.getElementById('progress-text').textContent = 'Scenario ' + (currentScenario + 1) + ' of ' + SCENARIOS.length;
+  answered = false;
+
+  let html = '<div class="scenario"><div class="scenario-context">' + s.context + '</div>';
+  html += '<h2>' + s.title + '</h2><p>' + s.desc + '</p>';
+  html += '<div class="choices">';
+  s.choices.forEach((c, i) => {
+    html += '<div class="choice" onclick="choose(' + i + ')" id="choice-' + i + '"><div class="letter">' + String.fromCharCode(65 + i) + '</div><div class="text">' + c.text + '</div></div>';
+  });
+  html += '</div></div>';
+  html += '<div id="feedback-area"></div>';
+  document.getElementById('game-area').innerHTML = html;
+}
+
+function choose(index) {
+  if (answered) return;
+  answered = true;
+  const s = SCENARIOS[currentScenario];
+  const choice = s.choices[index];
+
+  // Highlight selection
+  document.querySelectorAll('.choice').forEach((c, i) => {
+    if (i === index) c.style.borderColor = choice.correct ? '#27ae60' : '#e74c3c';
+    else c.style.opacity = '0.4';
+    c.style.cursor = 'default';
+  });
+
+  // Get feedback
+  let fb;
+  if (choice.correct) {
+    fb = s.feedback.correct;
+    scoreGood++;
+  } else {
+    fb = s.feedback['wrong' + index] || s.feedback['wrong0'];
+    if (fb.type === 'partial') scoreGood += 0.5;
+    else scoreBad++;
+  }
+
+  // Update scores
+  document.getElementById('score-good').textContent = Math.floor(scoreGood);
+  document.getElementById('score-bad').textContent = scoreBad;
+
+  // Badge
+  let badgeHtml = '';
+  if (choice.correct && s.badge) {
+    badges.push(s.badge);
+    document.getElementById('score-badges').textContent = badges.length;
+    badgeHtml = '<div class="badge-unlock">\u2B50 Badge unlocked: ' + s.badge + '</div>';
+  }
+
+  // Show feedback
+  const area = document.getElementById('feedback-area');
+  area.innerHTML = '<div class="feedback ' + fb.type + '"><h3>' + fb.title + '</h3><p>' + fb.text + '</p><div class="article-ref">' + fb.ref + '</div>' + badgeHtml + '</div>' +
+    '<button class="btn-next" onclick="nextScenario()">' + (currentScenario < SCENARIOS.length - 1 ? 'Next Scenario \u2192' : 'See My Results \u2192') + '</button>';
+}
+
+function nextScenario() {
+  currentScenario++;
+  if (currentScenario >= SCENARIOS.length) {
+    showFinalResults();
+  } else {
+    renderScenario();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+}
+
+function showFinalResults() {
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('progress-text').textContent = 'Complete!';
+
+  const pct = Math.round((scoreGood / SCENARIOS.length) * 100);
+  let grade, gradeClass, title, desc;
+  if (pct >= 90) { grade = 'A'; gradeClass = 'grade-a'; title = 'Compliance Expert'; desc = 'You navigated the AI Act with near-perfect judgement. You understand the risk classifications, prohibited practices, and deployer obligations. Your company is in safe hands.'; }
+  else if (pct >= 70) { grade = 'B'; gradeClass = 'grade-b'; title = 'Strong Foundation'; desc = 'You have a solid understanding of the AI Act. A few areas need sharpening, but you\'re well ahead of most businesses. Review the scenarios you missed and you\'ll be fully prepared.'; }
+  else if (pct >= 50) { grade = 'C'; gradeClass = 'grade-c'; title = 'Work to Do'; desc = 'You\'ve got the basics, but some critical concepts caught you out. The good news: you now know exactly where the gaps are. Our industry guides cover each topic in depth.'; }
+  else if (pct >= 30) { grade = 'D'; gradeClass = 'grade-d'; title = 'Needs Attention'; desc = 'Several key concepts need attention before August 2026. Consider working with a specialist consultant to build your compliance programme. Our directory can help you find one.'; }
+  else { grade = 'F'; gradeClass = 'grade-f'; title = 'Urgent Action Needed'; desc = 'Your company has significant compliance gaps. The AI Act deadline is August 2, 2026 and compliance typically takes 8\u201314 months. Professional guidance is strongly recommended.'; }
+
+  let html = '<div class="final-results">';
+  html += '<div class="final-grade ' + gradeClass + '">' + grade + '</div>';
+  html += '<div class="final-title">' + title + '</div>';
+  html += '<div class="final-desc">' + desc + '</div>';
+  html += '<div style="margin-bottom:1.5rem;font-size:0.9rem;opacity:0.7">You scored <strong>' + Math.floor(scoreGood) + '/' + SCENARIOS.length + '</strong> correct answers</div>';
+
+  if (badges.length > 0) {
+    html += '<div style="margin-bottom:0.5rem;font-size:0.85rem;opacity:0.6">Badges earned:</div><div class="badges-earned">';
+    badges.forEach(b => { html += '<div class="badge-display">' + b + '</div>'; });
+    html += '</div>';
+  }
+
+  html += '<div class="btn-row">';
+  html += '<a href="consultants.html" class="btn-primary">Find a Consultant \u2192</a>';
+  html += '<a href="blog.html" class="btn-outline">Read Our Guides \u2192</a>';
+  html += '<button class="btn-outline" onclick="resetGame()">Play Again</button>';
+  html += '</div></div>';
+
+  document.getElementById('game-area').innerHTML = html;
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'adventure_complete', {score: Math.floor(scoreGood), grade: grade, badges: badges.length});
+  }
+}
+
+function resetGame() {
+  currentScenario = 0; scoreGood = 0; scoreBad = 0; badges = [];
+  document.getElementById('score-good').textContent = '0';
+  document.getElementById('score-bad').textContent = '0';
+  document.getElementById('score-badges').textContent = '0';
+  renderScenario();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Keyboard support
+document.addEventListener('keydown', (e) => {
+  if (!answered) {
+    if (e.key === 'a' || e.key === 'A' || e.key === '1') choose(0);
+    if (e.key === 'b' || e.key === 'B' || e.key === '2') choose(1);
+    if (e.key === 'c' || e.key === 'C' || e.key === '3') choose(2);
+  } else {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); nextScenario(); }
+  }
+});
+
+renderScenario();
+</script>
+</body>
+</html>
