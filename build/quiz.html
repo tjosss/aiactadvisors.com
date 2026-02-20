@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Does the AI Act Mean for MY Business? | AI Act Advisors</title>
+<meta name="description" content="Pick your industry, tick your AI activities, and get a personalised compliance dashboard in 60 seconds.">
+<link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RRHZE8N0GW"></script>
 <script>
@@ -10,102 +14,94 @@
   gtag('js', new Date());
   gtag('config', 'G-RRHZE8N0GW');
 </script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="lz-CmQYG7LZE-G7RL7IPztnLW2yL4FKL-g5lXHoplgA" />
-<meta name="description" content="Pick your industry, tick your AI activities, and get a personalised compliance dashboard in 60 seconds. Free, evergreen, tied to the regulation.">
-<title>What Does the AI Act Mean for MY Business? — Free Simulator | AI Act Advisors</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="static/css/style.css">
-<link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#1a1a2e}
+.container{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+h1{text-align:center;font-size:2rem;margin-bottom:0.5rem;color:#1B2A4A}
+.subtitle{text-align:center;color:#6b7280;margin-bottom:2.5rem;font-size:1.05rem}
+
+/* Industry Grid */
+.industry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem}
+.industry-tile{background:#fff;border:2px solid #e5e7eb;border-radius:14px;padding:1.25rem 1rem;text-align:center;cursor:pointer;transition:all 0.2s}
+.industry-tile:hover{border-color:#C9A84C;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.industry-tile .icon{font-size:2.2rem;margin-bottom:0.5rem}
+.industry-tile .label{font-size:0.85rem;font-weight:600;color:#1B2A4A}
+.industry-tile .risk-badge{display:inline-block;font-size:0.65rem;font-weight:700;padding:0.1rem 0.4rem;border-radius:4px;margin-top:0.4rem}
+.risk-high{background:#fde8e8;color:#c0392b}
+.risk-limited{background:#fef3cd;color:#856404}
+.risk-minimal{background:#d4edda;color:#155724}
+
+/* Activities Section */
+#activities-section{display:none;animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.activities-header{margin-bottom:1.5rem}
+.activities-header h2{font-size:1.4rem;color:#1B2A4A;margin-bottom:0.25rem}
+.activities-header p{color:#6b7280;font-size:0.95rem}
+.activity-list{display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2rem}
+.activity-card{background:#fff;border:2px solid #e5e7eb;border-radius:12px;padding:1rem 1.15rem;display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer;transition:all 0.15s}
+.activity-card:hover{border-color:#C9A84C}
+.activity-card.checked{border-color:#1B2A4A;background:#f8faff}
+.activity-card .checkbox{width:22px;height:22px;border:2px solid #d1d5db;border-radius:6px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.activity-card.checked .checkbox{background:#1B2A4A;border-color:#1B2A4A}
+.activity-card.checked .checkbox::after{content:'\2713';color:#fff;font-size:0.8rem;font-weight:700}
+.activity-info{flex:1}
+.activity-name{font-weight:600;font-size:0.95rem;color:#1B2A4A}
+.activity-annex{font-size:0.75rem;color:#6b7280;margin-top:0.1rem}
+.activity-risk{display:inline-block;font-size:0.65rem;font-weight:700;padding:0.1rem 0.35rem;border-radius:3px;margin-top:0.3rem}
+.risk-prohibited{background:#fde8e8;color:#c0392b}
+
+.btn-primary{display:inline-block;background:#1B2A4A;color:#fff;padding:0.7rem 2rem;border-radius:10px;font-weight:600;font-size:1rem;border:none;cursor:pointer;text-decoration:none;font-family:inherit}
+.btn-primary:hover{background:#2a3d6b}
+.btn-secondary{display:inline-block;background:#f3f4f6;color:#374151;border:1px solid #d1d5db;padding:0.5rem 1.25rem;border-radius:10px;font-weight:600;font-size:0.9rem;cursor:pointer;text-decoration:none;font-family:inherit}
+.btn-secondary:hover{background:#e5e7eb}
+.btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem}
+
+/* Results Dashboard */
+#results-section{display:none;animation:fadeIn 0.4s ease}
+.results-summary{background:linear-gradient(135deg,#1B2A4A 0%,#2a3d6b 100%);color:#fff;border-radius:16px;padding:2rem;margin-bottom:2rem}
+.results-summary h2{font-size:1.3rem;margin-bottom:0.5rem}
+.results-summary .industry-name{color:#C9A84C;font-weight:700}
+.results-summary p{opacity:0.9;font-size:0.95rem;line-height:1.6}
+.overall-risk{display:inline-block;padding:0.3rem 0.8rem;border-radius:6px;font-weight:700;font-size:0.85rem;margin-top:0.75rem}
+.overall-prohibited{background:#c0392b;color:#fff}
+.overall-high{background:#e74c3c;color:#fff}
+.overall-limited{background:#f39c12;color:#fff}
+.overall-minimal{background:#27ae60;color:#fff}
+
+.risk-breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.risk-group{background:#fff;border-radius:14px;padding:1.25rem;border-left:4px solid}
+.risk-group.prohibited{border-color:#c0392b}
+.risk-group.high{border-color:#e74c3c}
+.risk-group.limited{border-color:#f39c12}
+.risk-group.minimal{border-color:#27ae60}
+.risk-group h3{font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem}
+.risk-group.prohibited h3{color:#c0392b}
+.risk-group.high h3{color:#e74c3c}
+.risk-group.limited h3{color:#f39c12}
+.risk-group.minimal h3{color:#27ae60}
+.risk-group ul{list-style:none;padding:0}
+.risk-group li{font-size:0.85rem;padding:0.3rem 0;color:#374151;border-bottom:1px solid #f3f4f6}
+.risk-group li:last-child{border:none}
+
+.action-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:2rem}
+.action-card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:1.25rem}
+.action-card h3{font-size:1rem;color:#1B2A4A;margin-bottom:0.5rem}
+.action-card p{font-size:0.85rem;color:#6b7280;line-height:1.5}
+.action-card .deadline{display:inline-block;background:#fde8e8;color:#c0392b;font-size:0.75rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:4px;margin-top:0.5rem}
+.action-card .done{display:inline-block;background:#d4edda;color:#155724;font-size:0.75rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:4px;margin-top:0.5rem}
+</style>
 </head>
 <body>
-<div class="urgency-bar">
-  <strong><span id="countdown"></span> days</strong> until EU AI Act high-risk deadline (August 2026) — Find your compliance consultant now
-</div>
-<script>document.getElementById('countdown').textContent=Math.max(0,Math.ceil((new Date('2026-08-02T00:00:00')-new Date())/(1000*60*60*24)));</script>
-<header class="site-header">
-  <div class="header-inner">
-    <a href="index.html" class="site-logo">AI Act <span>Advisors</span></a>
-    <button class="mobile-toggle" onclick="document.querySelector('.main-nav').classList.toggle('open')" aria-label="Menu">&#9776;</button>
-    <nav class="main-nav">
-      <a href="consultants.html">All Consultants</a>
-      <a href="countries.html">By Country</a>
-      <a href="sectors.html">By Sector</a>
-      <a href="blog.html">Resources</a>
-      <a href="products.html">Free Tools</a>
-      <a href="list-your-practice.html" class="nav-cta">List Your Practice</a>
-    </nav>
+<div style="background:#1B2A4A;padding:0.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem">
+  <a href="index.html" style="color:#fff;text-decoration:none;font-weight:700;font-size:1rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">AI Act <span style="color:#C9A84C">Advisors</span></a>
+  <div style="display:flex;gap:1rem;align-items:center">
+    <a href="products.html" style="color:#d1d5db;text-decoration:none;font-size:0.85rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Free Tools</a>
+    <a href="consultants.html" style="color:#d1d5db;text-decoration:none;font-size:0.85rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Find a Consultant</a>
+    <a href="blog.html" style="color:#d1d5db;text-decoration:none;font-size:0.85rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">Resources</a>
   </div>
-</header>
-<style>
-.sim-wrap .container{{max-width:900px;margin:0 auto;padding:2rem 1.5rem}}
-.sim-wrap h1{{text-align:center;font-size:2rem;margin-bottom:0.5rem;color:#1B2A4A}}
-.sim-wrap .subtitle{{text-align:center;color:#6b7280;margin-bottom:2.5rem;font-size:1.05rem}}
-.sim-wrap .industry-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem}}
-.sim-wrap .industry-tile{{background:#fff;border:2px solid #e5e7eb;border-radius:14px;padding:1.25rem 1rem;text-align:center;cursor:pointer;transition:all 0.2s}}
-.sim-wrap .industry-tile:hover{{border-color:#C9A84C;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}}
-.sim-wrap .industry-tile .icon{{font-size:2.2rem;margin-bottom:0.5rem}}
-.sim-wrap .industry-tile .label{{font-size:0.85rem;font-weight:600;color:#1B2A4A}}
-.sim-wrap .industry-tile .risk-badge{{display:inline-block;font-size:0.65rem;font-weight:700;padding:0.1rem 0.4rem;border-radius:4px;margin-top:0.4rem}}
-.sim-wrap .risk-high{{background:#fde8e8;color:#c0392b}}
-.sim-wrap .risk-limited{{background:#fef3cd;color:#856404}}
-.sim-wrap .risk-minimal{{background:#d4edda;color:#155724}}
-.sim-wrap #activities-section{{display:none;animation:fadeIn 0.3s ease}}
-@keyframes fadeIn{{from{{opacity:0;transform:translateY(10px)}}to{{opacity:1;transform:translateY(0)}}}}
-.sim-wrap .activities-header{{margin-bottom:1.5rem}}
-.sim-wrap .activities-header h2{{font-size:1.4rem;color:#1B2A4A;margin-bottom:0.25rem}}
-.sim-wrap .activities-header p{{color:#6b7280;font-size:0.95rem}}
-.sim-wrap .activity-list{{display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2rem}}
-.sim-wrap .activity-card{{background:#fff;border:2px solid #e5e7eb;border-radius:12px;padding:1rem 1.15rem;display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer;transition:all 0.15s}}
-.sim-wrap .activity-card:hover{{border-color:#C9A84C}}
-.sim-wrap .activity-card.checked{{border-color:#1B2A4A;background:#f8faff}}
-.sim-wrap .activity-card .checkbox{{width:22px;height:22px;border:2px solid #d1d5db;border-radius:6px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}}
-.sim-wrap .activity-card.checked .checkbox{{background:#1B2A4A;border-color:#1B2A4A}}
-.sim-wrap .activity-card.checked .checkbox::after{{content:'¹3';color:#fff;font-size:0.8rem;font-weight:700}}
-.sim-wrap .activity-info{{flex:1}}
-.sim-wrap .activity-name{{font-weight:600;font-size:0.95rem;color:#1B2A4A}}
-.sim-wrap .activity-annex{{font-size:0.75rem;color:#6b7280;margin-top:0.1rem}}
-.sim-wrap .activity-risk{{display:inline-block;font-size:0.65rem;font-weight:700;padding:0.1rem 0.35rem;border-radius:3px;margin-top:0.3rem}}
-.sim-wrap .risk-prohibited{{background:#fde8e8;color:#c0392b}}
-.sim-wrap .btn-primary{{display:inline-block;background:#1B2A4A;color:#fff;padding:0.7rem 2rem;border-radius:10px;font-weight:600;font-size:1rem;border:none;cursor:pointer;text-decoration:none;font-family:inherit}}
-.sim-wrap .btn-primary:hover{{background:#2a3d6b}}
-.sim-wrap .btn-secondary{{display:inline-block;background:#f3f4f6;color:#374151;border:1px solid #d1d5db;padding:0.5rem 1.25rem;border-radius:10px;font-weight:600;font-size:0.9rem;cursor:pointer;text-decoration:none;font-family:inherit}}
-.sim-wrap .btn-secondary:hover{{background:#e5e7eb}}
-.sim-wrap .btn-row{{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem}}
-.sim-wrap #results-section{{display:none;animation:fadeIn 0.4s ease}}
-.sim-wrap .results-summary{{background:linear-gradient(135deg,#1B2A4A 0%,#2a3d6b 100%);color:#fff;border-radius:16px;padding:2rem;margin-bottom:2rem}}
-.sim-wrap .results-summary h2{{font-size:1.3rem;margin-bottom:0.5rem}}
-.sim-wrap .results-summary .industry-name{{color:#C9A84C;font-weight:700}}
-.sim-wrap .results-summary p{{opacity:0.9;font-size:0.95rem;line-height:1.6}}
-.sim-wrap .overall-risk{{display:inline-block;padding:0.3rem 0.8rem;border-radius:6px;font-weight:700;font-size:0.85rem;margin-top:0.75rem}}
-.sim-wrap .overall-prohibited{{background:#c0392b;color:#fff}}
-.sim-wrap .overall-high{{background:#e74c3c;color:#fff}}
-.sim-wrap .overall-limited{{background:#f39c12;color:#fff}}
-.sim-wrap .overall-minimal{{background:#27ae60;color:#fff}}
-.sim-wrap .risk-breakdown{{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}}
-.sim-wrap .risk-group{{background:#fff;border-radius:14px;padding:1.25rem;border-left:4px solid}}
-.sim-wrap .risk-group.prohibited{{border-color:#c0392b}}
-.sim-wrap .risk-group.high{{border-color:#e74c3c}}
-.sim-wrap .risk-group.limited{{border-color:#f39c12}}
-.sim-wrap .risk-group.minimal{{border-color:#27ae60}}
-.sim-wrap .risk-group h3{{font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem}}
-.sim-wrap .risk-group.prohibited h3{{color:#c0392b}}
-.sim-wrap .risk-group.high h3{{color:#e74c3c}}
-.sim-wrap .risk-group.limited h3{{color:#f39c12}}
-.sim-wrap .risk-group.minimal h3{{color:#27ae60}}
-.sim-wrap .risk-group ul{{list-style:none;padding:0}}
-.sim-wrap .risk-group li{{font-size:0.85rem;padding:0.3rem 0;color:#374151;border-bottom:1px solid #f3f4f6}}
-.sim-wrap .risk-group li:last-child{{border:none}}
-.sim-wrap .action-cards{{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:2rem}}
-.sim-wrap .action-card{{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:1.25rem}}
-.sim-wrap .action-card h3{{font-size:1rem;color:#1B2A4A;margin-bottom:0.5rem}}
-.sim-wrap .action-card p{{font-size:0.85rem;color:#6b7280;line-height:1.5}}
-.sim-wrap .action-card .deadline{{display:inline-block;background:#fde8e8;color:#c0392b;font-size:0.75rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:4px;margin-top:0.5rem}}
-.sim-wrap .action-card .done{{display:inline-block;background:#d4edda;color:#155724;font-size:0.75rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:4px;margin-top:0.5rem}}
-</style>
-<div class="sim-wrap">
+</div>
 <div class="container">
   <h1>What Does the AI Act Mean for <em>My</em> Business?</h1>
   <p class="subtitle">Pick your industry. Tell us what you use AI for. Get your personalised compliance picture in 60 seconds.</p>
@@ -134,221 +130,221 @@
     <div class="btn-row" style="margin-top:2rem">
       <button class="btn-secondary" onclick="backToIndustries()">&larr; Try Another Industry</button>
       <a href="" class="btn-primary" id="blog-link">Read the Full Guide &rarr;</a>
-      <a href="consultants.html" class="btn-primary" style="background:#C9A84C;color:#1B2A4A">Find a Consultant &rarr;</a>
+      <a href="consultants.html" class="btn-primary" style="background:#D79922;color:#fff">Find a Consultant &rarr;</a>
     </div>
   </div>
 </div>
 
 <script>
-const DATA = {{
-  recruitment: {{
-    name: "Recruitment Agency", icon: "👔",
+const DATA = {
+  recruitment: {
+    name: "Recruitment Agency", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#4056A1"><path d="M100,100a12,12,0,0,1,12-12h32a12,12,0,0,1,0,24H112A12,12,0,0,1,100,100ZM236,68V196a20,20,0,0,1-20,20H40a20,20,0,0,1-20-20V68A20,20,0,0,1,40,48H76V40a28,28,0,0,1,28-28h48a28,28,0,0,1,28,28v8h36A20,20,0,0,1,236,68ZM100,48h56V40a4,4,0,0,0-4-4H104a4,4,0,0,0-4,4ZM44,72v35.23A180.06,180.06,0,0,0,128,128a180,180,0,0,0,84-20.78V72ZM212,192V133.94A204.27,204.27,0,0,1,128,152a204.21,204.21,0,0,1-84-18.06V192Z"/></svg>',
     riskLevel: "high", blogSlug: "ai-act-recruitment-agencies.html",
     summary: "Recruitment AI is explicitly HIGH-RISK under Annex III, Category 4. The regulation targets the activity — screening, scoring, ranking candidates — not any specific product.",
     activities: [
-      {{name:"We use AI to screen or rank CVs and applications",annex:"Annex III, Category 4(a) — explicitly listed",risk:"high",checked:true}},
-      {{name:"We use AI to score or evaluate candidates",annex:"Annex III, Category 4(a) — evaluating candidates",risk:"high",checked:true}},
-      {{name:"We use AI video interviewing or assessment",annex:"Annex III, Category 4(a) — AI evaluation of candidates",risk:"high",checked:false}},
-      {{name:"We use AI to place targeted job advertisements",annex:"Annex III, Category 4(a) — explicitly named",risk:"high",checked:false}},
-      {{name:"We use AI to match candidates to roles",annex:"Annex III, Category 4(a) — selection of candidates",risk:"high",checked:true}},
-      {{name:"We use a chatbot for candidate enquiries",annex:"Article 50 — transparency obligation",risk:"limited",checked:false}},
-      {{name:"We use AI for interview scheduling",annex:"Administrative task — no evaluation",risk:"minimal",checked:false}},
-      {{name:"We use AI that analyses facial expressions or voice tone",annex:"Article 5 — BANNED since February 2025",risk:"prohibited",checked:false}}
+      {name:"We use AI to screen or rank CVs and applications",annex:"Annex III, Category 4(a) — explicitly listed",risk:"high",checked:true},
+      {name:"We use AI to score or evaluate candidates",annex:"Annex III, Category 4(a) — evaluating candidates",risk:"high",checked:true},
+      {name:"We use AI video interviewing or assessment",annex:"Annex III, Category 4(a) — AI evaluation of candidates",risk:"high",checked:false},
+      {name:"We use AI to place targeted job advertisements",annex:"Annex III, Category 4(a) — explicitly named",risk:"high",checked:false},
+      {name:"We use AI to match candidates to roles",annex:"Annex III, Category 4(a) — selection of candidates",risk:"high",checked:true},
+      {name:"We use a chatbot for candidate enquiries",annex:"Article 50 — transparency obligation",risk:"limited",checked:false},
+      {name:"We use AI for interview scheduling",annex:"Administrative task — no evaluation",risk:"minimal",checked:false},
+      {name:"We use AI that analyses facial expressions or voice tone",annex:"Article 5 — BANNED since February 2025",risk:"prohibited",checked:false}
     ],
     actions: [
-      {{title:"Inform all candidates",text:"Tell candidates AI is used in screening. Explain how it works and what role it plays in decisions.",deadline:"Aug 2026"}},
-      {{title:"Human oversight on every shortlist",text:"A qualified recruiter must review every AI-generated score, ranking, and recommendation before it becomes a hiring decision.",deadline:"Aug 2026"}},
-      {{title:"AI literacy training",text:"All recruiters using AI tools need documented training on how the tools work, their limitations, and known biases.",deadline:"Already required"}},
-      {{title:"Data Protection Impact Assessment",text:"High-risk AI processing personal data requires a DPIA under GDPR Article 35.",deadline:"Aug 2026"}},
-      {{title:"Check your software providers",text:"Ask every AI vendor: are they conducting conformity assessments? Will they be ready by August 2026? Get it in writing.",deadline:"Now"}}
+      {title:"Inform all candidates",text:"Tell candidates AI is used in screening. Explain how it works and what role it plays in decisions.",deadline:"Aug 2026"},
+      {title:"Human oversight on every shortlist",text:"A qualified recruiter must review every AI-generated score, ranking, and recommendation before it becomes a hiring decision.",deadline:"Aug 2026"},
+      {title:"AI literacy training",text:"All recruiters using AI tools need documented training on how the tools work, their limitations, and known biases.",deadline:"Already required"},
+      {title:"Data Protection Impact Assessment",text:"High-risk AI processing personal data requires a DPIA under GDPR Article 35.",deadline:"Aug 2026"},
+      {title:"Check your software providers",text:"Ask every AI vendor: are they conducting conformity assessments? Will they be ready by August 2026? Get it in writing.",deadline:"Now"}
     ]
-  }},
-  schools: {{
-    name: "School or University", icon: "🎓",
+  },
+  schools: {
+    name: "School or University", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#4056A1"><path d="M249.8,85.49l-116-64a12,12,0,0,0-11.6,0l-116,64a12,12,0,0,0,0,21l21.8,12v47.76a19.89,19.89,0,0,0,5.09,13.32C46.63,194.7,77,220,128,220a136.88,136.88,0,0,0,40-5.75V240a12,12,0,0,0,24,0V204.12a119.53,119.53,0,0,0,30.91-24.51A19.89,19.89,0,0,0,228,166.29V118.53l21.8-12a12,12,0,0,0,0-21ZM128,45.71,219.16,96,186,114.3a1.88,1.88,0,0,1-.18-.12l-52-28.69a12,12,0,0,0-11.6,21l39,21.49L128,146.3,36.84,96ZM128,196c-40.42,0-64.65-19.07-76-31.27v-33l70.2,38.74a12,12,0,0,0,11.6,0L168,151.64v37.23A110.46,110.46,0,0,1,128,196Zm76-31.27a93.21,93.21,0,0,1-12,10.81V138.39l12-6.62Z"/></svg>',
     riskLevel: "high", blogSlug: "ai-act-schools-universities.html",
     summary: "Education AI is one of the most detailed HIGH-RISK categories in the entire Act (Annex III, Category 3). Four subcategories cover admissions, grading, adaptive learning, and exam monitoring. Emotion recognition in schools is already BANNED.",
     activities: [
-      {{name:"We use AI to grade, mark, or score student work",annex:"Annex III, Category 3(b) — evaluating learning outcomes",risk:"high",checked:true}},
-      {{name:"We use AI plagiarism or AI-writing detection",annex:"Annex III, Category 3(d) — detecting prohibited behaviour in assessments",risk:"high",checked:true}},
-      {{name:"We use AI proctoring or exam monitoring",annex:"Annex III, Category 3(d) — monitoring behaviour during tests",risk:"high",checked:false}},
-      {{name:"We use adaptive learning platforms that personalise student pathways",annex:"Annex III, Category 3(b) — steering the learning process",risk:"high",checked:false}},
-      {{name:"We use AI in admissions or student placement decisions",annex:"Annex III, Category 3(a) — determining access to education",risk:"high",checked:false}},
-      {{name:"We use AI to predict student performance or dropout risk",annex:"Annex III, Category 3(b)/(c) — influencing educational decisions",risk:"high",checked:false}},
-      {{name:"We use a chatbot for student enquiries",annex:"Article 50 — transparency obligation",risk:"limited",checked:false}},
-      {{name:"We use AI for timetabling or scheduling",annex:"Administrative task — no evaluation of students",risk:"minimal",checked:true}},
-      {{name:"We use AI that monitors student attention or engagement via camera/microphone",annex:"Article 5 — BANNED since February 2025",risk:"prohibited",checked:false}}
+      {name:"We use AI to grade, mark, or score student work",annex:"Annex III, Category 3(b) — evaluating learning outcomes",risk:"high",checked:true},
+      {name:"We use AI plagiarism or AI-writing detection",annex:"Annex III, Category 3(d) — detecting prohibited behaviour in assessments",risk:"high",checked:true},
+      {name:"We use AI proctoring or exam monitoring",annex:"Annex III, Category 3(d) — monitoring behaviour during tests",risk:"high",checked:false},
+      {name:"We use adaptive learning platforms that personalise student pathways",annex:"Annex III, Category 3(b) — steering the learning process",risk:"high",checked:false},
+      {name:"We use AI in admissions or student placement decisions",annex:"Annex III, Category 3(a) — determining access to education",risk:"high",checked:false},
+      {name:"We use AI to predict student performance or dropout risk",annex:"Annex III, Category 3(b)/(c) — influencing educational decisions",risk:"high",checked:false},
+      {name:"We use a chatbot for student enquiries",annex:"Article 50 — transparency obligation",risk:"limited",checked:false},
+      {name:"We use AI for timetabling or scheduling",annex:"Administrative task — no evaluation of students",risk:"minimal",checked:true},
+      {name:"We use AI that monitors student attention or engagement via camera/microphone",annex:"Article 5 — BANNED since February 2025",risk:"prohibited",checked:false}
     ],
     actions: [
-      {{title:"Remove emotion recognition immediately",text:"AI inferring student emotions from biometric data has been PROHIBITED since February 2025. Remove any such systems now.",deadline:"Already banned"}},
-      {{title:"Inform students and parents",text:"Tell students (and parents of minors) that AI is used in assessments, plagiarism detection, and admissions.",deadline:"Aug 2026"}},
-      {{title:"Human review of all AI flags and grades",text:"Every plagiarism flag, AI-generated grade, and admissions recommendation must be reviewed by a qualified human before becoming final.",deadline:"Aug 2026"}},
-      {{title:"AI literacy for all teaching staff",text:"Teachers using AI tools need training on how they work, their false positive rates, and when to override.",deadline:"Already required"}},
-      {{title:"DPIAs for tools processing student data",text:"Proctoring tools recording video/audio of students (especially minors) require Data Protection Impact Assessments.",deadline:"Aug 2026"}}
+      {title:"Remove emotion recognition immediately",text:"AI inferring student emotions from biometric data has been PROHIBITED since February 2025. Remove any such systems now.",deadline:"Already banned"},
+      {title:"Inform students and parents",text:"Tell students (and parents of minors) that AI is used in assessments, plagiarism detection, and admissions.",deadline:"Aug 2026"},
+      {title:"Human review of all AI flags and grades",text:"Every plagiarism flag, AI-generated grade, and admissions recommendation must be reviewed by a qualified human before becoming final.",deadline:"Aug 2026"},
+      {title:"AI literacy for all teaching staff",text:"Teachers using AI tools need training on how they work, their false positive rates, and when to override.",deadline:"Already required"},
+      {title:"DPIAs for tools processing student data",text:"Proctoring tools recording video/audio of students (especially minors) require Data Protection Impact Assessments.",deadline:"Aug 2026"}
     ]
-  }},
-  insurance: {{
-    name: "Insurance Company", icon: "🛡️",
+  },
+  insurance: {
+    name: "Insurance Company", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#4056A1"><path d="M208,36H48A20,20,0,0,0,28,56v56c0,54.29,26.32,87.22,48.4,105.29,23.71,19.39,47.44,26,48.44,26.29a12.1,12.1,0,0,0,6.32,0c1-.28,24.73-6.9,48.44-26.29,22.08-18.07,48.4-51,48.4-105.29V56A20,20,0,0,0,208,36Zm-4,76c0,35.71-13.09,64.69-38.91,86.15A126.28,126.28,0,0,1,128,219.38a126.14,126.14,0,0,1-37.09-21.23C65.09,176.69,52,147.71,52,112V60H204ZM79.51,144.49a12,12,0,1,1,17-17L112,143l47.51-47.52a12,12,0,0,1,17,17l-56,56a12,12,0,0,1-17,0Z"/></svg>',
     riskLevel: "high", blogSlug: "ai-act-insurance-companies.html",
     summary: "Insurance AI is explicitly HIGH-RISK under Annex III, Category 5 — covering risk assessment, pricing, and access to essential services. Life and health insurance AI is specifically named. Fraud detection gets a narrow exemption.",
     activities: [
-      {{name:"We use AI for underwriting or risk assessment",annex:"Annex III, Category 5(c) — risk assessment for insurance",risk:"high",checked:true}},
-      {{name:"We use AI to calculate or personalise premiums",annex:"Annex III, Category 5(c) — pricing in life and health insurance",risk:"high",checked:true}},
-      {{name:"We use AI to approve or deny claims automatically",annex:"Annex III, Category 5 — access to insurance benefits",risk:"high",checked:false}},
-      {{name:"We use AI to assess damage from photos or documents",annex:"Annex III, Category 5 — influences claim settlement",risk:"high",checked:false}},
-      {{name:"We use telematics or wearable data for pricing",annex:"Annex III, Category 5(c) — behaviour-based premiums",risk:"high",checked:false}},
-      {{name:"We use AI for credit scoring or eligibility checks",annex:"Annex III, Category 5(b) — creditworthiness evaluation",risk:"high",checked:false}},
-      {{name:"We use AI for fraud detection only",annex:"Category 5(b) exception — fraud detection is exempt*",risk:"minimal",checked:false}},
-      {{name:"We use a chatbot for policyholder enquiries",annex:"Article 50 — transparency obligation",risk:"limited",checked:true}}
+      {name:"We use AI for underwriting or risk assessment",annex:"Annex III, Category 5(c) — risk assessment for insurance",risk:"high",checked:true},
+      {name:"We use AI to calculate or personalise premiums",annex:"Annex III, Category 5(c) — pricing in life and health insurance",risk:"high",checked:true},
+      {name:"We use AI to approve or deny claims automatically",annex:"Annex III, Category 5 — access to insurance benefits",risk:"high",checked:false},
+      {name:"We use AI to assess damage from photos or documents",annex:"Annex III, Category 5 — influences claim settlement",risk:"high",checked:false},
+      {name:"We use telematics or wearable data for pricing",annex:"Annex III, Category 5(c) — behaviour-based premiums",risk:"high",checked:false},
+      {name:"We use AI for credit scoring or eligibility checks",annex:"Annex III, Category 5(b) — creditworthiness evaluation",risk:"high",checked:false},
+      {name:"We use AI for fraud detection only",annex:"Category 5(b) exception — fraud detection is exempt*",risk:"minimal",checked:false},
+      {name:"We use a chatbot for policyholder enquiries",annex:"Article 50 — transparency obligation",risk:"limited",checked:true}
     ],
     actions: [
-      {{title:"Fundamental Rights Impact Assessment",text:"Before first use of high-risk AI in financial services, you must conduct an FRIA — identifying affected demographic groups and quantifying disparate-impact ratios.",deadline:"Aug 2026"}},
-      {{title:"Human oversight on all coverage decisions",text:"Qualified underwriters and claims handlers must review AI recommendations, especially coverage denials.",deadline:"Aug 2026"}},
-      {{title:"Decision logs for 6+ months",text:"Maintain AI-generated logs that allow full reconstruction of every underwriting, pricing, and claims decision.",deadline:"Aug 2026"}},
-      {{title:"Inform policyholders",text:"Tell individuals that AI is involved in their underwriting, pricing, or claims assessment.",deadline:"Aug 2026"}},
-      {{title:"Monitor for bias and discrimination",text:"Continuously track AI outcomes across demographic groups. Document and remediate discriminatory patterns.",deadline:"Aug 2026"}}
+      {title:"Fundamental Rights Impact Assessment",text:"Before first use of high-risk AI in financial services, you must conduct an FRIA — identifying affected demographic groups and quantifying disparate-impact ratios.",deadline:"Aug 2026"},
+      {title:"Human oversight on all coverage decisions",text:"Qualified underwriters and claims handlers must review AI recommendations, especially coverage denials.",deadline:"Aug 2026"},
+      {title:"Decision logs for 6+ months",text:"Maintain AI-generated logs that allow full reconstruction of every underwriting, pricing, and claims decision.",deadline:"Aug 2026"},
+      {title:"Inform policyholders",text:"Tell individuals that AI is involved in their underwriting, pricing, or claims assessment.",deadline:"Aug 2026"},
+      {title:"Monitor for bias and discrimination",text:"Continuously track AI outcomes across demographic groups. Document and remediate discriminatory patterns.",deadline:"Aug 2026"}
     ]
-  }},
-  gp: {{
-    name: "GP Practice", icon: "🩺",
+  },
+  gp: {
+    name: "GP Practice", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#F13C20"><path d="M248,160a40,40,0,1,0-52.64,37.94A28,28,0,0,1,168,220H144a28,28,0,0,1-28-28V154.9c31.73-5.78,56-34.09,56-67.73V40a12,12,0,0,0-12-12H136a12,12,0,0,0,0,24h12V87.17c0,24.4-19.47,44.52-43.41,44.83A44,44,0,0,1,60,88V52H72a12,12,0,0,0,0-24H48A12,12,0,0,0,36,40V88a68,68,0,0,0,56,66.93V192a52.06,52.06,0,0,0,52,52h24a52.06,52.06,0,0,0,51.61-45.72A40.08,40.08,0,0,0,248,160Zm-40,16a16,16,0,1,1,16-16A16,16,0,0,1,208,176Z"/></svg>',
     riskLevel: "high", blogSlug: "ai-act-gp-practices.html",
     summary: "Healthcare AI directly affects patient safety. AI triage, diagnostic support, and clinical decision tools are HIGH-RISK and may also require medical device certification under the MDR.",
     activities: [
-      {{name:"We use AI triage to assess patient urgency",annex:"Annex III, Category 1 — safety component affecting patient outcomes",risk:"high",checked:false}},
-      {{name:"We use AI for diagnostic support or differential diagnosis",annex:"Annex III, Category 1 — clinical decision support",risk:"high",checked:false}},
-      {{name:"We use AI to analyse skin lesions, scans, or images",annex:"Annex III, Category 1 + MDR — medical device AI",risk:"high",checked:false}},
-      {{name:"We use AI for clinical coding or medical transcription",annex:"Article 50 — transparency if patient-facing",risk:"limited",checked:false}},
-      {{name:"We use AI for appointment booking or scheduling",annex:"Administrative task — no clinical impact",risk:"minimal",checked:true}},
-      {{name:"We use a patient-facing chatbot or symptom checker",annex:"Annex III if it triages; Article 50 if informational only",risk:"high",checked:false}}
+      {name:"We use AI triage to assess patient urgency",annex:"Annex III, Category 1 — safety component affecting patient outcomes",risk:"high",checked:false},
+      {name:"We use AI for diagnostic support or differential diagnosis",annex:"Annex III, Category 1 — clinical decision support",risk:"high",checked:false},
+      {name:"We use AI to analyse skin lesions, scans, or images",annex:"Annex III, Category 1 + MDR — medical device AI",risk:"high",checked:false},
+      {name:"We use AI for clinical coding or medical transcription",annex:"Article 50 — transparency if patient-facing",risk:"limited",checked:false},
+      {name:"We use AI for appointment booking or scheduling",annex:"Administrative task — no clinical impact",risk:"minimal",checked:true},
+      {name:"We use a patient-facing chatbot or symptom checker",annex:"Annex III if it triages; Article 50 if informational only",risk:"high",checked:false}
     ],
     actions: [
-      {{title:"Verify medical device compliance",text:"AI triage and diagnostic tools may require CE marking under the MDR. Check with your provider.",deadline:"Now"}},
-      {{title:"Human oversight on all clinical AI",text:"No AI-generated triage, diagnosis, or recommendation should become a patient decision without clinician review.",deadline:"Aug 2026"}},
-      {{title:"Inform patients",text:"Tell patients when AI is used in their triage, diagnosis, or referral process.",deadline:"Aug 2026"}},
-      {{title:"AI literacy for clinical staff",text:"GPs and nurses need training on how AI tools work, their accuracy rates, and limitations.",deadline:"Already required"}},
-      {{title:"DPIAs for health data AI",text:"AI processing patient health data requires a Data Protection Impact Assessment.",deadline:"Aug 2026"}}
+      {title:"Verify medical device compliance",text:"AI triage and diagnostic tools may require CE marking under the MDR. Check with your provider.",deadline:"Now"},
+      {title:"Human oversight on all clinical AI",text:"No AI-generated triage, diagnosis, or recommendation should become a patient decision without clinician review.",deadline:"Aug 2026"},
+      {title:"Inform patients",text:"Tell patients when AI is used in their triage, diagnosis, or referral process.",deadline:"Aug 2026"},
+      {title:"AI literacy for clinical staff",text:"GPs and nurses need training on how AI tools work, their accuracy rates, and limitations.",deadline:"Already required"},
+      {title:"DPIAs for health data AI",text:"AI processing patient health data requires a Data Protection Impact Assessment.",deadline:"Aug 2026"}
     ]
-  }},
-  ecommerce: {{
-    name: "E-Commerce Shop", icon: "🛒",
+  },
+  ecommerce: {
+    name: "E-Commerce Shop", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#D79922"><path d="M233.21,56.31A12,12,0,0,0,224,52H66L60.53,21.85A12,12,0,0,0,48.73,12H24a12,12,0,0,0,0,24H38.71L63.62,173a28,28,0,0,0,4.07,10.21A32,32,0,1,0,123,196h34a32,32,0,1,0,31-24H91.17a4,4,0,0,1-3.93-3.28L84.92,156H196.1a28,28,0,0,0,27.55-23l12.16-66.86A12,12,0,0,0,233.21,56.31ZM100,204a8,8,0,1,1-8-8A8,8,0,0,1,100,204Zm88,8a8,8,0,1,1,8-8A8,8,0,0,1,188,212Zm12-83.28A4,4,0,0,1,196.1,132H80.56L70.38,76H209.62Z"/></svg>',
     riskLevel: "minimal", blogSlug: "ai-act-ecommerce-shops.html",
     summary: "Most e-commerce AI is minimal risk. The one exception: BNPL (buy now, pay later) credit scoring is explicitly HIGH-RISK. Product recommendations, fraud detection, and inventory forecasting are all fine.",
     activities: [
-      {{name:"We use AI product recommendations or personalisation",annex:"No specific obligation — standard business AI",risk:"minimal",checked:true}},
-      {{name:"We use AI for fraud detection on orders",annex:"No specific obligation — protective, not evaluative",risk:"minimal",checked:true}},
-      {{name:"We use AI dynamic pricing",annex:"Minimal risk unless targeting vulnerable groups",risk:"minimal",checked:false}},
-      {{name:"We use AI for demand forecasting or inventory",annex:"No specific obligation — internal analytics",risk:"minimal",checked:false}},
-      {{name:"We use a customer service chatbot",annex:"Article 50 — must disclose AI interaction",risk:"limited",checked:false}},
-      {{name:"We use AI-generated product descriptions or images",annex:"Article 50 — disclosure if it could mislead",risk:"limited",checked:false}},
-      {{name:"We offer buy now, pay later (BNPL) with AI credit scoring",annex:"Annex III, Category 5(b) — creditworthiness evaluation",risk:"high",checked:false}},
-      {{name:"We use AI email personalisation or send-time optimisation",annex:"No specific obligation — standard marketing AI",risk:"minimal",checked:false}}
+      {name:"We use AI product recommendations or personalisation",annex:"No specific obligation — standard business AI",risk:"minimal",checked:true},
+      {name:"We use AI for fraud detection on orders",annex:"No specific obligation — protective, not evaluative",risk:"minimal",checked:true},
+      {name:"We use AI dynamic pricing",annex:"Minimal risk unless targeting vulnerable groups",risk:"minimal",checked:false},
+      {name:"We use AI for demand forecasting or inventory",annex:"No specific obligation — internal analytics",risk:"minimal",checked:false},
+      {name:"We use a customer service chatbot",annex:"Article 50 — must disclose AI interaction",risk:"limited",checked:false},
+      {name:"We use AI-generated product descriptions or images",annex:"Article 50 — disclosure if it could mislead",risk:"limited",checked:false},
+      {name:"We offer buy now, pay later (BNPL) with AI credit scoring",annex:"Annex III, Category 5(b) — creditworthiness evaluation",risk:"high",checked:false},
+      {name:"We use AI email personalisation or send-time optimisation",annex:"No specific obligation — standard marketing AI",risk:"minimal",checked:false}
     ],
     actions: [
-      {{title:"Disclose chatbots",text:"If you use any AI chatbot, clearly tell customers they're interacting with AI before or at the start of the conversation.",deadline:"Already required"}},
-      {{title:"Check your BNPL provider",text:"If you offer Klarna, Afterpay, or Clearpay, confirm they're preparing for AI Act compliance on their credit scoring.",deadline:"Aug 2026"}},
-      {{title:"AI literacy for your team",text:"Staff managing AI tools need basic training on what the tools do and their limitations.",deadline:"Already required"}},
-      {{title:"Review dynamic pricing ethics",text:"Dynamic pricing is fine, but pricing that exploits vulnerable groups is PROHIBITED under Article 5.",deadline:"Already banned"}}
+      {title:"Disclose chatbots",text:"If you use any AI chatbot, clearly tell customers they're interacting with AI before or at the start of the conversation.",deadline:"Already required"},
+      {title:"Check your BNPL provider",text:"If you offer Klarna, Afterpay, or Clearpay, confirm they're preparing for AI Act compliance on their credit scoring.",deadline:"Aug 2026"},
+      {title:"AI literacy for your team",text:"Staff managing AI tools need basic training on what the tools do and their limitations.",deadline:"Already required"},
+      {title:"Review dynamic pricing ethics",text:"Dynamic pricing is fine, but pricing that exploits vulnerable groups is PROHIBITED under Article 5.",deadline:"Already banned"}
     ]
-  }},
-  restaurants: {{
-    name: "Restaurant or Café", icon: "🍽️",
+  },
+  restaurants: {
+    name: "Restaurant or Caf\u00e9", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#F13C20"><path d="M68,88V40a12,12,0,0,1,24,0V88a12,12,0,0,1-24,0ZM220,40V224a12,12,0,0,1-24,0V180H152a12,12,0,0,1-12-12,273.23,273.23,0,0,1,7.33-57.82C157.42,68.42,176.76,40.33,203.27,29A12,12,0,0,1,220,40ZM196,62.92C182.6,77,175,98,170.77,115.38A254.41,254.41,0,0,0,164.55,156H196ZM128,39A12,12,0,0,0,104,41l4,47.46a28,28,0,0,1-56,0L56,41A12,12,0,1,0,32,39L28,87c0,.34,0,.67,0,1a52.1,52.1,0,0,0,40,50.59V224a12,12,0,0,0,24,0V138.59A52.1,52.1,0,0,0,132,88c0-.33,0-.66,0-1Z"/></svg>',
     riskLevel: "minimal", blogSlug: "ai-act-restaurants-cafes.html",
     summary: "Good news: most restaurant AI is minimal risk. Demand forecasting, menu analytics, and inventory tools have no specific obligations. AI phone answering needs disclosure. Watch out for AI staff scheduling based on individual performance.",
     activities: [
-      {{name:"We use AI for sales analytics or menu optimisation",annex:"No specific obligation — internal business AI",risk:"minimal",checked:true}},
-      {{name:"We use AI for demand forecasting or labour scheduling",annex:"No specific obligation — operational AI",risk:"minimal",checked:false}},
-      {{name:"We use AI phone answering for reservations or orders",annex:"Article 50 — must disclose AI interaction",risk:"limited",checked:false}},
-      {{name:"We use AI for guest profiling or personalised marketing",annex:"No specific obligation — standard marketing",risk:"minimal",checked:false}},
-      {{name:"We use AI for food waste tracking",annex:"No specific obligation — operational AI",risk:"minimal",checked:false}},
-      {{name:"We use AI that evaluates individual staff performance for scheduling",annex:"Annex III, Category 4 — AI affecting work-related decisions",risk:"high",checked:false}}
+      {name:"We use AI for sales analytics or menu optimisation",annex:"No specific obligation — internal business AI",risk:"minimal",checked:true},
+      {name:"We use AI for demand forecasting or labour scheduling",annex:"No specific obligation — operational AI",risk:"minimal",checked:false},
+      {name:"We use AI phone answering for reservations or orders",annex:"Article 50 — must disclose AI interaction",risk:"limited",checked:false},
+      {name:"We use AI for guest profiling or personalised marketing",annex:"No specific obligation — standard marketing",risk:"minimal",checked:false},
+      {name:"We use AI for food waste tracking",annex:"No specific obligation — operational AI",risk:"minimal",checked:false},
+      {name:"We use AI that evaluates individual staff performance for scheduling",annex:"Annex III, Category 4 — AI affecting work-related decisions",risk:"high",checked:false}
     ],
     actions: [
-      {{title:"Disclose AI phone systems",text:"If AI answers your phone, callers must be told they're speaking with AI.",deadline:"Already required"}},
-      {{title:"Check staff scheduling AI",text:"If your scheduling tool ranks or evaluates individual employee performance using AI, it could be high-risk.",deadline:"Aug 2026"}},
-      {{title:"Basic AI literacy",text:"Managers using AI tools should understand what the tools do. Light obligation for restaurants.",deadline:"Already required"}}
+      {title:"Disclose AI phone systems",text:"If AI answers your phone, callers must be told they're speaking with AI.",deadline:"Already required"},
+      {title:"Check staff scheduling AI",text:"If your scheduling tool ranks or evaluates individual employee performance using AI, it could be high-risk.",deadline:"Aug 2026"},
+      {title:"Basic AI literacy",text:"Managers using AI tools should understand what the tools do. Light obligation for restaurants.",deadline:"Already required"}
     ]
-  }},
-  estate: {{
-    name: "Estate Agency", icon: "🏠",
+  },
+  estate: {
+    name: "Estate Agency", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#4056A1"><path d="M222.14,105.85l-80-80a20,20,0,0,0-28.28,0l-80,80A19.86,19.86,0,0,0,28,120v96a12,12,0,0,0,12,12h64a12,12,0,0,0,12-12V164h24v52a12,12,0,0,0,12,12h64a12,12,0,0,0,12-12V120A19.86,19.86,0,0,0,222.14,105.85ZM204,204H164V152a12,12,0,0,0-12-12H104a12,12,0,0,0-12,12v52H52V121.65l76-76,76,76Z"/></svg>',
     riskLevel: "limited", blogSlug: "ai-act-estate-agents.html",
     summary: "Most estate agency AI is minimal risk, but automated valuations (AVMs) used for mortgage decisions could be HIGH-RISK. AI tenant screening is explicitly HIGH-RISK. Virtual staging and property matching are fine.",
     activities: [
-      {{name:"We use AI-powered automated property valuations",annex:"Potentially HIGH-RISK if used for mortgage/lending decisions",risk:"high",checked:false}},
-      {{name:"We use AI for tenant screening or referencing",annex:"Annex III, Category 4 — AI affecting access to housing",risk:"high",checked:false}},
-      {{name:"We use AI lead scoring or property matching",annex:"No specific obligation — standard business AI",risk:"minimal",checked:true}},
-      {{name:"We use AI-generated property descriptions",annex:"No specific obligation — marketing content",risk:"minimal",checked:false}},
-      {{name:"We use AI virtual staging or 3D tours",annex:"No specific obligation — visual marketing",risk:"minimal",checked:false}},
-      {{name:"We use an AI voice system for enquiries",annex:"Article 50 — must disclose AI interaction",risk:"limited",checked:false}}
+      {name:"We use AI-powered automated property valuations",annex:"Potentially HIGH-RISK if used for mortgage/lending decisions",risk:"high",checked:false},
+      {name:"We use AI for tenant screening or referencing",annex:"Annex III, Category 4 — AI affecting access to housing",risk:"high",checked:false},
+      {name:"We use AI lead scoring or property matching",annex:"No specific obligation — standard business AI",risk:"minimal",checked:true},
+      {name:"We use AI-generated property descriptions",annex:"No specific obligation — marketing content",risk:"minimal",checked:false},
+      {name:"We use AI virtual staging or 3D tours",annex:"No specific obligation — visual marketing",risk:"minimal",checked:false},
+      {name:"We use an AI voice system for enquiries",annex:"Article 50 — must disclose AI interaction",risk:"limited",checked:false}
     ],
     actions: [
-      {{title:"Check valuation AI usage",text:"If automated valuations feed into mortgage or lending decisions, they may be high-risk. Confirm with your AVM provider.",deadline:"Aug 2026"}},
-      {{title:"Tenant screening obligations",text:"If you use AI for tenant screening, this is explicitly high-risk. Ensure human review of all AI-generated assessments.",deadline:"Aug 2026"}},
-      {{title:"Disclose AI voice systems",text:"If AI answers enquiries, callers must be told they're interacting with AI.",deadline:"Already required"}},
-      {{title:"AI literacy for agents",text:"Staff using AI tools need basic understanding of what the tools do and their limitations.",deadline:"Already required"}}
+      {title:"Check valuation AI usage",text:"If automated valuations feed into mortgage or lending decisions, they may be high-risk. Confirm with your AVM provider.",deadline:"Aug 2026"},
+      {title:"Tenant screening obligations",text:"If you use AI for tenant screening, this is explicitly high-risk. Ensure human review of all AI-generated assessments.",deadline:"Aug 2026"},
+      {title:"Disclose AI voice systems",text:"If AI answers enquiries, callers must be told they're interacting with AI.",deadline:"Already required"},
+      {title:"AI literacy for agents",text:"Staff using AI tools need basic understanding of what the tools do and their limitations.",deadline:"Already required"}
     ]
-  }},
-  accountants: {{
-    name: "Accountancy Practice", icon: "📊",
+  },
+  accountants: {
+    name: "Accountancy Practice", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#D79922"><path d="M68,100A12,12,0,0,1,80,88h96a12,12,0,0,1,0,24H80A12,12,0,0,1,68,100Zm12,52h96a12,12,0,0,0,0-24H80a12,12,0,0,0,0,24ZM236,56V208a12,12,0,0,1-17.37,10.73L192,205.42l-26.63,13.31a12,12,0,0,1-10.74,0L128,205.42l-26.63,13.31a12,12,0,0,1-10.74,0L64,205.42,37.37,218.73A12,12,0,0,1,20,208V56A20,20,0,0,1,40,36H216A20,20,0,0,1,236,56Zm-24,4H44V188.58l14.63-7.31a12,12,0,0,1,10.74,0L96,194.58l26.63-13.31a12,12,0,0,1,10.74,0L160,194.58l26.63-13.31a12,12,0,0,1,10.74,0L212,188.58Z"/></svg>',
     riskLevel: "minimal", blogSlug: "ai-act-accountants.html",
     summary: "Accountants have one of the lightest compliance burdens. Auto-categorisation, OCR, and cash flow forecasting are all minimal risk. The exception: AI credit scoring for client lending is high-risk.",
     activities: [
-      {{name:"We use AI auto-categorisation for transactions",annex:"No specific obligation — standard bookkeeping AI",risk:"minimal",checked:true}},
-      {{name:"We use AI/OCR for invoice and receipt processing",annex:"No specific obligation — document processing",risk:"minimal",checked:true}},
-      {{name:"We use AI for cash flow forecasting",annex:"No specific obligation — internal analytics",risk:"minimal",checked:false}},
-      {{name:"We use AI for anomaly or fraud detection in audits",annex:"No specific obligation — protective AI",risk:"minimal",checked:false}},
-      {{name:"We use a chatbot for client enquiries",annex:"Article 50 — must disclose AI interaction",risk:"limited",checked:false}},
-      {{name:"We use AI to assess client creditworthiness for lending",annex:"Annex III, Category 5(b) — credit scoring",risk:"high",checked:false}}
+      {name:"We use AI auto-categorisation for transactions",annex:"No specific obligation — standard bookkeeping AI",risk:"minimal",checked:true},
+      {name:"We use AI/OCR for invoice and receipt processing",annex:"No specific obligation — document processing",risk:"minimal",checked:true},
+      {name:"We use AI for cash flow forecasting",annex:"No specific obligation — internal analytics",risk:"minimal",checked:false},
+      {name:"We use AI for anomaly or fraud detection in audits",annex:"No specific obligation — protective AI",risk:"minimal",checked:false},
+      {name:"We use a chatbot for client enquiries",annex:"Article 50 — must disclose AI interaction",risk:"limited",checked:false},
+      {name:"We use AI to assess client creditworthiness for lending",annex:"Annex III, Category 5(b) — credit scoring",risk:"high",checked:false}
     ],
     actions: [
-      {{title:"Disclose chatbots",text:"If you use an AI chatbot for client enquiries, disclose that it's AI.",deadline:"Already required"}},
-      {{title:"Check credit scoring usage",text:"If you advise on lending or use AI for creditworthiness, this is high-risk.",deadline:"Aug 2026"}},
-      {{title:"Basic AI literacy",text:"Staff using AI tools should understand what they do. Light obligation.",deadline:"Already required"}}
+      {title:"Disclose chatbots",text:"If you use an AI chatbot for client enquiries, disclose that it's AI.",deadline:"Already required"},
+      {title:"Check credit scoring usage",text:"If you advise on lending or use AI for creditworthiness, this is high-risk.",deadline:"Aug 2026"},
+      {title:"Basic AI literacy",text:"Staff using AI tools should understand what they do. Light obligation.",deadline:"Already required"}
     ]
-  }},
-  marketing: {{
-    name: "Marketing Agency", icon: "📣",
+  },
+  marketing: {
+    name: "Marketing Agency", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#F13C20"><path d="M252,120a52.06,52.06,0,0,0-52-52H160.32c-3.44-.21-52.6-4-99.46-43.3A20,20,0,0,0,28,40V200a19.8,19.8,0,0,0,11.54,18.12,19.86,19.86,0,0,0,21.32-2.81A192.92,192.92,0,0,1,144,174.47v26.2a20,20,0,0,0,8.9,16.64,11.35,11.35,0,0,0,1.39.8l14.44,7.06A20,20,0,0,0,198.37,213l11.09-41.82A52.07,52.07,0,0,0,252,120ZM52,191.63V48.4c36.17,28.07,72.17,38.1,92,41.66V150C124.17,153.52,88.17,163.55,52,191.63ZM176.39,202.2,168,198.1V172h16.4ZM200,148H168V92h32a28,28,0,1,1,0,56Z"/></svg>',
     riskLevel: "limited", blogSlug: "ai-act-marketing-agencies.html",
     summary: "Most marketing AI is limited risk — transparency obligations, not heavy compliance. You must disclose AI-generated content, label deepfakes, and tell people when they're talking to a chatbot. Subliminal manipulation and targeting vulnerable groups is PROHIBITED.",
     activities: [
-      {{name:"We use AI to write copy, articles, or social posts",annex:"Article 50 — disclose if informing the public",risk:"limited",checked:true}},
-      {{name:"We use AI to generate images for marketing",annex:"Article 50 — disclose AI-generated images in ads",risk:"limited",checked:true}},
-      {{name:"We use AI to generate or edit video content",annex:"Article 50 — mandatory deepfake disclosure for ads",risk:"limited",checked:false}},
-      {{name:"We deploy chatbots for lead generation or customer service",annex:"Article 50 — must disclose AI interaction",risk:"limited",checked:false}},
-      {{name:"We use AI for ad targeting and optimisation",annex:"Minimal risk unless targeting vulnerable groups",risk:"minimal",checked:true}},
-      {{name:"We use AI for SEO or content optimisation",annex:"No specific obligation — internal tool",risk:"minimal",checked:false}},
-      {{name:"We use AI for email personalisation",annex:"No specific obligation — standard marketing",risk:"minimal",checked:false}},
-      {{name:"We use AI techniques that target vulnerable groups or use subliminal manipulation",annex:"Article 5 — BANNED. Fines up to €35M or 7% turnover",risk:"prohibited",checked:false}}
+      {name:"We use AI to write copy, articles, or social posts",annex:"Article 50 — disclose if informing the public",risk:"limited",checked:true},
+      {name:"We use AI to generate images for marketing",annex:"Article 50 — disclose AI-generated images in ads",risk:"limited",checked:true},
+      {name:"We use AI to generate or edit video content",annex:"Article 50 — mandatory deepfake disclosure for ads",risk:"limited",checked:false},
+      {name:"We deploy chatbots for lead generation or customer service",annex:"Article 50 — must disclose AI interaction",risk:"limited",checked:false},
+      {name:"We use AI for ad targeting and optimisation",annex:"Minimal risk unless targeting vulnerable groups",risk:"minimal",checked:true},
+      {name:"We use AI for SEO or content optimisation",annex:"No specific obligation — internal tool",risk:"minimal",checked:false},
+      {name:"We use AI for email personalisation",annex:"No specific obligation — standard marketing",risk:"minimal",checked:false},
+      {name:"We use AI techniques that target vulnerable groups or use subliminal manipulation",annex:"Article 5 — BANNED. Fines up to \u20ac35M or 7% turnover",risk:"prohibited",checked:false}
     ],
     actions: [
-      {{title:"Disclose AI-generated content",text:"AI-generated images, videos, and text intended to inform the public must be labelled. Commercial ads do NOT get the artistic exemption.",deadline:"Aug 2026"}},
-      {{title:"Label all deepfakes",text:"Synthetic spokesperson videos, manipulated images, and AI audio in advertising must be clearly disclosed.",deadline:"Aug 2026"}},
-      {{title:"Disclose chatbots",text:"Any chatbot must tell users they're interacting with AI before the conversation starts.",deadline:"Already required"}},
-      {{title:"Review ad targeting practices",text:"Ensure no campaigns target vulnerable populations with manipulative techniques.",deadline:"Already banned"}},
-      {{title:"AI literacy for your team",text:"Content creators, designers, and account managers all need training on the tools they use.",deadline:"Already required"}}
+      {title:"Disclose AI-generated content",text:"AI-generated images, videos, and text intended to inform the public must be labelled. Commercial ads do NOT get the artistic exemption.",deadline:"Aug 2026"},
+      {title:"Label all deepfakes",text:"Synthetic spokesperson videos, manipulated images, and AI audio in advertising must be clearly disclosed.",deadline:"Aug 2026"},
+      {title:"Disclose chatbots",text:"Any chatbot must tell users they're interacting with AI before the conversation starts.",deadline:"Already required"},
+      {title:"Review ad targeting practices",text:"Ensure no campaigns target vulnerable populations with manipulative techniques.",deadline:"Already banned"},
+      {title:"AI literacy for your team",text:"Content creators, designers, and account managers all need training on the tools they use.",deadline:"Already required"}
     ]
-  }},
-  hairdressers: {{
-    name: "Hair Salon / Beauty", icon: "💇",
+  },
+  hairdressers: {
+    name: "Hair Salon / Beauty", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#D79922"><path d="M238.78,183.79,98.28,87.65A40.18,40.18,0,0,0,100,76a40,40,0,1,0-15.29,31.45l30,20.56-30,20.56a40,40,0,1,0,3.57,59.74h0A39.73,39.73,0,0,0,100,180a40.18,40.18,0,0,0-1.72-11.66L136,142.54l89.22,61.06a12,12,0,0,0,13.56-19.81ZM71.31,191.33h0A16,16,0,1,1,76,180,16,16,0,0,1,71.31,191.33ZM48.69,87.3a16,16,0,1,1,22.62,0h0A16,16,0,0,1,48.69,87.3Zm112.82,23.24a12,12,0,0,1,3.13-16.68L225.22,52.4a12,12,0,0,1,13.56,19.81l-60.59,41.46a12,12,0,0,1-16.68-3.13Z"/></svg>',
     riskLevel: "minimal", blogSlug: "ai-act-hairdressers-beauty-salons.html",
     summary: "Hair salons have the lightest compliance burden of any industry we cover. Booking AI is minimal risk. AI phone answering needs to disclose it's AI. That's essentially it.",
     activities: [
-      {{name:"We use AI-powered booking or scheduling",annex:"No specific obligation — administrative AI",risk:"minimal",checked:true}},
-      {{name:"We use AI for client recommendations or upselling",annex:"No specific obligation — standard business AI",risk:"minimal",checked:false}},
-      {{name:"We use AI phone answering (24/7 receptionist)",annex:"Article 50 — must disclose AI interaction",risk:"limited",checked:false}},
-      {{name:"We use AI colour matching or styling technology",annex:"No specific obligation — product assistance",risk:"minimal",checked:false}}
+      {name:"We use AI-powered booking or scheduling",annex:"No specific obligation — administrative AI",risk:"minimal",checked:true},
+      {name:"We use AI for client recommendations or upselling",annex:"No specific obligation — standard business AI",risk:"minimal",checked:false},
+      {name:"We use AI phone answering (24/7 receptionist)",annex:"Article 50 — must disclose AI interaction",risk:"limited",checked:false},
+      {name:"We use AI colour matching or styling technology",annex:"No specific obligation — product assistance",risk:"minimal",checked:false}
     ],
     actions: [
-      {{title:"Disclose AI phone answering",text:"If AI answers your phone, callers must be told they're speaking with AI.",deadline:"Already required"}},
-      {{title:"Basic AI literacy",text:"You and your staff should have a basic understanding of the AI tools you use.",deadline:"Already required"}}
+      {title:"Disclose AI phone answering",text:"If AI answers your phone, callers must be told they're speaking with AI.",deadline:"Already required"},
+      {title:"Basic AI literacy",text:"You and your staff should have a basic understanding of the AI tools you use.",deadline:"Already required"}
     ]
-  }}
-}};
+  }
+};
 
 let selectedIndustry = null;
 
-function init() {{
+function init() {
   const grid = document.getElementById('industry-grid');
   const order = ['recruitment','schools','insurance','gp','ecommerce','marketing','estate','restaurants','accountants','hairdressers'];
-  order.forEach(key => {{
+  order.forEach(key => {
     const d = DATA[key];
     const tile = document.createElement('div');
     tile.className = 'industry-tile';
@@ -357,10 +353,10 @@ function init() {{
     const bt = d.riskLevel === 'high' ? 'HIGH-RISK' : d.riskLevel === 'limited' ? 'LIMITED RISK' : 'MINIMAL RISK';
     tile.innerHTML = '<div class="icon">'+d.icon+'</div><div class="label">'+d.name+'</div><div class="risk-badge '+bc+'">'+bt+'</div>';
     grid.appendChild(tile);
-  }});
-}}
+  });
+}
 
-function selectIndustry(key) {{
+function selectIndustry(key) {
   selectedIndustry = key;
   const d = DATA[key];
   document.getElementById('industry-section').style.display = 'none';
@@ -369,31 +365,31 @@ function selectIndustry(key) {{
   document.getElementById('activities-title').textContent = "You're a " + d.name;
   const list = document.getElementById('activity-list');
   list.innerHTML = '';
-  d.activities.forEach((a, i) => {{
+  d.activities.forEach((a, i) => {
     const card = document.createElement('div');
     card.className = 'activity-card' + (a.checked ? ' checked' : '');
-    card.onclick = () => {{ a.checked = !a.checked; card.classList.toggle('checked'); }};
+    card.onclick = () => { a.checked = !a.checked; card.classList.toggle('checked'); };
     const rc = a.risk === 'high' ? 'risk-high' : a.risk === 'prohibited' ? 'risk-prohibited' : a.risk === 'limited' ? 'risk-limited' : 'risk-minimal';
     const rl = a.risk === 'high' ? 'HIGH-RISK' : a.risk === 'prohibited' ? 'PROHIBITED' : a.risk === 'limited' ? 'LIMITED' : 'MINIMAL';
     card.innerHTML = '<div class="checkbox"></div><div class="activity-info"><div class="activity-name">'+a.name+'</div><div class="activity-annex">'+a.annex+'</div><div class="activity-risk '+rc+'">'+rl+'</div></div>';
     list.appendChild(card);
-  }});
-  window.scrollTo({{top:0,behavior:'smooth'}});
-}}
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
-function backToIndustries() {{
+function backToIndustries() {
   document.getElementById('industry-section').style.display = 'block';
   document.getElementById('activities-section').style.display = 'none';
   document.getElementById('results-section').style.display = 'none';
-  window.scrollTo({{top:0,behavior:'smooth'}});
-}}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
-function showResults() {{
+function showResults() {
   const d = DATA[selectedIndustry];
   const checked = d.activities.filter(a => a.checked);
   document.getElementById('activities-section').style.display = 'none';
   document.getElementById('results-section').style.display = 'block';
-  window.scrollTo({{top:0,behavior:'smooth'}});
+  window.scrollTo({top:0,behavior:'smooth'});
 
   const prohibited = checked.filter(a => a.risk === 'prohibited');
   const high = checked.filter(a => a.risk === 'high');
@@ -401,129 +397,56 @@ function showResults() {{
   const minimal = checked.filter(a => a.risk === 'minimal');
 
   let overallRisk = 'minimal'; let overallClass = 'overall-minimal'; let overallLabel = 'MINIMAL RISK';
-  if (limited.length > 0) {{ overallRisk = 'limited'; overallClass = 'overall-limited'; overallLabel = 'LIMITED RISK'; }}
-  if (high.length > 0) {{ overallRisk = 'high'; overallClass = 'overall-high'; overallLabel = 'HIGH-RISK'; }}
-  if (prohibited.length > 0) {{ overallRisk = 'prohibited'; overallClass = 'overall-prohibited'; overallLabel = 'PROHIBITED AI DETECTED'; }}
+  if (limited.length > 0) { overallRisk = 'limited'; overallClass = 'overall-limited'; overallLabel = 'LIMITED RISK'; }
+  if (high.length > 0) { overallRisk = 'high'; overallClass = 'overall-high'; overallLabel = 'HIGH-RISK'; }
+  if (prohibited.length > 0) { overallRisk = 'prohibited'; overallClass = 'overall-prohibited'; overallLabel = 'PROHIBITED AI DETECTED'; }
 
   let urgency = 'Based on '+checked.length+' activit'+(checked.length!==1?'ies':'y')+' you selected: ';
   if (prohibited.length > 0) urgency += '<strong>'+prohibited.length+' PROHIBITED</strong> practice'+(prohibited.length>1?'s':'')+' that must stop immediately. ';
   if (high.length > 0) urgency += '<strong>'+high.length+' HIGH-RISK</strong> activit'+(high.length>1?'ies':'y')+' requiring full compliance by August 2, 2026. ';
   if (limited.length > 0) urgency += '<strong>'+limited.length+'</strong> with transparency obligations. ';
   if (minimal.length > 0) urgency += '<strong>'+minimal.length+'</strong> with no specific obligations. ';
-  if (checked.length === 0) urgency = 'You didn't select any activities. Go back and tick the ones that apply to your business.';
+  if (checked.length === 0) urgency = 'You didn\'t select any activities. Go back and tick the ones that apply to your business.';
 
   document.getElementById('results-summary').innerHTML = '<h2>Your Compliance Dashboard: <span class="industry-name">'+d.name+'</span></h2><p>'+urgency+'</p><div class="overall-risk '+overallClass+'">Overall: '+overallLabel+'</div>';
 
   const breakdown = document.getElementById('risk-breakdown');
   breakdown.innerHTML = '';
-  [{{label:'Prohibited',key:'prohibited',items:prohibited}},{{label:'High-Risk',key:'high',items:high}},{{label:'Limited Risk',key:'limited',items:limited}},{{label:'Minimal Risk',key:'minimal',items:minimal}}].forEach(g => {{
-    if (g.items.length > 0) {{
+  [{label:'Prohibited',key:'prohibited',items:prohibited},{label:'High-Risk',key:'high',items:high},{label:'Limited Risk',key:'limited',items:limited},{label:'Minimal Risk',key:'minimal',items:minimal}].forEach(g => {
+    if (g.items.length > 0) {
       const div = document.createElement('div');
       div.className = 'risk-group ' + g.key;
       let h = '<h3>'+g.label+' ('+g.items.length+')</h3><ul>';
-      g.items.forEach(a => {{ h += '<li>'+a.name+'</li>'; }});
+      g.items.forEach(a => { h += '<li>'+a.name+'</li>'; });
       div.innerHTML = h + '</ul>';
       breakdown.appendChild(div);
-    }}
-  }});
+    }
+  });
 
   const actions = document.getElementById('action-cards');
   actions.innerHTML = '';
-  d.actions.forEach(a => {{
+  d.actions.forEach(a => {
     const card = document.createElement('div');
     card.className = 'action-card';
     const isDone = a.deadline.toLowerCase().includes('already');
     card.innerHTML = '<h3>'+a.title+'</h3><p>'+a.text+'</p><span class="'+(isDone?'done':'deadline')+'">'+a.deadline+'</span>';
     actions.appendChild(card);
-  }});
+  });
 
   const link = document.getElementById('blog-link');
   link.href = 'blog/' + d.blogSlug;
-  link.textContent = 'Read the Full ' + d.name + ' Guide →';
+  link.textContent = 'Read the Full ' + d.name + ' Guide \u2192';
 
-  if (typeof gtag !== 'undefined') {{
-    gtag('event', 'simulator_complete', {{industry: selectedIndustry, activities: checked.length, high_risk: high.length, prohibited: prohibited.length}});
-  }}
-}}
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'simulator_complete', {industry: selectedIndustry, activities: checked.length, high_risk: high.length, prohibited: prohibited.length});
+  }
+}
 
 init();
 </script>
+<div style="text-align:center;padding:2rem 1rem;background:#f3f4f6;font-size:0.8rem;color:#6b7280;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <a href="products.html" style="color:#1B2A4A;text-decoration:none;font-weight:600">All Free Tools</a> · <a href="consultants.html" style="color:#1B2A4A;text-decoration:none;font-weight:600">Find a Consultant</a> · <a href="blog.html" style="color:#1B2A4A;text-decoration:none;font-weight:600">Resources</a>
+  <p style="margin-top:0.5rem">&copy; 2026 AI Act Advisors</p>
 </div>
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <h4>AI Act Advisors</h4>
-        <p class="footer-about">Europe's directory for EU AI Act compliance consultants, ethics advisors, and governance experts. Find, compare, and contact the right expert for your organisation.</p>
-      </div>
-      <div>
-        <h4>Directory</h4>
-        <a href="consultants.html">All Consultants</a>
-        <a href="countries.html">Browse by Country</a>
-        <a href="sectors.html">Browse by Sector</a>
-      </div>
-      <div>
-        <h4>Resources</h4>
-        <a href="blog.html">Blog</a>
-        <a href="about.html">About Us</a>
-        <a href="list-your-practice.html">List Your Practice</a>
-      </div>
-      <div>
-        <h4>Legal</h4>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="disclaimer.html">Disclaimer</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 AI Act Advisors. All rights reserved.</p>
-      <p class="footer-disclaimer">AI Act Advisors is an independent directory service. Listings are informational only and do not constitute endorsement. Verify consultant qualifications independently. This site does not provide legal advice. For legal guidance, consult a qualified professional.</p>
-    </div>
-  </div>
-</footer>
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1f2937;color:#e5e7eb;padding:1rem 1.5rem;z-index:999;font-size:0.85rem;box-shadow:0 -2px 10px rgba(0,0,0,0.15)">
-  <div style="max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
-    <p style="margin:0;flex:1">We use cookies for analytics only (Google Analytics 4 with anonymised IPs). No marketing cookies. <a href="privacy.html" style="color:#D79922">Privacy Policy</a></p>
-    <div style="display:flex;gap:0.5rem">
-      <button onclick="acceptCookies()" style="background:#4056A1;color:#fff;border:none;padding:0.4rem 1rem;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem">Accept</button>
-      <button onclick="declineCookies()" style="background:transparent;color:#9ca3af;border:1px solid #4b5563;padding:0.4rem 1rem;border-radius:8px;cursor:pointer;font-size:0.85rem">Decline</button>
-    </div>
-  </div>
-</div>
-<script>
-if(!localStorage.getItem('cookie-consent')){document.getElementById('cookie-banner').style.display='block'}
-function acceptCookies(){localStorage.setItem('cookie-consent','accepted');document.getElementById('cookie-banner').style.display='none'}
-function declineCookies(){localStorage.setItem('cookie-consent','declined');document.getElementById('cookie-banner').style.display='none'}
-</script>
-<script src="static/js/main.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  document.querySelectorAll('.listing-card a, a[href*="consultant/"]').forEach(function(a){
-    a.addEventListener('click',function(){
-      var name=this.textContent.trim();
-      var href=this.getAttribute('href')||'';
-      var id=href.split('/').pop().replace('.html','');
-      if(typeof gtag==='function'){
-        gtag('event','consultant_click',{consultant_name:name,consultant_id:id,page_location:window.location.pathname});
-      }
-    });
-  });
-  document.querySelectorAll('.country-card').forEach(function(a){
-    a.addEventListener('click',function(){
-      var name=this.querySelector('.name');
-      if(name&&typeof gtag==='function'){
-        gtag('event','country_click',{country_name:name.textContent.trim(),page_location:window.location.pathname});
-      }
-    });
-  });
-  document.querySelectorAll('a[href*="list-your-practice"]').forEach(function(a){
-    a.addEventListener('click',function(){
-      if(typeof gtag==='function'){
-        gtag('event','cta_click',{cta_type:'list_practice',page_location:window.location.pathname});
-      }
-    });
-  });
-});
-</script>
 </body>
 </html>

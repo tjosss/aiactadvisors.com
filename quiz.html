@@ -130,7 +130,7 @@ h1{text-align:center;font-size:2rem;margin-bottom:0.5rem;color:#1B2A4A}
     <div class="btn-row" style="margin-top:2rem">
       <button class="btn-secondary" onclick="backToIndustries()">&larr; Try Another Industry</button>
       <a href="" class="btn-primary" id="blog-link">Read the Full Guide &rarr;</a>
-      <a href="consultants.html" class="btn-primary" style="background:#C9A84C;color:#1B2A4A">Find a Consultant &rarr;</a>
+      <a href="consultants.html" class="btn-primary" style="background:#D79922;color:#fff">Find a Consultant &rarr;</a>
     </div>
   </div>
 </div>
@@ -138,7 +138,7 @@ h1{text-align:center;font-size:2rem;margin-bottom:0.5rem;color:#1B2A4A}
 <script>
 const DATA = {
   recruitment: {
-    name: "Recruitment Agency", icon: "👔",
+    name: "Recruitment Agency", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#4056A1"><path d="M100,100a12,12,0,0,1,12-12h32a12,12,0,0,1,0,24H112A12,12,0,0,1,100,100ZM236,68V196a20,20,0,0,1-20,20H40a20,20,0,0,1-20-20V68A20,20,0,0,1,40,48H76V40a28,28,0,0,1,28-28h48a28,28,0,0,1,28,28v8h36A20,20,0,0,1,236,68ZM100,48h56V40a4,4,0,0,0-4-4H104a4,4,0,0,0-4,4ZM44,72v35.23A180.06,180.06,0,0,0,128,128a180,180,0,0,0,84-20.78V72ZM212,192V133.94A204.27,204.27,0,0,1,128,152a204.21,204.21,0,0,1-84-18.06V192Z"/></svg>',
     riskLevel: "high", blogSlug: "ai-act-recruitment-agencies.html",
     summary: "Recruitment AI is explicitly HIGH-RISK under Annex III, Category 4. The regulation targets the activity — screening, scoring, ranking candidates — not any specific product.",
     activities: [
@@ -160,7 +160,7 @@ const DATA = {
     ]
   },
   schools: {
-    name: "School or University", icon: "🎓",
+    name: "School or University", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#4056A1"><path d="M249.8,85.49l-116-64a12,12,0,0,0-11.6,0l-116,64a12,12,0,0,0,0,21l21.8,12v47.76a19.89,19.89,0,0,0,5.09,13.32C46.63,194.7,77,220,128,220a136.88,136.88,0,0,0,40-5.75V240a12,12,0,0,0,24,0V204.12a119.53,119.53,0,0,0,30.91-24.51A19.89,19.89,0,0,0,228,166.29V118.53l21.8-12a12,12,0,0,0,0-21ZM128,45.71,219.16,96,186,114.3a1.88,1.88,0,0,1-.18-.12l-52-28.69a12,12,0,0,0-11.6,21l39,21.49L128,146.3,36.84,96ZM128,196c-40.42,0-64.65-19.07-76-31.27v-33l70.2,38.74a12,12,0,0,0,11.6,0L168,151.64v37.23A110.46,110.46,0,0,1,128,196Zm76-31.27a93.21,93.21,0,0,1-12,10.81V138.39l12-6.62Z"/></svg>',
     riskLevel: "high", blogSlug: "ai-act-schools-universities.html",
     summary: "Education AI is one of the most detailed HIGH-RISK categories in the entire Act (Annex III, Category 3). Four subcategories cover admissions, grading, adaptive learning, and exam monitoring. Emotion recognition in schools is already BANNED.",
     activities: [
@@ -183,7 +183,7 @@ const DATA = {
     ]
   },
   insurance: {
-    name: "Insurance Company", icon: "🛡\uFE0F",
+    name: "Insurance Company", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#4056A1"><path d="M208,36H48A20,20,0,0,0,28,56v56c0,54.29,26.32,87.22,48.4,105.29,23.71,19.39,47.44,26,48.44,26.29a12.1,12.1,0,0,0,6.32,0c1-.28,24.73-6.9,48.44-26.29,22.08-18.07,48.4-51,48.4-105.29V56A20,20,0,0,0,208,36Zm-4,76c0,35.71-13.09,64.69-38.91,86.15A126.28,126.28,0,0,1,128,219.38a126.14,126.14,0,0,1-37.09-21.23C65.09,176.69,52,147.71,52,112V60H204ZM79.51,144.49a12,12,0,1,1,17-17L112,143l47.51-47.52a12,12,0,0,1,17,17l-56,56a12,12,0,0,1-17,0Z"/></svg>',
     riskLevel: "high", blogSlug: "ai-act-insurance-companies.html",
     summary: "Insurance AI is explicitly HIGH-RISK under Annex III, Category 5 — covering risk assessment, pricing, and access to essential services. Life and health insurance AI is specifically named. Fraud detection gets a narrow exemption.",
     activities: [
@@ -205,7 +205,7 @@ const DATA = {
     ]
   },
   gp: {
-    name: "GP Practice", icon: "🩺",
+    name: "GP Practice", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#F13C20"><path d="M248,160a40,40,0,1,0-52.64,37.94A28,28,0,0,1,168,220H144a28,28,0,0,1-28-28V154.9c31.73-5.78,56-34.09,56-67.73V40a12,12,0,0,0-12-12H136a12,12,0,0,0,0,24h12V87.17c0,24.4-19.47,44.52-43.41,44.83A44,44,0,0,1,60,88V52H72a12,12,0,0,0,0-24H48A12,12,0,0,0,36,40V88a68,68,0,0,0,56,66.93V192a52.06,52.06,0,0,0,52,52h24a52.06,52.06,0,0,0,51.61-45.72A40.08,40.08,0,0,0,248,160Zm-40,16a16,16,0,1,1,16-16A16,16,0,0,1,208,176Z"/></svg>',
     riskLevel: "high", blogSlug: "ai-act-gp-practices.html",
     summary: "Healthcare AI directly affects patient safety. AI triage, diagnostic support, and clinical decision tools are HIGH-RISK and may also require medical device certification under the MDR.",
     activities: [
@@ -225,7 +225,7 @@ const DATA = {
     ]
   },
   ecommerce: {
-    name: "E-Commerce Shop", icon: "🛒",
+    name: "E-Commerce Shop", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#D79922"><path d="M233.21,56.31A12,12,0,0,0,224,52H66L60.53,21.85A12,12,0,0,0,48.73,12H24a12,12,0,0,0,0,24H38.71L63.62,173a28,28,0,0,0,4.07,10.21A32,32,0,1,0,123,196h34a32,32,0,1,0,31-24H91.17a4,4,0,0,1-3.93-3.28L84.92,156H196.1a28,28,0,0,0,27.55-23l12.16-66.86A12,12,0,0,0,233.21,56.31ZM100,204a8,8,0,1,1-8-8A8,8,0,0,1,100,204Zm88,8a8,8,0,1,1,8-8A8,8,0,0,1,188,212Zm12-83.28A4,4,0,0,1,196.1,132H80.56L70.38,76H209.62Z"/></svg>',
     riskLevel: "minimal", blogSlug: "ai-act-ecommerce-shops.html",
     summary: "Most e-commerce AI is minimal risk. The one exception: BNPL (buy now, pay later) credit scoring is explicitly HIGH-RISK. Product recommendations, fraud detection, and inventory forecasting are all fine.",
     activities: [
@@ -246,7 +246,7 @@ const DATA = {
     ]
   },
   restaurants: {
-    name: "Restaurant or Caf\u00e9", icon: "🍽\uFE0F",
+    name: "Restaurant or Caf\u00e9", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#F13C20"><path d="M68,88V40a12,12,0,0,1,24,0V88a12,12,0,0,1-24,0ZM220,40V224a12,12,0,0,1-24,0V180H152a12,12,0,0,1-12-12,273.23,273.23,0,0,1,7.33-57.82C157.42,68.42,176.76,40.33,203.27,29A12,12,0,0,1,220,40ZM196,62.92C182.6,77,175,98,170.77,115.38A254.41,254.41,0,0,0,164.55,156H196ZM128,39A12,12,0,0,0,104,41l4,47.46a28,28,0,0,1-56,0L56,41A12,12,0,1,0,32,39L28,87c0,.34,0,.67,0,1a52.1,52.1,0,0,0,40,50.59V224a12,12,0,0,0,24,0V138.59A52.1,52.1,0,0,0,132,88c0-.33,0-.66,0-1Z"/></svg>',
     riskLevel: "minimal", blogSlug: "ai-act-restaurants-cafes.html",
     summary: "Good news: most restaurant AI is minimal risk. Demand forecasting, menu analytics, and inventory tools have no specific obligations. AI phone answering needs disclosure. Watch out for AI staff scheduling based on individual performance.",
     activities: [
@@ -264,7 +264,7 @@ const DATA = {
     ]
   },
   estate: {
-    name: "Estate Agency", icon: "🏠",
+    name: "Estate Agency", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#4056A1"><path d="M222.14,105.85l-80-80a20,20,0,0,0-28.28,0l-80,80A19.86,19.86,0,0,0,28,120v96a12,12,0,0,0,12,12h64a12,12,0,0,0,12-12V164h24v52a12,12,0,0,0,12,12h64a12,12,0,0,0,12-12V120A19.86,19.86,0,0,0,222.14,105.85ZM204,204H164V152a12,12,0,0,0-12-12H104a12,12,0,0,0-12,12v52H52V121.65l76-76,76,76Z"/></svg>',
     riskLevel: "limited", blogSlug: "ai-act-estate-agents.html",
     summary: "Most estate agency AI is minimal risk, but automated valuations (AVMs) used for mortgage decisions could be HIGH-RISK. AI tenant screening is explicitly HIGH-RISK. Virtual staging and property matching are fine.",
     activities: [
@@ -283,7 +283,7 @@ const DATA = {
     ]
   },
   accountants: {
-    name: "Accountancy Practice", icon: "📊",
+    name: "Accountancy Practice", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#D79922"><path d="M68,100A12,12,0,0,1,80,88h96a12,12,0,0,1,0,24H80A12,12,0,0,1,68,100Zm12,52h96a12,12,0,0,0,0-24H80a12,12,0,0,0,0,24ZM236,56V208a12,12,0,0,1-17.37,10.73L192,205.42l-26.63,13.31a12,12,0,0,1-10.74,0L128,205.42l-26.63,13.31a12,12,0,0,1-10.74,0L64,205.42,37.37,218.73A12,12,0,0,1,20,208V56A20,20,0,0,1,40,36H216A20,20,0,0,1,236,56Zm-24,4H44V188.58l14.63-7.31a12,12,0,0,1,10.74,0L96,194.58l26.63-13.31a12,12,0,0,1,10.74,0L160,194.58l26.63-13.31a12,12,0,0,1,10.74,0L212,188.58Z"/></svg>',
     riskLevel: "minimal", blogSlug: "ai-act-accountants.html",
     summary: "Accountants have one of the lightest compliance burdens. Auto-categorisation, OCR, and cash flow forecasting are all minimal risk. The exception: AI credit scoring for client lending is high-risk.",
     activities: [
@@ -301,7 +301,7 @@ const DATA = {
     ]
   },
   marketing: {
-    name: "Marketing Agency", icon: "📣",
+    name: "Marketing Agency", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#F13C20"><path d="M252,120a52.06,52.06,0,0,0-52-52H160.32c-3.44-.21-52.6-4-99.46-43.3A20,20,0,0,0,28,40V200a19.8,19.8,0,0,0,11.54,18.12,19.86,19.86,0,0,0,21.32-2.81A192.92,192.92,0,0,1,144,174.47v26.2a20,20,0,0,0,8.9,16.64,11.35,11.35,0,0,0,1.39.8l14.44,7.06A20,20,0,0,0,198.37,213l11.09-41.82A52.07,52.07,0,0,0,252,120ZM52,191.63V48.4c36.17,28.07,72.17,38.1,92,41.66V150C124.17,153.52,88.17,163.55,52,191.63ZM176.39,202.2,168,198.1V172h16.4ZM200,148H168V92h32a28,28,0,1,1,0,56Z"/></svg>',
     riskLevel: "limited", blogSlug: "ai-act-marketing-agencies.html",
     summary: "Most marketing AI is limited risk — transparency obligations, not heavy compliance. You must disclose AI-generated content, label deepfakes, and tell people when they're talking to a chatbot. Subliminal manipulation and targeting vulnerable groups is PROHIBITED.",
     activities: [
@@ -323,7 +323,7 @@ const DATA = {
     ]
   },
   hairdressers: {
-    name: "Hair Salon / Beauty", icon: "💇",
+    name: "Hair Salon / Beauty", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256" fill="#D79922"><path d="M238.78,183.79,98.28,87.65A40.18,40.18,0,0,0,100,76a40,40,0,1,0-15.29,31.45l30,20.56-30,20.56a40,40,0,1,0,3.57,59.74h0A39.73,39.73,0,0,0,100,180a40.18,40.18,0,0,0-1.72-11.66L136,142.54l89.22,61.06a12,12,0,0,0,13.56-19.81ZM71.31,191.33h0A16,16,0,1,1,76,180,16,16,0,0,1,71.31,191.33ZM48.69,87.3a16,16,0,1,1,22.62,0h0A16,16,0,0,1,48.69,87.3Zm112.82,23.24a12,12,0,0,1,3.13-16.68L225.22,52.4a12,12,0,0,1,13.56,19.81l-60.59,41.46a12,12,0,0,1-16.68-3.13Z"/></svg>',
     riskLevel: "minimal", blogSlug: "ai-act-hairdressers-beauty-salons.html",
     summary: "Hair salons have the lightest compliance burden of any industry we cover. Booking AI is minimal risk. AI phone answering needs to disclose it's AI. That's essentially it.",
     activities: [
