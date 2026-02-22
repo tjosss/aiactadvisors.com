@@ -98,30 +98,74 @@ function declineCookies(){localStorage.setItem('cookie-consent','declined');docu
 <script src="static/js/main.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
+  var g=typeof gtag==='function'?gtag:function(){};
+  var pg=window.location.pathname;
+
+  /* Consultant profile clicks */
   document.querySelectorAll('.listing-card a, a[href*="consultant/"]').forEach(function(a){
     a.addEventListener('click',function(){
       var name=this.textContent.trim();
       var href=this.getAttribute('href')||'';
       var id=href.split('/').pop().replace('.html','');
-      if(typeof gtag==='function'){
-        gtag('event','consultant_click',{consultant_name:name,consultant_id:id,page_location:window.location.pathname});
-      }
+      g('event','consultant_click',{consultant_name:name,consultant_id:id,page_location:pg});
     });
   });
+
+  /* Country card clicks */
   document.querySelectorAll('.country-card').forEach(function(a){
     a.addEventListener('click',function(){
       var name=this.querySelector('.name');
-      if(name&&typeof gtag==='function'){
-        gtag('event','country_click',{country_name:name.textContent.trim(),page_location:window.location.pathname});
+      if(name)g('event','country_click',{country_name:name.textContent.trim(),page_location:pg});
+    });
+  });
+
+  /* List your practice CTA */
+  document.querySelectorAll('a[href*="list-your-practice"]').forEach(function(a){
+    a.addEventListener('click',function(){
+      g('event','cta_click',{cta_type:'list_practice',page_location:pg});
+    });
+  });
+
+  /* Free tool clicks (quiz, adventure, periodic table) */
+  document.querySelectorAll('a[href*="quiz.html"],a[href*="adventure.html"],a[href*="jargon-buster.html"]').forEach(function(a){
+    a.addEventListener('click',function(){
+      var tool=this.getAttribute('href').split('/').pop().replace('.html','');
+      g('event','tool_click',{tool_name:tool,page_location:pg});
+    });
+  });
+
+  /* Contact form submissions */
+  document.querySelectorAll('form[name*="inquiry"]').forEach(function(f){
+    f.addEventListener('submit',function(){
+      var consultant=this.querySelector('input[name="consultant"]');
+      g('event','lead_form_submit',{consultant_name:consultant?consultant.value:'unknown',page_location:pg});
+    });
+  });
+
+  /* External website clicks (consultant websites) */
+  document.querySelectorAll('a[target="_blank"][href^="http"]').forEach(function(a){
+    a.addEventListener('click',function(){
+      g('event','outbound_click',{url:this.href,page_location:pg});
+    });
+  });
+
+  /* Scroll depth tracking (25%, 50%, 75%, 100%) */
+  var scrollMarks={25:false,50:false,75:false,100:false};
+  window.addEventListener('scroll',function(){
+    var pct=Math.round(100*window.scrollY/(document.documentElement.scrollHeight-window.innerHeight));
+    [25,50,75,100].forEach(function(mark){
+      if(pct>=mark&&!scrollMarks[mark]){
+        scrollMarks[mark]=true;
+        g('event','scroll_depth',{depth:mark+'%',page_location:pg});
       }
     });
   });
-  document.querySelectorAll('a[href*="list-your-practice"]').forEach(function(a){
-    a.addEventListener('click',function(){
-      if(typeof gtag==='function'){
-        gtag('event','cta_click',{cta_type:'list_practice',page_location:window.location.pathname});
-      }
-    });
+
+  /* Time on page tracking (30s, 60s, 180s) */
+  [30,60,180].forEach(function(sec){
+    setTimeout(function(){
+      g('event','engaged_time',{seconds:sec,page_location:pg});
+    },sec*1000);
   });
 });
 </script>

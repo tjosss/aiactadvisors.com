@@ -52,12 +52,12 @@
     <h3><a href="../consultant/ethicai.html">EthicAI</a></h3>
     <div> <span class="badge badge-boutique">Boutique</span></div>
   </div>
-  <div class="card-location"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor"><path d="M128,60a44,44,0,1,0,44,44A44.05,44.05,0,0,0,128,60Zm0,64a20,20,0,1,1,20-20A20,20,0,0,1,128,124Zm0-112a92.1,92.1,0,0,0-92,92c0,77.36,81.64,135.4,85.12,137.83a12,12,0,0,0,13.76,0,259,259,0,0,0,42.18-39C205.15,170.57,220,136.37,220,104A92.1,92.1,0,0,0,128,12Zm31.3,174.71A249.35,249.35,0,0,1,128,216.89a249.35,249.35,0,0,1-31.3-30.18C80,167.37,60,137.31,60,104a68,68,0,0,1,136,0C196,137.31,176,167.37,159.3,186.71Z"/></svg> Cambridge, United Kingdom</div>
+  <div class="card-location"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Cambridge, United Kingdom</div>
   <p class="card-desc">EthicAI is a University of Cambridge spinout specializing in responsible AI assurance. The firm minimizes AI risks and maximizes deployment benefits through governance frameworks and compliance support for organizations across sectors.</p>
   <div class="card-tags"><span class="card-tag">AI Act Compliance</span><span class="card-tag">AI Governance</span><span class="card-tag">Responsible AI</span><span class="card-tag">Risk Assessment</span></div>
   <div class="card-footer">
     <a href="../consultant/ethicai.html">View Profile →</a>
-    <a href="https://ethicai.net" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" fill="currentColor"><path d="M228,104a12,12,0,0,1-24,0V69l-59.51,59.51a12,12,0,0,1-17-17L187,52H152a12,12,0,0,1,0-24h64a12,12,0,0,1,12,12Zm-44,24a12,12,0,0,0-12,12v64H52V84h64a12,12,0,0,0,0-24H48A20,20,0,0,0,28,80V208a20,20,0,0,0,20,20H176a20,20,0,0,0,20-20V140A12,12,0,0,0,184,128Z"/></svg> Website</a>
+    <a href="https://ethicai.net" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Website</a>
   </div>
 </div></div>
 </section>
@@ -110,30 +110,74 @@ function declineCookies(){localStorage.setItem('cookie-consent','declined');docu
 <script src="../static/js/main.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
+  var g=typeof gtag==='function'?gtag:function(){};
+  var pg=window.location.pathname;
+
+  /* Consultant profile clicks */
   document.querySelectorAll('.listing-card a, a[href*="consultant/"]').forEach(function(a){
     a.addEventListener('click',function(){
       var name=this.textContent.trim();
       var href=this.getAttribute('href')||'';
       var id=href.split('/').pop().replace('.html','');
-      if(typeof gtag==='function'){
-        gtag('event','consultant_click',{consultant_name:name,consultant_id:id,page_location:window.location.pathname});
-      }
+      g('event','consultant_click',{consultant_name:name,consultant_id:id,page_location:pg});
     });
   });
+
+  /* Country card clicks */
   document.querySelectorAll('.country-card').forEach(function(a){
     a.addEventListener('click',function(){
       var name=this.querySelector('.name');
-      if(name&&typeof gtag==='function'){
-        gtag('event','country_click',{country_name:name.textContent.trim(),page_location:window.location.pathname});
+      if(name)g('event','country_click',{country_name:name.textContent.trim(),page_location:pg});
+    });
+  });
+
+  /* List your practice CTA */
+  document.querySelectorAll('a[href*="list-your-practice"]').forEach(function(a){
+    a.addEventListener('click',function(){
+      g('event','cta_click',{cta_type:'list_practice',page_location:pg});
+    });
+  });
+
+  /* Free tool clicks (quiz, adventure, periodic table) */
+  document.querySelectorAll('a[href*="quiz.html"],a[href*="adventure.html"],a[href*="jargon-buster.html"]').forEach(function(a){
+    a.addEventListener('click',function(){
+      var tool=this.getAttribute('href').split('/').pop().replace('.html','');
+      g('event','tool_click',{tool_name:tool,page_location:pg});
+    });
+  });
+
+  /* Contact form submissions */
+  document.querySelectorAll('form[name*="inquiry"]').forEach(function(f){
+    f.addEventListener('submit',function(){
+      var consultant=this.querySelector('input[name="consultant"]');
+      g('event','lead_form_submit',{consultant_name:consultant?consultant.value:'unknown',page_location:pg});
+    });
+  });
+
+  /* External website clicks (consultant websites) */
+  document.querySelectorAll('a[target="_blank"][href^="http"]').forEach(function(a){
+    a.addEventListener('click',function(){
+      g('event','outbound_click',{url:this.href,page_location:pg});
+    });
+  });
+
+  /* Scroll depth tracking (25%, 50%, 75%, 100%) */
+  var scrollMarks={25:false,50:false,75:false,100:false};
+  window.addEventListener('scroll',function(){
+    var pct=Math.round(100*window.scrollY/(document.documentElement.scrollHeight-window.innerHeight));
+    [25,50,75,100].forEach(function(mark){
+      if(pct>=mark&&!scrollMarks[mark]){
+        scrollMarks[mark]=true;
+        g('event','scroll_depth',{depth:mark+'%',page_location:pg});
       }
     });
   });
-  document.querySelectorAll('a[href*="list-your-practice"]').forEach(function(a){
-    a.addEventListener('click',function(){
-      if(typeof gtag==='function'){
-        gtag('event','cta_click',{cta_type:'list_practice',page_location:window.location.pathname});
-      }
-    });
+
+  /* Time on page tracking (30s, 60s, 180s) */
+  [30,60,180].forEach(function(sec){
+    setTimeout(function(){
+      g('event','engaged_time',{seconds:sec,page_location:pg});
+    },sec*1000);
   });
 });
 </script>
